@@ -179,7 +179,8 @@ function slcb_status_header() {
     if ( 'option1' == $cache_header_control[0] ) {
         nocache_headers();
 		header("Cache-Control: public, s-maxage=120");
-		//define('WP_CACHE', false);
+        if ( !defined('WP_CACHE') )
+		    define('WP_CACHE', false);
 	}
     var_dump($cache_header_control[0]);
 }
