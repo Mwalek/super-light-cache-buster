@@ -211,7 +211,7 @@ add_filter( 'script_loader_src', 'slcb_randomize_ver', 9999 );
 // NoCache Header
 add_action( 'send_headers', 'slcb_status_header', 9999  );
 
-/*function wprdcv_param_redirect(){
+/* function wprdcv_param_redirect(){
 if( !is_admin() && !isset($_GET['cache']) ){
     $location = "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
     $location .= utf8_decode('?cache=bypass');
@@ -219,53 +219,7 @@ if( !is_admin() && !isset($_GET['cache']) ){
 }
 }
 
-add_action('template_redirect', 'wprdcv_param_redirect'); */
-
-function wprdcv_param_redirect(){
-if( !is_admin() && !isset($_GET['cache']) ){
-    $location = "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-    $location .= "a=b";
-	//$new = rawurlencode($location);
-	// Parameters as array of key => value pairs
-	//$newlocation = add_query_arg( 'hello', 'there', $location );
-    wp_redirect( $location );
-	//exit();
-}
-}
-
-//add_action('template_redirect', 'wprdcv_param_redirect');
-
-
-/*add_action('init','wpse46108_register_param');
-function wpse46108_register_param() { 
-    global $wp; 
-    $wp->add_query_var('anyParamName'); 
-}
-
-$anyParamNameValue = get_query_var('anyParamName');
-
-var_dump($_SERVER["REQUEST_URI"]);
-var_dump($anyParamNameValue);
-*/
-
-/*function add_custom_query_var( $vars ){
-  $vars[] = "c";
-  return $vars;
-}
-add_filter( 'query_vars', 'add_custom_query_var' );*/
-
-/*add_action('init','add_query_args');
-function add_query_args()
-{ 
-    add_query_arg( 'var1', 'val1' );
-}
-*/
-
-function custom_rewrite_basic() 
-{
-    add_rewrite_rule('^about/([0-9]+)/?', 'about?c=$1', 'top');
-}
-//add_action('init', 'custom_rewrite_basic');
+add_action('template_redirect', 'wprdcv_param_redirect');*/
 
 /**
  * Redirect any items without query string
