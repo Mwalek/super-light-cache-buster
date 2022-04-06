@@ -156,20 +156,16 @@ class Super_Light_Cache_Buster {
 
 new Super_Light_Cache_Buster();
 
-//var_dump($randomizer_control);
+$randomizer_control = get_option('randomizer_setting_one');
+    var_dump($randomizer_control);
 
 // Randomize version numbers
 function slcb_randomize_ver( $src ) {
-    $randomizer_control = get_option('randomizer_setting_one');
 
-	if ( 'option1' == $randomizer_control[0] ) {
-
-		$random_number = wp_rand( 1000, 520000000 );
-		$src = esc_url( add_query_arg( 'ver', $random_number, $src ) );
-		return $src;
-		
-	}
+    $random_number = wp_rand( 1000, 520000000 );
+    $src = esc_url( add_query_arg( 'ver', $random_number, $src ) );
     return $src;
+	
 }
 
 // Add nocache_headers if enable in wp-admin options
@@ -202,11 +198,15 @@ function hook_inHeader() {
         define('DONOTCACHEPAGE', true);
 }
 
+if ( 'option1' == $randomizer_control[0] ) {
+
 // Randomize asset version for styles	
 add_filter( 'style_loader_src', 'slcb_randomize_ver', 9999 );
 
 // Randomize asset version for scripts	
 add_filter( 'script_loader_src', 'slcb_randomize_ver', 9999 );
+
+}
 
 // NoCache Header
 add_action( 'send_headers', 'slcb_status_header', 9999  );
