@@ -271,8 +271,8 @@ function custom_rewrite_basic()
  * Redirect any items without query string
  * 
  * @return void
-
-function wpse375877_redirect_to_referrer() {
+*/
+/*function wpse375877_redirect_to_referrer() {
     
    if ( ! isset( $_GET, $_GET['rfd'], $_GET['dfr'] ) ) {
 	   
@@ -314,17 +314,3 @@ function wpd_append_query_string( $url ) {
     return $url;
 }
 add_filter( 'page_link', 'wpd_append_query_string', 10, 2 );*/
-
-// https://wordpress.stackexchange.com/questions/188749/i-am-looking-to-append-url-parameter-to-all-urls
-// https://wordpress.stackexchange.com/questions/250837/understanding-add-rewrite-rule
-// https://wordpress.stackexchange.com/questions/267131/how-to-filter-to-output-of-the-get-permalink-function
-// https://stackoverflow.com/questions/20754505/wordpress-add-rewrite-tag-add-rewrite-rule-and-post-link
-// https://newbedev.com/get-the-full-url-in-php
-// https://stackoverflow.com/questions/4586835/how-to-pass-extra-variables-in-url-with-wordpress
-// https://stackoverflow.com/questions/27432586/wordpress-page-link-filter
-// https://wordpress.stackexchange.com/questions/250837/understanding-add-rewrite-rule
-// https://wordpress.stackexchange.com/questions/257899/add-rewrite-rule-not-working-for-page-var
-// https://wordpress.stackexchange.com/questions/169787/adding-a-query-string-to-only-one-page-url
-// https://stackoverflow.com/questions/22014167/general-wordpress-link-filter
-// https://stackoverflow.com/questions/20754505/wordpress-add-rewrite-tag-add-rewrite-rule-and-post-link
-// https://wordpress.stackexchange.com/questions/375877/how-to-create-a-filter-and-add-query-params-to-all-links
