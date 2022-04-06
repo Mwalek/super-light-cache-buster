@@ -193,88 +193,75 @@ function slcb_randomize_ver( $src ) {
 function slcb_status_header() {
     
     nocache_headers();
-    header("Cache-Control: public, s-maxage=120");
+    header("Cache-Control: public, s-maxage=0");
     if ( !defined('WP_CACHE') ) {
         define('WP_CACHE', false);
     }
 }
 
-/*add_action( 'template_redirect', array( $this, 'donotcachepage' ), 9999 );
+add_action( 'template_redirect', 'donotcachepage', 9999 );
 
-public function donotcachepage() {
+function donotcachepage() {
 	if ( headers_sent() || ! defined( 'DONOTCACHEPAGE' ) ) {
 		return;
 	}
 
 	header( 'X-Cache-Enabled: False', true );
 	header("Cache-Control: max-age=0, must-revalidate");
-}*/
+}
 
 function hook_inHeader() {
-        // Get the post id using the get_the_ID(); function:
+        if ( !defined('DONOTCACHEPAGE') )
         define('DONOTCACHEPAGE', true);
 }
-
-/* function wprdcv_param_redirect(){
-if( !is_admin() && !isset($_GET['cache']) ){
-    $location = "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-    $location .= utf8_decode('?cache=bypass');
-    wp_redirect( $location );
-}
-}
-
-add_action('template_redirect', 'wprdcv_param_redirect');*/
 
 /**
  * Redirect any items without query string
  * 
  * @return void
 */
-/*function wpse375877_redirect_to_referrer() {
+function wpse375877_redirect_to_referrer() {
     
-   if ( ! isset( $_GET, $_GET['rfd'], $_GET['dfr'] ) ) {
-	   
-	   $location = "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+    if ( ! isset( $_GET, $_GET['cache'] ) ) {
         
-        wp_safe_redirect(
-            add_query_arg( array(
-                'rfd'        => 'off',
-                'dfr'  => 'none'
-            ), $location )
-        );
-		
-		// wp_safe_redirect( get_permalink().'?page=1'); exit;
-        exit();
-        
-    }
-    
-}
+        $location = "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+         
+         wp_safe_redirect(
+             add_query_arg( array(
+                 'cache'        => 'bypass'
+             ), get_permalink() )
+         );
+         
+         // wp_safe_redirect( get_permalink().'?page=1'); exit;
+         exit();
+         
+     }
+     
+ }
 
-add_action( 'template_redirect', 'wpse375877_redirect_to_referrer' ); */
-
-/* add_filter( 'query_vars', 'addnew_query_vars', 10, 1 );
-function addnew_query_vars($vars)
-{   
-    $vars[] = 'var1'; // var1 is the name of variable you want to add       
-    return $vars;
-}
-
-var_dump($_GET['var1']);*/
-
-/*function myplugin_query_vars( $qvars ) {
-    $qvars[] = 'custom_query_var';
-    return $qvars;
-}
-add_filter( 'query_vars', 'myplugin_query_vars' );
-
-function wpd_append_query_string( $url ) {
-    $url = add_query_arg( 'ngg_force_update', 1, $url );
-    return $url;
-}
-add_filter( 'page_link', 'wpd_append_query_string', 10, 2 );*/
+add_action( 'template_redirect', 'wpse375877_redirect_to_referrer' );
 
 # Debugging
 
-echo "Enable/Disable Cache Buster:", "<pre>", var_dump($randomizer_control), "</pre>";
+#echo "Enable/Disable Cache Buster:", "<pre>", var_dump($randomizer_control), "</pre>";
 
-echo "Enable/Disable No Cache Headers:", "<pre>", var_dump($cache_header_control), "</pre>";
+#echo "Enable/Disable No Cache Headers:", "<pre>", var_dump($cache_header_control), "</pre>";
+
+function custom_button_example($wp_admin_bar){
+    if(! is_admin()) {
+        $args = array(
+        'id' => 'custom-button',
+        'title' => 'Bust Cache',
+        'href' => get_permalink() . '?cache=bypass',
+        'meta' => array(
+        'class' => 'custom-button-class'
+        )
+        );
+        $wp_admin_bar->add_node($args);
+    }
+    else {
+        return;
+    }
+    }
+    
+    add_action('admin_bar_menu', 'custom_button_example', 50);
