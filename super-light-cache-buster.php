@@ -175,6 +175,8 @@ if ( 'option1' == $cache_header_control[0] ) {
     // NoCache Header
     add_action( 'send_headers', 'slcb_status_header', 9999  );
 
+    add_action ( 'wp_head', 'hook_inHeader' );
+
 }
 
 // Randomize version numbers
@@ -208,7 +210,6 @@ public function donotcachepage() {
 	header("Cache-Control: max-age=0, must-revalidate");
 }*/
 
-add_action ( 'wp_head', 'hook_inHeader' );
 function hook_inHeader() {
         // Get the post id using the get_the_ID(); function:
         define('DONOTCACHEPAGE', true);
