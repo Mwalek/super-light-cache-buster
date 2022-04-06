@@ -157,7 +157,25 @@ class Super_Light_Cache_Buster {
 new Super_Light_Cache_Buster();
 
 $randomizer_control = get_option('randomizer_setting_one');
-    var_dump($randomizer_control);
+
+if ( 'option1' == $randomizer_control[0] ) {
+
+    // Randomize asset version for styles	
+    add_filter( 'style_loader_src', 'slcb_randomize_ver', 9999 );
+
+    // Randomize asset version for scripts	
+    add_filter( 'script_loader_src', 'slcb_randomize_ver', 9999 );
+
+}
+
+$cache_header_control = get_option('cache_header_one');
+
+if ( 'option1' == $cache_header_control[0] ) {
+
+    // NoCache Header
+    add_action( 'send_headers', 'slcb_status_header', 9999  );
+
+}
 
 // Randomize version numbers
 function slcb_randomize_ver( $src ) {
@@ -171,14 +189,12 @@ function slcb_randomize_ver( $src ) {
 // Add nocache_headers if enable in wp-admin options
 
 function slcb_status_header() {
-    $cache_header_control = get_option('cache_header_one'); 
-    if ( 'option1' == $cache_header_control[0] ) {
-        nocache_headers();
-		header("Cache-Control: public, s-maxage=120");
-        if ( !defined('WP_CACHE') )
-		    define('WP_CACHE', false);
-	}
-    var_dump($cache_header_control[0]);
+    
+    nocache_headers();
+    header("Cache-Control: public, s-maxage=120");
+    if ( !defined('WP_CACHE') ) {
+        define('WP_CACHE', false);
+    }
 }
 
 /*add_action( 'template_redirect', array( $this, 'donotcachepage' ), 9999 );
@@ -197,19 +213,6 @@ function hook_inHeader() {
         // Get the post id using the get_the_ID(); function:
         define('DONOTCACHEPAGE', true);
 }
-
-if ( 'option1' == $randomizer_control[0] ) {
-
-// Randomize asset version for styles	
-add_filter( 'style_loader_src', 'slcb_randomize_ver', 9999 );
-
-// Randomize asset version for scripts	
-add_filter( 'script_loader_src', 'slcb_randomize_ver', 9999 );
-
-}
-
-// NoCache Header
-add_action( 'send_headers', 'slcb_status_header', 9999  );
 
 /* function wprdcv_param_redirect(){
 if( !is_admin() && !isset($_GET['cache']) ){
@@ -268,3 +271,9 @@ function wpd_append_query_string( $url ) {
     return $url;
 }
 add_filter( 'page_link', 'wpd_append_query_string', 10, 2 );*/
+
+# Debugging
+
+echo "Enable/Disable Cache Buster:", "<pre>", var_dump($randomizer_control), "</pre>";
+
+echo "Enable/Disable No Cache Headers:", "<pre>", var_dump($cache_header_control), "</pre>";
