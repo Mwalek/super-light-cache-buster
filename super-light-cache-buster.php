@@ -160,9 +160,9 @@ $defaults = array (
     'advanced_option' => 'option2'
 );
 
-$randomizer_control = get_option('randomizer_setting_one');
+$randomizer_control = wp_parse_args(get_option('randomizer_setting_one'), $defaults);
 
-if ( 'option1' == $randomizer_control[0] ) {
+if ( 'option1' == $randomizer_control['randomizer_setting_one'] ) {
 
     // Randomize asset version for styles	
     add_filter( 'style_loader_src', 'slcb_randomize_ver', 9999 );
@@ -174,7 +174,7 @@ if ( 'option1' == $randomizer_control[0] ) {
 
 $adv_option_control = wp_parse_args(get_option('advanced_option'), $defaults);
 
-if ( 'option1' == $adv_option_control['randomizer_setting_one'] ) {
+if ( 'option1' == $adv_option_control['advanced_option'] ) {
 
     // NoCache Header
     add_action( 'send_headers', 'slcb_status_header', 9999  );
@@ -248,17 +248,21 @@ function slcb_redirect_to_referrer() {
 # A status button is also required to show whether or not a cached page has been served.
 
 function slcb_buster_button($wp_admin_bar){
+    $defaults = array (
+        'randomizer_setting_one' => 'option2',
+        'advanced_option' => 'option2'
+    );
     if(! is_admin()) {
-        $randomizer_control = get_option('randomizer_setting_one');
+        $randomizer_control = wp_parse_args(get_option('randomizer_setting_one'), $defaults);
         $intitial_args = array(
             'id' => 'custom-button',
             'title' => 'Cache Buster',
             'href' => get_site_url() . '/wp-admin/options-general.php?page=slcb_options',
             'meta' => array(
-                'class' => 'custom-button-class'
+                'class' => 'slcb-button'
             )
         );
-        if ( 'option1' == $randomizer_control[0] ) {
+        if ( 'option1' == $randomizer_control['randomizer_setting_one'] ) {
             $title = array(
                 'title' => 'Cache Buster: On'
             );
