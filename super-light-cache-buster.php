@@ -267,11 +267,8 @@ function slcb_buster_button($wp_admin_bar){
                 'title' => 'Cache Buster: Off'
             );
         }
-        #array_splice( $args, 1, 1, $title );
         $args = array_insert($intitial_args, $title, 1);
         $wp_admin_bar->add_node($args);
-        #var_dump($args);
-        var_dump($randomizer_control[0]);
     }
     else {
         return;
