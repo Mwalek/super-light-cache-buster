@@ -249,10 +249,11 @@ function slcb_redirect_to_referrer() {
 
 function slcb_buster_button($wp_admin_bar){
     if(! is_admin()) {
+        $randomizer_control = get_option('randomizer_setting_one');
         $intitial_args = array(
             'id' => 'custom-button',
             'title' => 'Cache Buster',
-            'href' => get_permalink() . '?cache=bypass',
+            'href' => get_site_url() . '/wp-admin/options-general.php?page=slcb_options',
             'meta' => array(
                 'class' => 'custom-button-class'
             )
@@ -269,7 +270,8 @@ function slcb_buster_button($wp_admin_bar){
         #array_splice( $args, 1, 1, $title );
         $args = array_insert($intitial_args, $title, 1);
         $wp_admin_bar->add_node($args);
-        var_dump($args);
+        #var_dump($args);
+        var_dump($randomizer_control[0]);
     }
     else {
         return;
@@ -284,7 +286,7 @@ function array_insert($array,$values,$offset) {
 
 # Debugging
 
-#echo "Enable/Disable Cache Buster:", "<pre>", var_dump($randomizer_control), "</pre>";
+#echo "Enable/Disable Cache Buster:", "<pre>", var_dump($randomizer_control[0]), "</pre>";
 
 #echo "Enable/Disable No Cache Headers:", "<pre>", var_dump($cache_header_control), "</pre>";
 
