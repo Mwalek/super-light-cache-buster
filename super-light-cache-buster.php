@@ -86,7 +86,7 @@ class Super_Light_Cache_Buster {
                 'default' => array()
         	),
 			array(
-        		'uid' => 'cache_header_one',
+        		'uid' => 'advanced_option',
         		'label' => 'Enable/Disable No Cache Headers',
         		'section' => 'section_two',
         		'type' => 'select',
@@ -168,9 +168,17 @@ if ( 'option1' == $randomizer_control[0] ) {
 
 }
 
-$cache_header_control = get_option('cache_header_one');
+$defaults = array (
+    'randomizer_setting_one' => 'option2',
+    'advanced_option' => 'option2'
+);
 
-if ( 'option1' == $cache_header_control[0] ) {
+#$random_item = "lokale";
+$adv_option_controller = get_option('advanced_option');
+$adv_option_control = wp_parse_args(get_option('advanced_option'), $defaults);
+var_dump($adv_option_control['randomizer_setting_one']);
+
+if ( 'option1' == $adv_option_control['randomizer_setting_one'] ) {
 
     // NoCache Header
     add_action( 'send_headers', 'slcb_status_header', 9999  );
