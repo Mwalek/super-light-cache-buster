@@ -220,7 +220,7 @@ function hook_inHeader() {
  * 
  * @return void
 */
-function wpse375877_redirect_to_referrer() {
+function slcb_redirect_to_referrer() {
     
     if ( ! isset( $_GET, $_GET['cache'] ) ) {
         
@@ -232,14 +232,13 @@ function wpse375877_redirect_to_referrer() {
              ), get_permalink() )
          );
          
-         // wp_safe_redirect( get_permalink().'?page=1'); exit;
          exit();
          
      }
      
  }
 
-add_action( 'template_redirect', 'wpse375877_redirect_to_referrer' );
+add_action( 'template_redirect', 'slcb_redirect_to_referrer' );
 
 # Debugging
 
@@ -251,7 +250,7 @@ function custom_button_example($wp_admin_bar){
     if(! is_admin()) {
         $args = array(
         'id' => 'custom-button',
-        'title' => 'Bust Cache',
+        'title' => 'Cache Bust',
         'href' => get_permalink() . '?cache=bypass',
         'meta' => array(
         'class' => 'custom-button-class'
