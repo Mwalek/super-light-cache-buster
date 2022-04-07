@@ -250,7 +250,7 @@ function custom_button_example($wp_admin_bar){
     if(! is_admin()) {
         $args = array(
         'id' => 'custom-button',
-        'title' => 'Cache Bust',
+        'title' => 'Cache Buster',
         'href' => get_permalink() . '?cache=bypass',
         'meta' => array(
         'class' => 'custom-button-class'
