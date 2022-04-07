@@ -118,6 +118,19 @@ class Super_Light_Cache_Buster {
                 printf( '<textarea name="%1$s" id="%1$s" placeholder="%2$s" rows="5" cols="50">%3$s</textarea>', $arguments['uid'], $arguments['placeholder'], $value );
                 break;
             case 'select':
+            case 'multiselect':
+                if( ! empty ( $arguments['options'] ) && is_array( $arguments['options'] ) ){
+                    $attributes = '';
+                    $options_markup = '';
+                    foreach( $arguments['options'] as $key => $label ){
+                        $options_markup .= sprintf( '<option value="%s" %s>%s</option>', $key, selected( $value[ array_search( $key, $value, true ) ], $key, false ), $label );
+                    }
+                    if( $arguments['type'] === 'multiselect' ){
+                        $attributes = ' multiple="multiple" ';
+                    }
+                    printf( '<select name="%1$s[]" id="%1$s" %2$s>%3$s</select>', $arguments['uid'], $attributes, $options_markup );
+                }
+                break;
             case 'radio':
             case 'checkbox':
                 if( ! empty ( $arguments['options'] ) && is_array( $arguments['options'] ) ){
