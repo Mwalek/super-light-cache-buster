@@ -241,6 +241,7 @@ function slcb_redirect_to_referrer() {
 }
 
 # Add button that allows users to turn cache buster on/off and also refresh the page w/o cache.
+# A status button is also required to show whether or not a cached page has been served.
 
 function slcb_buster_button($wp_admin_bar){
     if(! is_admin()) {
