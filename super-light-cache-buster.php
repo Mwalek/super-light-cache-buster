@@ -177,6 +177,10 @@ if ( 'option1' == $cache_header_control[0] ) {
 
     add_action ( 'wp_head', 'hook_inHeader' );
 
+    add_action( 'template_redirect', 'donotcachepage', 9999 );
+
+    add_action( 'template_redirect', 'slcb_redirect_to_referrer' );
+
 }
 
 // Randomize version numbers
@@ -199,7 +203,10 @@ function slcb_status_header() {
     }
 }
 
-add_action( 'template_redirect', 'donotcachepage', 9999 );
+function hook_inHeader() {
+        if ( !defined('DONOTCACHEPAGE') )
+        define('DONOTCACHEPAGE', true);
+}
 
 function donotcachepage() {
 	if ( headers_sent() || ! defined( 'DONOTCACHEPAGE' ) ) {
@@ -208,11 +215,6 @@ function donotcachepage() {
 
 	header( 'X-Cache-Enabled: False', true );
 	header("Cache-Control: max-age=0, must-revalidate");
-}
-
-function hook_inHeader() {
-        if ( !defined('DONOTCACHEPAGE') )
-        define('DONOTCACHEPAGE', true);
 }
 
 /**
@@ -236,17 +238,11 @@ function slcb_redirect_to_referrer() {
          
      }
      
- }
+}
 
-add_action( 'template_redirect', 'slcb_redirect_to_referrer' );
+# Add button that allows users to turn cache buster on/off and also refresh the page w/o cache.
 
-# Debugging
-
-#echo "Enable/Disable Cache Buster:", "<pre>", var_dump($randomizer_control), "</pre>";
-
-#echo "Enable/Disable No Cache Headers:", "<pre>", var_dump($cache_header_control), "</pre>";
-
-function custom_button_example($wp_admin_bar){
+function slcb_buster_button($wp_admin_bar){
     if(! is_admin()) {
         $args = array(
         'id' => 'custom-button',
@@ -261,6 +257,12 @@ function custom_button_example($wp_admin_bar){
     else {
         return;
     }
-    }
+}
     
-    add_action('admin_bar_menu', 'custom_button_example', 50);
+add_action('admin_bar_menu', 'slcb_buster_button', 50);
+
+# Debugging
+
+#echo "Enable/Disable Cache Buster:", "<pre>", var_dump($randomizer_control), "</pre>";
+
+#echo "Enable/Disable No Cache Headers:", "<pre>", var_dump($cache_header_control), "</pre>";
