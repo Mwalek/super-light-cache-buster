@@ -20,8 +20,7 @@ class Super_Light_Cache_Buster {
         // Add Settings and Fields
     	add_action( 'admin_init', array( $this, 'setup_sections' ) );
     	add_action( 'admin_init', array( $this, 'setup_fields' ) );
-		/*add_filter( 'register', 'sll_register_link' );
-		add_action('login_head', 'control_logo_settings');*/
+
     }
 	public function create_plugin_settings_page() {
     	// Add the menu item and page
@@ -250,15 +249,27 @@ function slcb_redirect_to_referrer() {
 
 function slcb_buster_button($wp_admin_bar){
     if(! is_admin()) {
-        $args = array(
-        'id' => 'custom-button',
-        'title' => 'Cache Buster',
-        'href' => get_permalink() . '?cache=bypass',
-        'meta' => array(
-        'class' => 'custom-button-class'
-        )
+        $intitial_args = array(
+            'id' => 'custom-button',
+            'title' => 'Cache Buster',
+            'href' => get_permalink() . '?cache=bypass',
+            'meta' => array(
+                'class' => 'custom-button-class'
+            )
         );
+        if ( 'option1' == $randomizer_control[0] ) {
+            $title = array(
+                'title' => 'Cache Buster: On'
+            );
+        } else {
+            $title = array(
+                'title' => 'Cache Buster: Off'
+            );
+        }
+        #array_splice( $args, 1, 1, $title );
+        $args = array_insert($intitial_args, $title, 1);
         $wp_admin_bar->add_node($args);
+        var_dump($args);
     }
     else {
         return;
@@ -266,6 +277,10 @@ function slcb_buster_button($wp_admin_bar){
 }
     
 add_action('admin_bar_menu', 'slcb_buster_button', 50);
+
+function array_insert($array,$values,$offset) {
+    return array_slice($array, 0, $offset, true) + $values + array_slice($array, $offset+1, NULL, true);  
+}
 
 # Debugging
 
