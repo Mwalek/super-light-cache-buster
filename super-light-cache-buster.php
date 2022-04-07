@@ -156,6 +156,11 @@ class Super_Light_Cache_Buster {
 
 new Super_Light_Cache_Buster();
 
+$defaults = array (
+    'randomizer_setting_one' => 'option2',
+    'advanced_option' => 'option2'
+);
+
 $randomizer_control = get_option('randomizer_setting_one');
 
 if ( 'option1' == $randomizer_control[0] ) {
@@ -168,15 +173,7 @@ if ( 'option1' == $randomizer_control[0] ) {
 
 }
 
-$defaults = array (
-    'randomizer_setting_one' => 'option2',
-    'advanced_option' => 'option2'
-);
-
-#$random_item = "lokale";
-$adv_option_controller = get_option('advanced_option');
 $adv_option_control = wp_parse_args(get_option('advanced_option'), $defaults);
-var_dump($adv_option_control['randomizer_setting_one']);
 
 if ( 'option1' == $adv_option_control['randomizer_setting_one'] ) {
 
@@ -275,3 +272,5 @@ add_action('admin_bar_menu', 'slcb_buster_button', 50);
 #echo "Enable/Disable Cache Buster:", "<pre>", var_dump($randomizer_control), "</pre>";
 
 #echo "Enable/Disable No Cache Headers:", "<pre>", var_dump($cache_header_control), "</pre>";
+
+#var_dump($adv_option_control['randomizer_setting_one']);
