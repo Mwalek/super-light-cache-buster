@@ -82,7 +82,7 @@ class Super_Light_Cache_Buster {
         			'option1' => 'Enable',
         			'option2' => 'Disable',
         		),
-                'default' => array()
+                'default' => array('option1')
         	),
 			array(
         		'uid' => 'advanced_option',
@@ -94,7 +94,7 @@ class Super_Light_Cache_Buster {
         			'option1' => 'Enable',
         			'option2' => 'Disable',
         		),
-                'default' => array()
+                'default' => array('option2')
         	)
         );
     	foreach( $fields as $field ){
@@ -125,10 +125,10 @@ class Super_Light_Cache_Buster {
                     foreach( $arguments['options'] as $key => $label ){
                         $options_markup .= sprintf( '<option value="%s" %s>%s</option>', $key, selected( $value[ array_search( $key, $value, true ) ], $key, false ), $label );
                         //echo var_dump($key), '</br>';
-                        #echo '<strong>$Value:</strong> ', var_dump($value);
+                        echo '<strong>$Value:</strong> ', var_dump($value);
                         //echo '<strong>$Key:</strong> ', var_dump($key);
                         $debug = array_search( $key, $value, true );
-                        echo '<strong>Array Search Result:</strong> ', var_dump($debug);
+                        #echo '<strong>Array Search Result:</strong> ', var_dump($debug);
                     }
                     if( $arguments['type'] === 'multiselect' ){
                         $attributes = ' multiple="multiple" ';
@@ -301,4 +301,4 @@ function array_insert($array,$values,$offset) {
 
 #var_dump($adv_option_control['randomizer_setting_one']);
 
-print_r($randomizer_control['randomizer_setting_one']);
+#print_r($randomizer_control['randomizer_setting_one']);
