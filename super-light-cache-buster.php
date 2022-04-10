@@ -167,7 +167,7 @@ $defaults = array (
 
 $randomizer_control = wp_parse_args(get_option('randomizer_setting_one'), $defaults);
 $randomizer = get_option('randomizer_setting_one');
-print_r($randomizer[0]);
+#print_r($randomizer[0]);
 
 if ( 'option1' == $randomizer_control['randomizer_setting_one'] ) {
 
