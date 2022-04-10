@@ -124,6 +124,11 @@ class Super_Light_Cache_Buster {
                     $options_markup = '';
                     foreach( $arguments['options'] as $key => $label ){
                         $options_markup .= sprintf( '<option value="%s" %s>%s</option>', $key, selected( $value[ array_search( $key, $value, true ) ], $key, false ), $label );
+                        //echo var_dump($key), '</br>';
+                        #echo '<strong>$Value:</strong> ', var_dump($value);
+                        //echo '<strong>$Key:</strong> ', var_dump($key);
+                        $debug = array_search( $key, $value, true );
+                        echo '<strong>Array Search Result:</strong> ', var_dump($debug);
                     }
                     if( $arguments['type'] === 'multiselect' ){
                         $attributes = ' multiple="multiple" ';
@@ -161,6 +166,8 @@ $defaults = array (
 );
 
 $randomizer_control = wp_parse_args(get_option('randomizer_setting_one'), $defaults);
+$randomizer = get_option('randomizer_setting_one');
+print_r($randomizer[0]);
 
 if ( 'option1' == $randomizer_control['randomizer_setting_one'] ) {
 
@@ -273,6 +280,7 @@ function slcb_buster_button($wp_admin_bar){
         }
         $args = array_insert($intitial_args, $title, 1);
         $wp_admin_bar->add_node($args);
+        print_r($randomizer_control['randomizer_setting_one']);
     }
     else {
         return;
@@ -292,3 +300,5 @@ function array_insert($array,$values,$offset) {
 #echo "Enable/Disable No Cache Headers:", "<pre>", var_dump($cache_header_control), "</pre>";
 
 #var_dump($adv_option_control['randomizer_setting_one']);
+
+print_r($randomizer_control['randomizer_setting_one']);
