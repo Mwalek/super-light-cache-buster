@@ -171,11 +171,11 @@ $defaults = array (
     'advanced_option' => 'option2'
 );
 
-$randomizer_control = wp_parse_args(get_option('randomizer_setting_one'), $slcb_fields->get_SLCB_fields(0, 'default'));
+$randomizer_control = get_option('randomizer_setting_one', $slcb_fields->get_SLCB_fields(0, 'default'));
 $randomizer = get_option('randomizer_setting_one');
-#print_r($randomizer[0]);
+print_r($randomizer_control[0]);
 
-if ( 'option1' == $randomizer_control['randomizer_setting_one'] ) {
+if ( 'option1' == $randomizer_control[0] ) {
 
     // Randomize asset version for styles	
     add_filter( 'style_loader_src', 'slcb_randomize_ver', 9999 );
@@ -185,9 +185,9 @@ if ( 'option1' == $randomizer_control['randomizer_setting_one'] ) {
 
 }
 
-$adv_option_control = wp_parse_args(get_option('advanced_option'), $slcb_fields->get_SLCB_fields(0, 'default'));
+$adv_option_control = get_option('advanced_option', $slcb_fields->get_SLCB_fields(0, 'default'));
 
-if ( 'option1' == $adv_option_control['advanced_option'] ) {
+if ( 'option1' == $adv_option_control[0] ) {
 
     // NoCache Header
     add_action( 'send_headers', 'slcb_status_header', 9999  );
