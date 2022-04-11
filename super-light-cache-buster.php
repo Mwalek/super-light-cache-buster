@@ -164,11 +164,6 @@ class Super_Light_Cache_Buster {
 
 $slcb_fields = new Super_Light_Cache_Buster();
 
-$defaults = array (
-    'randomizer_setting_one' => 'option2',
-    'advanced_option' => 'option2'
-);
-
 $randomizer_control = get_option('randomizer_setting_one', $slcb_fields->get_SLCB_fields(0, 'default'));
 
 if ( 'option1' == $randomizer_control[0] ) {
