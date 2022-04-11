@@ -14,6 +14,32 @@
  */
 
 class Super_Light_Cache_Buster {
+    public $all_fields = array(
+        array(
+            'uid' => 'randomizer_setting_one',
+            'label' => 'Enable/Disable Cache Buster',
+            'section' => 'section_one',
+            'type' => 'select',
+            'helper' => 'When disabled your cache will work normally.',
+            'options' => array(
+                'option1' => 'Enable',
+                'option2' => 'Disable',
+            ),
+            'default' => array('option1')
+        ),
+        array(
+            'uid' => 'advanced_option',
+            'label' => 'Enable/Disable No Cache Headers',
+            'section' => 'section_two',
+            'type' => 'select',
+            'helper' => 'When enabled your pages will instruct browsers not to cache them.',
+            'options' => array(
+                'option1' => 'Enable',
+                'option2' => 'Disable',
+            ),
+            'default' => array('option2')
+        )
+    );
 	public function __construct() {
     	// Hook into the admin menu
     	add_action( 'admin_menu', array( $this, 'create_plugin_settings_page' ) );
@@ -71,32 +97,7 @@ class Super_Light_Cache_Buster {
     	}
     }
 	public function setup_fields() {
-        $fields = array(
-			array(
-        		'uid' => 'randomizer_setting_one',
-        		'label' => 'Enable/Disable Cache Buster',
-        		'section' => 'section_one',
-        		'type' => 'select',
-				'helper' => 'When disabled your cache will work normally.',
-        		'options' => array(
-        			'option1' => 'Enable',
-        			'option2' => 'Disable',
-        		),
-                'default' => array('option1')
-        	),
-			array(
-        		'uid' => 'advanced_option',
-        		'label' => 'Enable/Disable No Cache Headers',
-        		'section' => 'section_two',
-        		'type' => 'select',
-				'helper' => 'When enabled your pages will instruct browsers not to cache them.',
-        		'options' => array(
-        			'option1' => 'Enable',
-        			'option2' => 'Disable',
-        		),
-                'default' => array('option2')
-        	)
-        );
+        $fields = $this->all_fields;
     	foreach( $fields as $field ){
         	add_settings_field( $field['uid'], $field['label'], array( $this, 'field_callback' ), 'slcb_fields', $field['section'], $field );
             register_setting( 'slcb_fields', $field['uid'] );
@@ -156,16 +157,21 @@ class Super_Light_Cache_Buster {
             printf( '<p class="description">%s</p>', $supplimental );
         }*/
     }
+    public function get_SLCB_fields($offset1, $offset2) {
+        return( $this->all_fields[$offset1][$offset2] );
+    }
 }
 
 new Super_Light_Cache_Buster();
+
+$slcb_fields = new Super_Light_Cache_Buster();
 
 $defaults = array (
     'randomizer_setting_one' => 'option2',
     'advanced_option' => 'option2'
 );
 
-$randomizer_control = wp_parse_args(get_option('randomizer_setting_one'), $defaults);
+$randomizer_control = wp_parse_args(get_option('randomizer_setting_one'), $slcb_fields->get_SLCB_fields(0, 'default'));
 $randomizer = get_option('randomizer_setting_one');
 #print_r($randomizer[0]);
 
@@ -179,7 +185,7 @@ if ( 'option1' == $randomizer_control['randomizer_setting_one'] ) {
 
 }
 
-$adv_option_control = wp_parse_args(get_option('advanced_option'), $defaults);
+$adv_option_control = wp_parse_args(get_option('advanced_option'), $slcb_fields->get_SLCB_fields(0, 'default'));
 
 if ( 'option1' == $adv_option_control['advanced_option'] ) {
 
