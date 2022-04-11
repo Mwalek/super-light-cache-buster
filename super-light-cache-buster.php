@@ -178,7 +178,10 @@ if ( 'option1' == $randomizer_control[0] ) {
 
 $adv_option_control = get_option('advanced_option', $slcb_fields->get_SLCB_fields(0, 'default'));
 
-if ( 'option1' == $adv_option_control[0] ) {
+echo 'Randomizer: ', $randomizer_control[0], '</br>';
+echo 'Advanced: ', $adv_option_control[0];
+
+if ( 'option1' == $randomizer_control[0] && 'option1' == $adv_option_control[0] ) {
 
     // NoCache Header
     add_action( 'send_headers', 'slcb_status_header', 9999  );
