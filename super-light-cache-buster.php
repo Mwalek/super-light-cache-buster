@@ -261,12 +261,8 @@ function slcb_redirect_to_referrer() {
 # A status button is also required to show whether or not a cached page has been served.
 
 function slcb_buster_button($wp_admin_bar){
-    $defaults = array (
-        'randomizer_setting_one' => 'option2',
-        'advanced_option' => 'option2'
-    );
+    $randomizer_control = get_option('advanced_option', $slcb_fields->get_SLCB_fields(0, 'default'));
     if(! is_admin()) {
-        $randomizer_control = get_option('advanced_option', $slcb_fields->get_SLCB_fields(0, 'default'));
         $intitial_args = array(
             'id' => 'custom-button',
             'title' => 'Cache Buster',
@@ -275,7 +271,7 @@ function slcb_buster_button($wp_admin_bar){
                 'class' => 'slcb-button'
             )
         );
-        if ( 'option1' == $randomizer_control['randomizer_setting_one'] ) {
+        if ( 'option1' == $randomizer_control[0] ) {
             $title = array(
                 'title' => 'Cache Buster: On'
             );
