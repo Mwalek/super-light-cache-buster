@@ -172,8 +172,6 @@ $defaults = array (
 );
 
 $randomizer_control = get_option('randomizer_setting_one', $slcb_fields->get_SLCB_fields(0, 'default'));
-$randomizer = get_option('randomizer_setting_one');
-print_r($randomizer_control[0]);
 
 if ( 'option1' == $randomizer_control[0] ) {
 
@@ -261,6 +259,7 @@ function slcb_redirect_to_referrer() {
 # A status button is also required to show whether or not a cached page has been served.
 
 function slcb_buster_button($wp_admin_bar){
+    $slcb_fields = new Super_Light_Cache_Buster();
     $randomizer_control = get_option('advanced_option', $slcb_fields->get_SLCB_fields(0, 'default'));
     if(! is_admin()) {
         $intitial_args = array(
@@ -282,7 +281,7 @@ function slcb_buster_button($wp_admin_bar){
         }
         $args = array_insert($intitial_args, $title, 1);
         $wp_admin_bar->add_node($args);
-        print_r($randomizer_control['randomizer_setting_one']);
+        #print_r($randomizer_control[0]);
     }
     else {
         return;
