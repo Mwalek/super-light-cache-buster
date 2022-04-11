@@ -91,7 +91,7 @@ class Super_Light_Cache_Buster {
 				echo '<hr>';
     			break;
     		case 'section_two':
-    			echo 'This will stop caching on the page in general.';
+    			echo 'Settings in this section add more ways to prevent caching. The default settings are recommended for most sites.';
 				echo '<hr>';
     			break;
     	}
