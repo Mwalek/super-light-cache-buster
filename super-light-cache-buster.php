@@ -253,7 +253,7 @@ function slcb_redirect_to_referrer() {
 
 function slcb_buster_button($wp_admin_bar){
     $slcb_fields = new Super_Light_Cache_Buster();
-    $randomizer_control = get_option('advanced_option', $slcb_fields->get_SLCB_fields(0, 'default'));
+    $randomizer_control = get_option('randomizer_setting_one', $slcb_fields->get_SLCB_fields(0, 'default'));
     if(! is_admin()) {
         $intitial_args = array(
             'id' => 'custom-button',
