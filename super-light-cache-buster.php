@@ -17,7 +17,7 @@ class Super_Light_Cache_Buster {
     public $all_fields = array(
         array(
             'uid' => 'slcb_plugin_state',
-            'label' => 'Enable/Disable Cache Buster',
+            'label' => 'Cache Buster Status',
             'section' => 'section_one',
             'type' => 'select',
             'helper' => 'When disabled your cache will work normally.',
@@ -29,7 +29,7 @@ class Super_Light_Cache_Buster {
         ),
         array(
             'uid' => 'slcb_intensity_level',
-            'label' => 'Enable/Disable No Cache Headers',
+            'label' => 'Cache Buster Intensity',
             'section' => 'section_two',
             'type' => 'select',
             'helper' => 'When enabled your pages will instruct browsers not to cache them.',
@@ -81,7 +81,7 @@ class Super_Light_Cache_Buster {
         </div><?php
     }
     public function setup_sections() {
-        add_settings_section( 'section_one', 'Cache Buster Status', array( $this, 'section_callback' ), 'slcb_fields' );
+        add_settings_section( 'section_one', 'Basic Settings', array( $this, 'section_callback' ), 'slcb_fields' );
         add_settings_section( 'section_two', 'Advanced Settings', array( $this, 'section_callback' ), 'slcb_fields' );
     }
 	public function section_callback( $arguments ) {
