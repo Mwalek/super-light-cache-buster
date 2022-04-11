@@ -16,7 +16,7 @@
 class Super_Light_Cache_Buster {
     public $all_fields = array(
         array(
-            'uid' => 'slcb_plugin_status',
+            'uid' => 'slcb_plugin_state',
             'label' => 'Enable/Disable Cache Buster',
             'section' => 'section_one',
             'type' => 'select',
@@ -164,7 +164,7 @@ class Super_Light_Cache_Buster {
 
 $slcb_fields = new Super_Light_Cache_Buster();
 
-$randomizer_control = get_option('slcb_plugin_status', $slcb_fields->get_SLCB_fields(0, 'default'));
+$randomizer_control = get_option('slcb_plugin_state', $slcb_fields->get_SLCB_fields(0, 'default'));
 
 if ( 'option1' == $randomizer_control[0] ) {
 
@@ -253,7 +253,7 @@ function slcb_redirect_to_referrer() {
 
 function slcb_buster_button($wp_admin_bar){
     $slcb_fields = new Super_Light_Cache_Buster();
-    $randomizer_control = get_option('slcb_plugin_status', $slcb_fields->get_SLCB_fields(0, 'default'));
+    $randomizer_control = get_option('slcb_plugin_state', $slcb_fields->get_SLCB_fields(0, 'default'));
     if(! is_admin()) {
         $intitial_args = array(
             'id' => 'custom-button',
@@ -293,9 +293,9 @@ function array_insert($array,$values,$offset) {
 
 #echo "Enable/Disable No Cache Headers:", "<pre>", var_dump($cache_header_control), "</pre>";
 
-#var_dump($adv_option_control['slcb_plugin_status']);
+#var_dump($adv_option_control['slcb_plugin_state']);
 
-#print_r($randomizer_control['slcb_plugin_status']);
+#print_r($randomizer_control['slcb_plugin_state']);
 
 /* echo 'Randomizer: ', $randomizer_control[0], '</br>';
 echo 'Advanced: ', $adv_option_control[0]; */
