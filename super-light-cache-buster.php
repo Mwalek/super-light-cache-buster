@@ -34,10 +34,10 @@ class Super_Light_Cache_Buster {
             'type' => 'select',
             'helper' => 'When enabled your pages will instruct browsers not to cache them.',
             'options' => array(
-                'option1' => 'Enable',
-                'option2' => 'Disable',
+                'option1' => 'Normal',
+                'option2' => 'Intense',
             ),
-            'default' => array('option2')
+            'default' => array('option1')
         )
     );
 	public function __construct() {
@@ -178,7 +178,7 @@ if ( 'option1' == $randomizer_control[0] ) {
 
 $adv_option_control = get_option('slcb_intensity_level', $slcb_fields->get_SLCB_fields(1, 'default'));
 
-if ( 'option1' == $randomizer_control[0] && 'option1' == $adv_option_control[0] ) {
+if ( 'option1' == $randomizer_control[0] && 'option2' == $adv_option_control[0] ) {
 
     // NoCache Header
     add_action( 'send_headers', 'slcb_status_header', 9999  );
