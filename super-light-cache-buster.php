@@ -126,7 +126,7 @@ class Super_Light_Cache_Buster {
                     foreach( $arguments['options'] as $key => $label ){
                         $options_markup .= sprintf( '<option value="%s" %s>%s</option>', $key, selected( $value[ array_search( $key, $value, true ) ], $key, false ), $label );
                         //echo var_dump($key), '</br>';
-                        echo '<strong>$Value:</strong> ', var_dump($value);
+                        #echo '<strong>$Value:</strong> ', var_dump($value);
                         //echo '<strong>$Key:</strong> ', var_dump($key);
                         $debug = array_search( $key, $value, true );
                         #echo '<strong>Array Search Result:</strong> ', var_dump($debug);
