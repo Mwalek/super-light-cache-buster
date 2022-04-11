@@ -176,10 +176,7 @@ if ( 'option1' == $randomizer_control[0] ) {
 
 }
 
-$adv_option_control = get_option('advanced_option', $slcb_fields->get_SLCB_fields(0, 'default'));
-
-echo 'Randomizer: ', $randomizer_control[0], '</br>';
-echo 'Advanced: ', $adv_option_control[0];
+$adv_option_control = get_option('advanced_option', $slcb_fields->get_SLCB_fields(1, 'default'));
 
 if ( 'option1' == $randomizer_control[0] && 'option1' == $adv_option_control[0] ) {
 
@@ -299,3 +296,6 @@ function array_insert($array,$values,$offset) {
 #var_dump($adv_option_control['randomizer_setting_one']);
 
 #print_r($randomizer_control['randomizer_setting_one']);
+
+/* echo 'Randomizer: ', $randomizer_control[0], '</br>';
+echo 'Advanced: ', $adv_option_control[0]; */
