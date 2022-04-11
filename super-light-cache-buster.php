@@ -81,7 +81,7 @@ class Super_Light_Cache_Buster {
         </div><?php
     }
     public function setup_sections() {
-        add_settings_section( 'section_one', 'Set Cache Buster Status', array( $this, 'section_callback' ), 'slcb_fields' );
+        add_settings_section( 'section_one', 'Cache Buster Status', array( $this, 'section_callback' ), 'slcb_fields' );
         add_settings_section( 'section_two', 'Advanced Settings', array( $this, 'section_callback' ), 'slcb_fields' );
     }
 	public function section_callback( $arguments ) {
