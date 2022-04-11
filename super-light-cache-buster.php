@@ -162,8 +162,6 @@ class Super_Light_Cache_Buster {
     }
 }
 
-new Super_Light_Cache_Buster();
-
 $slcb_fields = new Super_Light_Cache_Buster();
 
 $defaults = array (
