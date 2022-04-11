@@ -266,7 +266,7 @@ function slcb_buster_button($wp_admin_bar){
         'advanced_option' => 'option2'
     );
     if(! is_admin()) {
-        $randomizer_control = wp_parse_args(get_option('randomizer_setting_one'), $defaults);
+        $randomizer_control = get_option('advanced_option', $slcb_fields->get_SLCB_fields(0, 'default'));
         $intitial_args = array(
             'id' => 'custom-button',
             'title' => 'Cache Buster',
