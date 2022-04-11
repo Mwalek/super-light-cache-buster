@@ -28,7 +28,7 @@ class Super_Light_Cache_Buster {
             'default' => array('option1')
         ),
         array(
-            'uid' => 'advanced_option',
+            'uid' => 'slcb_intensity_level',
             'label' => 'Enable/Disable No Cache Headers',
             'section' => 'section_two',
             'type' => 'select',
@@ -176,7 +176,7 @@ if ( 'option1' == $randomizer_control[0] ) {
 
 }
 
-$adv_option_control = get_option('advanced_option', $slcb_fields->get_SLCB_fields(1, 'default'));
+$adv_option_control = get_option('slcb_intensity_level', $slcb_fields->get_SLCB_fields(1, 'default'));
 
 if ( 'option1' == $randomizer_control[0] && 'option1' == $adv_option_control[0] ) {
 
