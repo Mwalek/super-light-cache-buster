@@ -46,7 +46,6 @@ class Super_Light_Cache_Buster {
         // Add Settings and Fields
     	add_action( 'admin_init', array( $this, 'setup_sections' ) );
     	add_action( 'admin_init', array( $this, 'setup_fields' ) );
-
     }
 	public function create_plugin_settings_page() {
     	// Add the menu item and page
@@ -159,6 +158,25 @@ class Super_Light_Cache_Buster {
     }
     public function get_SLCB_fields($offset1, $offset2 = 'default') {
         return( $this->all_fields[$offset1][$offset2] );
+    }
+    public function get_SLCB_uids() {
+        $uid = $this->all_fields[0]['uid'];
+        print_r ($uid);
+    }
+    public function uninstall_SLCB () {
+        $uids = array();
+
+        foreach($this->all_fields as $array) {
+            $uids[] = $array['uid'];
+        }
+        # $options = implode(", ", $uids);
+
+        $settingOptions = $uids;
+ 
+        foreach ( $settingOptions as $settingName ) {
+            delete_option( $settingName );
+            #echo $settingName;
+        }
     }
 }
 
@@ -309,3 +327,13 @@ function array_insert($array,$values,$offset) {
 echo 'Advanced: ', $adv_option_control[0]; */
 
 #print_r ($slcb_fields->get_SLCB_fields(0, 'uid'));
+
+#$slcb_fields->uninstall_SLCB();
+
+// plugin uninstallation
+register_uninstall_hook( __FILE__, 'uninstaller' );
+
+function uninstaller() {
+    $slcb_fields = new Super_Light_Cache_Buster();
+    $slcb_fields->uninstall_SLCB();
+}
