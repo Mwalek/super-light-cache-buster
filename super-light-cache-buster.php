@@ -20,10 +20,10 @@ class Super_Light_Cache_Buster {
             'label' => 'Cache Buster Status',
             'section' => 'section_one',
             'type' => 'select',
-            'helper' => 'When disabled your cache will work normally.',
+            'helper' => 'When Off your cache will work normally.',
             'options' => array(
-                'option1' => 'Enable',
-                'option2' => 'Disable',
+                'option1' => 'On',
+                'option2' => 'Off',
             ),
             'default' => array('option1')
         ),
@@ -32,7 +32,7 @@ class Super_Light_Cache_Buster {
             'label' => 'Cache Buster Intensity',
             'section' => 'section_two',
             'type' => 'select',
-            'helper' => 'Intensity only works if the Cache Buster Status is enabled.',
+            'helper' => 'Intensity only works if the Cache Buster Status is \'On\'.',
             'options' => array(
                 'option1' => 'Normal',
                 'option2' => 'Intense',
