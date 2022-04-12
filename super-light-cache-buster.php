@@ -32,7 +32,7 @@ class Super_Light_Cache_Buster {
             'label' => 'Cache Buster Intensity',
             'section' => 'section_two',
             'type' => 'select',
-            'helper' => 'When enabled your pages will instruct browsers not to cache them.',
+            'helper' => 'Intensity only works if the Cache Buster Status is enabled.',
             'options' => array(
                 'option1' => 'Normal',
                 'option2' => 'Intense',
