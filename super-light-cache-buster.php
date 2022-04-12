@@ -164,7 +164,7 @@ class Super_Light_Cache_Buster {
 
 $slcb_fields = new Super_Light_Cache_Buster();
 
-$randomizer_control = get_option('slcb_plugin_state', $slcb_fields->get_SLCB_fields(0, 'default'));
+$randomizer_control = get_option('slcb_plugin_state', $slcb_fields->get_SLCB_fields(0));
 
 if ( 'option1' == $randomizer_control[0] ) {
 
@@ -176,7 +176,7 @@ if ( 'option1' == $randomizer_control[0] ) {
 
 }
 
-$adv_option_control = get_option('slcb_intensity_level', $slcb_fields->get_SLCB_fields(1, 'default'));
+$adv_option_control = get_option('slcb_intensity_level', $slcb_fields->get_SLCB_fields(1));
 
 if ( 'option1' == $randomizer_control[0] && 'option2' == $adv_option_control[0] ) {
 
@@ -261,7 +261,7 @@ function slcb_redirect_to_referrer() {
 
 function slcb_buster_button($wp_admin_bar){
     $slcb_fields = new Super_Light_Cache_Buster();
-    $randomizer_control = get_option('slcb_plugin_state', $slcb_fields->get_SLCB_fields(0, 'default'));
+    $randomizer_control = get_option('slcb_plugin_state', $slcb_fields->get_SLCB_fields(0));
     if(! is_admin()) {
         $intitial_args = array(
             'id' => 'custom-button',
