@@ -313,6 +313,14 @@ function array_insert($array,$values,$offset) {
     return array_slice($array, 0, $offset, true) + $values + array_slice($array, $offset+1, NULL, true);  
 }
 
+// plugin uninstallation
+register_uninstall_hook( __FILE__, 'uninstaller' );
+
+function uninstaller() {
+    $slcb_fields = new Super_Light_Cache_Buster();
+    $slcb_fields->uninstall_SLCB();
+}
+
 # Debugging
 
 #echo "Enable/Disable Cache Buster:", "<pre>", var_dump($randomizer_control[0]), "</pre>";
@@ -327,13 +335,3 @@ function array_insert($array,$values,$offset) {
 echo 'Advanced: ', $adv_option_control[0]; */
 
 #print_r ($slcb_fields->get_SLCB_fields(0, 'uid'));
-
-#$slcb_fields->uninstall_SLCB();
-
-// plugin uninstallation
-register_uninstall_hook( __FILE__, 'uninstaller' );
-
-function uninstaller() {
-    $slcb_fields = new Super_Light_Cache_Buster();
-    $slcb_fields->uninstall_SLCB();
-}
