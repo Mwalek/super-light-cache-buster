@@ -20,7 +20,7 @@ class Super_Light_Cache_Buster {
             'label' => 'Cache Buster Status',
             'section' => 'section_one',
             'type' => 'select',
-            'helper' => 'When Off your cache will work normally.',
+            'helper' => 'When \'Off\' your cache will work normally.',
             'options' => array(
                 'option1' => 'On',
                 'option2' => 'Off',
