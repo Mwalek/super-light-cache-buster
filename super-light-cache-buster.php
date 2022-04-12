@@ -231,6 +231,14 @@ function donotcachepage() {
  * @return void
 */
 function slcb_redirect_to_referrer() {
+
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+    # Don't change URL params for search engine bots
+
+    if ( isset($user_agent) && preg_match('/bot|crawl|slurp|spider|mediapartners/i', $user_agent) ) {
+        return;
+    }
     
     if ( ! isset( $_GET, $_GET['cache'] ) ) {
         
