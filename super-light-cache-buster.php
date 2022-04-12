@@ -307,3 +307,5 @@ function array_insert($array,$values,$offset) {
 
 /* echo 'Randomizer: ', $randomizer_control[0], '</br>';
 echo 'Advanced: ', $adv_option_control[0]; */
+
+#print_r ($slcb_fields->get_SLCB_fields(0, 'uid'));
