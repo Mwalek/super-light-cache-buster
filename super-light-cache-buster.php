@@ -157,7 +157,7 @@ class Super_Light_Cache_Buster {
             printf( '<p class="description">%s</p>', $supplimental );
         }*/
     }
-    public function get_SLCB_fields($offset1, $offset2) {
+    public function get_SLCB_fields($offset1, $offset2 = 'default') {
         return( $this->all_fields[$offset1][$offset2] );
     }
 }
