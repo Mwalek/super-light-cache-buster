@@ -51,7 +51,7 @@ class Super_Light_Cache_Buster {
         // plugin deactivation
         register_deactivation_hook( __FILE__, array( $this, 'slcb_deactivation') );
         // plugin uninstallation
-        register_uninstall_hook( __FILE__, array( $this, 'slcb_uninstaller') );
+        register_uninstall_hook( __FILE__, 'slcb_uninstaller' );
     }
 	public function create_plugin_settings_page() {
     	// Add the menu item and page
@@ -185,31 +185,35 @@ class Super_Light_Cache_Buster {
         }
     }
     public function slcb_activation() {
-        if (file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php")) {
-            wp_config_delete();
-        }
-        else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && is_writable (dirname (ABSPATH) . "/wp-config.php")) {
-            wp_config_delete('/');
-        }
-        else if (file_exists (ABSPATH . "wp-config.php") && !is_writable (ABSPATH . "wp-config.php")) {
-            add_warning('Error removing');
-        }
-        else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && !is_writable (dirname (ABSPATH) . "/wp-config.php")) {
-            add_warning('Error removing');
-        }
-        else {
-            add_warning('Error removing');
+        if ( 'option2' == get_option('slcb_intensity_level', $this->get_SLCB_fields(1)) ) {
+            if (file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php")) {
+                wp_config_delete();
+            }
+            else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && is_writable (dirname (ABSPATH) . "/wp-config.php")) {
+                wp_config_delete('/');
+            }
+            else if (file_exists (ABSPATH . "wp-config.php") && !is_writable (ABSPATH . "wp-config.php")) {
+                add_warning('Error removing');
+            }
+            else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && !is_writable (dirname (ABSPATH) . "/wp-config.php")) {
+                add_warning('Error removing');
+            }
+            else {
+                add_warning('Error removing');
+            }
         }
     }
     public function slcb_deactivation() {
-        if ( file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php") ){
-            wp_config_put();
-        }
-        else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && is_writable (dirname (ABSPATH) . "/wp-config.php")){
-            wp_config_put('/');
-        }
-        else { 
-            add_warning('Error adding');
+        if ( 'option1' == get_option('slcb_plugin_state', $this->get_SLCB_fields(0)) ) {
+            if ( file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php") ){
+                wp_config_put();
+            }
+            else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && is_writable (dirname (ABSPATH) . "/wp-config.php")){
+                wp_config_put('/');
+            }
+            else { 
+                add_warning('Error adding');
+            }
         }
     }
     public function slcb_uninstaller() {
