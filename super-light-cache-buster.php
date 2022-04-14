@@ -46,6 +46,12 @@ class Super_Light_Cache_Buster {
         // Add Settings and Fields
     	add_action( 'admin_init', array( $this, 'setup_sections' ) );
     	add_action( 'admin_init', array( $this, 'setup_fields' ) );
+        // plugin activation
+        register_activation_hook( __FILE__, array( $this, 'slcb_activation') );
+        // plugin deactivation
+        register_deactivation_hook( __FILE__, array( $this, 'slcb_deactivation') );
+        // plugin uninstallation
+        register_uninstall_hook( __FILE__, array( $this, 'slcb_uninstaller') );
     }
 	public function create_plugin_settings_page() {
     	// Add the menu item and page
@@ -177,6 +183,37 @@ class Super_Light_Cache_Buster {
             delete_option( $settingName );
             #echo $settingName;
         }
+    }
+    public function slcb_activation() {
+        if (file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php")) {
+            wp_config_delete();
+        }
+        else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && is_writable (dirname (ABSPATH) . "/wp-config.php")) {
+            wp_config_delete('/');
+        }
+        else if (file_exists (ABSPATH . "wp-config.php") && !is_writable (ABSPATH . "wp-config.php")) {
+            add_warning('Error removing');
+        }
+        else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && !is_writable (dirname (ABSPATH) . "/wp-config.php")) {
+            add_warning('Error removing');
+        }
+        else {
+            add_warning('Error removing');
+        }
+    }
+    public function slcb_deactivation() {
+        if ( file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php") ){
+            wp_config_put();
+        }
+        else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && is_writable (dirname (ABSPATH) . "/wp-config.php")){
+            wp_config_put('/');
+        }
+        else { 
+            add_warning('Error adding');
+        }
+    }
+    public function slcb_uninstaller() {
+        $this->uninstall_SLCB();
     }
 }
 
@@ -326,54 +363,6 @@ if ( !function_exists( 'wp_config_delete' ) ) {
         $config = file_get_contents (ABSPATH . "wp-config.php");
         $config = preg_replace ("/( ?)(define)( ?)(\()( ?)(['\"])WP_CACHE(['\"])( ?)(,)( ?)(0|1|true|false)( ?)(\))( ?);/i", "", $config);
         file_put_contents (ABSPATH . $slash . "wp-config.php", $config);
-    }
-}
-
-// plugin activation
-register_activation_hook( __FILE__, 'slcb_activation' );
-
-if ( !function_exists( 'slcb_activation' ) ) {
-    function slcb_activation() {
-        if (file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php")) {
-            wp_config_delete();
-        }
-        else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && is_writable (dirname (ABSPATH) . "/wp-config.php")) {
-            wp_config_delete('/');
-        }
-        else if (file_exists (ABSPATH . "wp-config.php") && !is_writable (ABSPATH . "wp-config.php")) {
-            add_warning('Error removing');
-        }
-        else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && !is_writable (dirname (ABSPATH) . "/wp-config.php")) {
-            add_warning('Error removing');
-        }
-        else {
-            add_warning('Error removing');
-        }
-    }
-}
-
-register_deactivation_hook( __FILE__, 'slcb_deactivation' );
-if ( !function_exists( 'slcb_deactivation' ) ) {
-    function slcb_deactivation() {
-        if ( file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php") ){
-            wp_config_put();
-        }
-        else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && is_writable (dirname (ABSPATH) . "/wp-config.php")){
-            wp_config_put('/');
-        }
-        else { 
-            add_warning('Error adding');
-        }
-    }
-}
-
-// plugin uninstallation
-register_uninstall_hook( __FILE__, 'slcb_uninstaller' );
-
-if ( !function_exists( 'slcb_activation' ) ) {
-    function slcb_uninstaller() {
-        $slcb_fields = new Super_Light_Cache_Buster();
-        $slcb_fields->uninstall_SLCB();
     }
 }
 
