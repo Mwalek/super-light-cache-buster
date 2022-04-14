@@ -319,16 +319,6 @@ if ( !function_exists( 'wp_config_put' ) ) {
         $config = preg_replace ("/^([\r\n\t ]*)(\<\?)(php)?/i", "<?php define('WP_CACHE', true);", $config);
         file_put_contents (ABSPATH . $slash . "wp-config.php", $config);
     }
-    
-    if ( file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php") ){
-        wp_config_put();
-    }
-    else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && is_writable (dirname (ABSPATH) . "/wp-config.php")){
-        wp_config_put('/');
-    }
-    else { 
-        add_warning('Error adding');
-    }
 }
 
 if ( !function_exists( 'wp_config_delete' ) ) {
@@ -337,22 +327,6 @@ if ( !function_exists( 'wp_config_delete' ) ) {
         $config = preg_replace ("/( ?)(define)( ?)(\()( ?)(['\"])WP_CACHE(['\"])( ?)(,)( ?)(0|1|true|false)( ?)(\))( ?);/i", "", $config);
         file_put_contents (ABSPATH . $slash . "wp-config.php", $config);
     }
-    
-    if (file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php")) {
-        wp_config_delete();
-    }
-    else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && is_writable (dirname (ABSPATH) . "/wp-config.php")) {
-        wp_config_delete('/');
-    }
-    else if (file_exists (ABSPATH . "wp-config.php") && !is_writable (ABSPATH . "wp-config.php")) {
-        add_warning('Error removing');
-    }
-    else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && !is_writable (dirname (ABSPATH) . "/wp-config.php")) {
-        add_warning('Error removing');
-    }
-    else {
-        add_warning('Error removing');
-    }
 }
 
 // plugin activation
@@ -360,14 +334,36 @@ register_activation_hook( __FILE__, 'slcb_activation' );
 
 if ( !function_exists( 'slcb_activation' ) ) {
     function slcb_activation() {
-        wp_config_delete();
+        if (file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php")) {
+            wp_config_delete();
+        }
+        else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && is_writable (dirname (ABSPATH) . "/wp-config.php")) {
+            wp_config_delete('/');
+        }
+        else if (file_exists (ABSPATH . "wp-config.php") && !is_writable (ABSPATH . "wp-config.php")) {
+            add_warning('Error removing');
+        }
+        else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && !is_writable (dirname (ABSPATH) . "/wp-config.php")) {
+            add_warning('Error removing');
+        }
+        else {
+            add_warning('Error removing');
+        }
     }
 }
 
 register_deactivation_hook( __FILE__, 'slcb_deactivation' );
 if ( !function_exists( 'slcb_deactivation' ) ) {
     function slcb_deactivation() {
-        wp_config_put();
+        if ( file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php") ){
+            wp_config_put();
+        }
+        else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && is_writable (dirname (ABSPATH) . "/wp-config.php")){
+            wp_config_put('/');
+        }
+        else { 
+            add_warning('Error adding');
+        }
     }
 }
 
