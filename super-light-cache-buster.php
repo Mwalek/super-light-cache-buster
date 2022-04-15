@@ -38,6 +38,18 @@ class Super_Light_Cache_Buster {
                 'option2' => 'Intense',
             ),
             'default' => array('option1')
+        ),
+        array(
+            'uid' => 'slcb_wp_cache',
+            'label' => 'WP_CACHE',
+            'section' => 'section_two',
+            'type' => 'select',
+            'helper' => 'Sets WP_CACHE to \'true\' or \'false\'.',
+            'options' => array(
+                'option1' => 'false',
+                'option2' => 'true',
+            ),
+            'default' => array('option1')
         )
     );
 	public function __construct() {
@@ -52,6 +64,8 @@ class Super_Light_Cache_Buster {
         register_deactivation_hook( __FILE__, array( $this, 'slcb_deactivation') );
         // plugin uninstallation
         register_uninstall_hook( __FILE__, 'slcb_uninstaller' );
+        // Fire on the initialization of WordPress
+        //add_action( 'init', array( $this, 'setWpCache') );
     }
 	public function create_plugin_settings_page() {
     	// Add the menu item and page
@@ -65,10 +79,11 @@ class Super_Light_Cache_Buster {
 	public function plugin_settings_page_content() {?>
     	<div class="wrap">
             <diV class="main_content">
-                <h2>Super Light Cache Buster Settings</h2><?php /*
+                <h2>Super Light Cache Buster Settings</h2><?php 
                 if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] ){
-                    $this->admin_notice();
-                }*/ ?>
+                    #$this->admin_notice();
+                    $this->setWpCache();
+                } ?>
                 <form method="POST" action="options.php">
                     <?php
                         settings_fields( 'slcb_fields' );
@@ -79,7 +94,9 @@ class Super_Light_Cache_Buster {
             <diV>
     	</div> <?php
     }
-
+    public function debugSave() {
+        echo "saaved baby!!";
+    }
 	public function admin_notice() { ?>
         <div class="notice notice-success is-dismissible">
             <p>Your settings have been updated!</p>
@@ -184,8 +201,23 @@ class Super_Light_Cache_Buster {
             #echo $settingName;
         }
     }
+    public function retrieve_option($uid, $num) {
+        $retrieved = get_option( $uid, $this->get_SLCB_fields($num));
+        return $retrieved[0];
+    }
+    public function setWpCache() {
+        $setting_3 = get_option('slcb_wp_cache', $this->get_SLCB_fields(2));
+        var_dump($setting_3[0]);
+        #var_dump( 'option2' == get_option('slcb_wp_cache', $this->get_SLCB_fields(2)[0]) );
+        if ( 'option1' == $this->retrieve_option('slcb_wp_cache', 2) ) {
+            $this->slcb_activation();
+            
+        } else if ( 'option2' == $this->retrieve_option('slcb_wp_cache', 2) ) {
+            $this->slcb_deactivation();
+        }
+    }
     public function slcb_activation() {
-        if ( 'option2' == get_option('slcb_intensity_level', $this->get_SLCB_fields(1)) ) {
+        if ( 'option1' == $this->retrieve_option('slcb_wp_cache', 2) ) {        
             if (file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php")) {
                 wp_config_delete();
             }
@@ -204,16 +236,14 @@ class Super_Light_Cache_Buster {
         }
     }
     public function slcb_deactivation() {
-        if ( 'option1' == get_option('slcb_plugin_state', $this->get_SLCB_fields(0)) ) {
-            if ( file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php") ){
-                wp_config_put();
-            }
-            else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && is_writable (dirname (ABSPATH) . "/wp-config.php")){
-                wp_config_put('/');
-            }
-            else { 
-                add_warning('Error adding');
-            }
+        if ( file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php") ){
+            wp_config_put();
+        }
+        else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && is_writable (dirname (ABSPATH) . "/wp-config.php")){
+            wp_config_put('/');
+        }
+        else { 
+            add_warning('Error adding');
         }
     }
     public function slcb_uninstaller() {
@@ -384,3 +414,5 @@ if ( !function_exists( 'wp_config_delete' ) ) {
 echo 'Advanced: ', $adv_option_control[0]; */
 
 #print_r ($slcb_fields->get_SLCB_fields(0, 'uid'));
+
+#var_dump($this->retrieve_option('slcb_wp_cache', 2));
