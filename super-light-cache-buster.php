@@ -210,10 +210,10 @@ class Super_Light_Cache_Buster {
         var_dump($setting_3[0]);
         #var_dump( 'option2' == get_option('slcb_wp_cache', $this->get_SLCB_fields(2)[0]) );
         if ( 'option1' == $this->retrieve_option('slcb_wp_cache', 2) ) {
-            $this->slcb_activation();
+            $this->random();
             
         } else if ( 'option2' == $this->retrieve_option('slcb_wp_cache', 2) ) {
-            $this->slcb_deactivation();
+            $this->random();
         }
     }
     public function slcb_activation() {
@@ -248,6 +248,9 @@ class Super_Light_Cache_Buster {
     }
     public function slcb_uninstaller() {
         $this->uninstall_SLCB();
+    }
+    public function random() {
+        echo "random";
     }
 }
 
