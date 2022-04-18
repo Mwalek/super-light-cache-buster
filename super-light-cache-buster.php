@@ -52,7 +52,7 @@ class Super_Light_Cache_Buster {
             'default' => array('option1')
         )
     );
-    public $file_permissions_error = "Cache Buster failed to change WP_CACHE. Make sure wp-config is <a href='https://wordpress.org/support/article/changing-file-permissions/'>writable</a>.";
+    public $file_permissions_error = "Cache Buster failed to change the WP_CACHE setting. Make sure wp-config.php is <a href='https://wordpress.org/support/article/changing-file-permissions/'>writable</a>.";
 	public function __construct() {
     	// Hook into the admin menu
     	add_action( 'admin_menu', array( $this, 'create_plugin_settings_page' ) );
@@ -94,9 +94,6 @@ class Super_Light_Cache_Buster {
                 </form>
             <diV>
     	</div> <?php
-    }
-    public function debugSave() {
-        echo "saaved baby!!";
     }
 	public function admin_notice() { ?>
         <div class="notice notice-success is-dismissible">
@@ -212,8 +209,6 @@ class Super_Light_Cache_Buster {
         return $retrieved[0];
     }
     public function setWpCache() {
-        $setting_3 = get_option('slcb_wp_cache', $this->get_SLCB_fields(2));
-        var_dump($setting_3[0]);
         #var_dump( 'option2' == get_option('slcb_wp_cache', $this->get_SLCB_fields(2)[0]) );
         if ( 'option1' == $this->retrieve_option('slcb_wp_cache', 2) ) {
             $this->slcb_activation();
@@ -254,9 +249,6 @@ class Super_Light_Cache_Buster {
     }
     public function slcb_uninstaller() {
         $this->uninstall_SLCB();
-    }
-    public function random() {
-        echo "random";
     }
 }
 
@@ -429,3 +421,6 @@ echo 'Advanced: ', $adv_option_control[0]; */
 #print_r ($slcb_fields->get_SLCB_fields(0, 'uid'));
 
 #var_dump($this->retrieve_option('slcb_wp_cache', 2));
+
+/*$setting_3 = get_option('slcb_wp_cache', $this->get_SLCB_fields(2));
+var_dump($setting_3[0]);*/
