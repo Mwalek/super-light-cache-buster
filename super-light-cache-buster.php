@@ -346,7 +346,7 @@ function slcb_buster_button($wp_admin_bar){
         $intitial_args = array(
             'id' => 'custom-button',
             'title' => 'Cache Buster',
-            'href' => get_site_url() . '/wp-admin/options-general.php?page=slcb_options',
+            'href' => get_admin_url() . 'options-general.php?page=slcb_options',
             'meta' => array(
                 'class' => 'slcb-button'
             )
