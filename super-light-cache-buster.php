@@ -82,7 +82,6 @@ class Super_Light_Cache_Buster {
             <diV class="main_content">
                 <h2>Super Light Cache Buster Settings</h2><?php 
                 if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] ){
-                    #$this->admin_notice();
                     $this->setWpCache();
                 } ?>
                 <form method="POST" action="options.php">
@@ -150,11 +149,6 @@ class Super_Light_Cache_Buster {
                     $options_markup = '';
                     foreach( $arguments['options'] as $key => $label ){
                         $options_markup .= sprintf( '<option value="%s" %s>%s</option>', $key, selected( $value[ array_search( $key, $value, true ) ], $key, false ), $label );
-                        //echo var_dump($key), '</br>';
-                        #echo '<strong>$Value:</strong> ', var_dump($value);
-                        //echo '<strong>$Key:</strong> ', var_dump($key);
-                        $debug = array_search( $key, $value, true );
-                        #echo '<strong>Array Search Result:</strong> ', var_dump($debug);
                     }
                     if( $arguments['type'] === 'multiselect' ){
                         $attributes = ' multiple="multiple" ';
@@ -195,13 +189,13 @@ class Super_Light_Cache_Buster {
         foreach($this->all_fields as $array) {
             $uids[] = $array['uid'];
         }
-        # $options = implode(", ", $uids);
+
+        # Potential alternative to foreach - $options = implode(", ", $uids);
 
         $settingOptions = $uids;
  
         foreach ( $settingOptions as $settingName ) {
             delete_option( $settingName );
-            #echo $settingName;
         }
     }
     public function retrieve_option($uid, $num) {
@@ -209,7 +203,6 @@ class Super_Light_Cache_Buster {
         return $retrieved[0];
     }
     public function setWpCache() {
-        #var_dump( 'option2' == get_option('slcb_wp_cache', $this->get_SLCB_fields(2)[0]) );
         if ( 'option1' == $this->retrieve_option('slcb_wp_cache', 2) ) {
             $this->slcb_activation();
             
@@ -345,9 +338,6 @@ function slcb_redirect_to_referrer() {
      }
      
 }
-
-# Add button that allows users to turn cache buster on/off and also refresh the page w/o cache.
-# A status button is also required to show whether or not a cached page has been served.
 
 function slcb_buster_button($wp_admin_bar){
     $slcb_fields = new Super_Light_Cache_Buster();
