@@ -210,10 +210,10 @@ class Super_Light_Cache_Buster {
         var_dump($setting_3[0]);
         #var_dump( 'option2' == get_option('slcb_wp_cache', $this->get_SLCB_fields(2)[0]) );
         if ( 'option1' == $this->retrieve_option('slcb_wp_cache', 2) ) {
-            $this->random();
+            $this->slcb_activation();
             
         } else if ( 'option2' == $this->retrieve_option('slcb_wp_cache', 2) ) {
-            $this->random();
+            $this->slcb_deactivation();
         }
     }
     public function slcb_activation() {
@@ -390,7 +390,11 @@ function array_insert($array,$values,$offset) {
 if ( !function_exists( 'wp_config_put' ) ) {
     function wp_config_put( $slash = '' ) {
         $config = file_get_contents (ABSPATH . "wp-config.php");
-        $config = preg_replace ("/^([\r\n\t ]*)(\<\?)(php)?/i", "<?php define('WP_CACHE', true);", $config);
+        if( strstr($config, "<?php define('WP_CACHE', true)") ) {
+            return;
+        } else {
+            $config = preg_replace ("/^([\r\n\t ]*)(\<\?)(php)?/i", "<?php define('WP_CACHE', true);", $config);
+        }
         file_put_contents (ABSPATH . $slash . "wp-config.php", $config);
     }
 }
