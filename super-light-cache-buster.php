@@ -44,7 +44,7 @@ class Super_Light_Cache_Buster {
             'label' => 'WP_CACHE',
             'section' => 'section_two',
             'type' => 'select',
-            'helper' => 'Sets WP_CACHE to \'true\' or \'false\'.',
+            'helper' => '\'false\' removes the WP_CACHE constant, \'true\' adds WP_CACHE back and sets it to \'true\'.',
             'options' => array(
                 'option1' => 'false',
                 'option2' => 'true',
