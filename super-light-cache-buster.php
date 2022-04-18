@@ -372,7 +372,6 @@ function slcb_buster_button($wp_admin_bar){
         }
         $args = array_insert($intitial_args, $title, 1);
         $wp_admin_bar->add_node($args);
-        #print_r($randomizer_control[0]);
     }
     else {
         return;
@@ -404,23 +403,3 @@ if ( !function_exists( 'remove_cache_constant' ) ) {
         file_put_contents (ABSPATH . $slash . "wp-config.php", $config);
     }
 }
-
-# Debugging
-
-#echo "Enable/Disable Cache Buster:", "<pre>", var_dump($randomizer_control[0]), "</pre>";
-
-#echo "Enable/Disable No Cache Headers:", "<pre>", var_dump($cache_header_control), "</pre>";
-
-#var_dump($adv_option_control['slcb_plugin_state']);
-
-#print_r($randomizer_control['slcb_plugin_state']);
-
-/* echo 'Randomizer: ', $randomizer_control[0], '</br>';
-echo 'Advanced: ', $adv_option_control[0]; */
-
-#print_r ($slcb_fields->get_SLCB_fields(0, 'uid'));
-
-#var_dump($this->retrieve_option('slcb_wp_cache', 2));
-
-/*$setting_3 = get_option('slcb_wp_cache', $this->get_SLCB_fields(2));
-var_dump($setting_3[0]);*/
