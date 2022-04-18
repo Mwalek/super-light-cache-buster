@@ -205,6 +205,8 @@ class Super_Light_Cache_Buster {
     public function setWpCache() {
         if ( ('option1' == $this->retrieve_option('slcb_plugin_state', 0)) && ('option1' == $this->retrieve_option('slcb_wp_cache', 2)) ) {
             $this->slcb_activation();
+        } else if ( 'option2' == $this->retrieve_option('slcb_plugin_state', 0) ) {
+            $this->slcb_deactivation();
         } else if ( 'option2' == $this->retrieve_option('slcb_wp_cache', 2) ) {
             $this->slcb_deactivation();
         }
