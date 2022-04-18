@@ -52,6 +52,7 @@ class Super_Light_Cache_Buster {
             'default' => array('option1')
         )
     );
+    public $file_permissions_error = "Cache Buster failed to change WP_CACHE. Make sure wp-config is <a href='https://wordpress.org/support/article/changing-file-permissions/'>writable</a>.";
 	public function __construct() {
     	// Hook into the admin menu
     	add_action( 'admin_menu', array( $this, 'create_plugin_settings_page' ) );
@@ -100,6 +101,11 @@ class Super_Light_Cache_Buster {
 	public function admin_notice() { ?>
         <div class="notice notice-success is-dismissible">
             <p>Your settings have been updated!</p>
+        </div><?php
+    }
+    public function admin_error($message = "An error occured.") { ?>
+        <div class="notice notice-error">
+            <p><?php echo "Error: ", $message; ?></p>
         </div><?php
     }
     public function setup_sections() {
@@ -225,13 +231,13 @@ class Super_Light_Cache_Buster {
                 remove_cache_constant('/');
             }
             else if (file_exists (ABSPATH . "wp-config.php") && !is_writable (ABSPATH . "wp-config.php")) {
-                add_warning('Error removing');
+                $this->admin_error($this->file_permissions_error);
             }
             else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && !is_writable (dirname (ABSPATH) . "/wp-config.php")) {
-                add_warning('Error removing');
+                $this->admin_error($this->file_permissions_error);
             }
             else {
-                add_warning('Error removing');
+                $this->admin_error($this->file_permissions_error);
             }
         }
     }
@@ -243,7 +249,7 @@ class Super_Light_Cache_Buster {
             add_cache_constant('/');
         }
         else { 
-            add_warning('Error adding');
+            $this->admin_error($this->file_permissions_error);
         }
     }
     public function slcb_uninstaller() {
