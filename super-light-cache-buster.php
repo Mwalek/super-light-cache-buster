@@ -219,10 +219,10 @@ class Super_Light_Cache_Buster {
     public function slcb_activation() {
         if ( 'option1' == $this->retrieve_option('slcb_wp_cache', 2) ) {        
             if (file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php")) {
-                wp_config_delete();
+                remove_cache_constant();
             }
             else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && is_writable (dirname (ABSPATH) . "/wp-config.php")) {
-                wp_config_delete('/');
+                remove_cache_constant('/');
             }
             else if (file_exists (ABSPATH . "wp-config.php") && !is_writable (ABSPATH . "wp-config.php")) {
                 add_warning('Error removing');
@@ -237,10 +237,10 @@ class Super_Light_Cache_Buster {
     }
     public function slcb_deactivation() {
         if ( file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php") ){
-            wp_config_put();
+            add_cache_constant();
         }
         else if (file_exists (dirname (ABSPATH) . "/wp-config.php") && is_writable (dirname (ABSPATH) . "/wp-config.php")){
-            wp_config_put('/');
+            add_cache_constant('/');
         }
         else { 
             add_warning('Error adding');
@@ -387,8 +387,8 @@ function array_insert($array,$values,$offset) {
     return array_slice($array, 0, $offset, true) + $values + array_slice($array, $offset+1, NULL, true);  
 }
 
-if ( !function_exists( 'wp_config_put' ) ) {
-    function wp_config_put( $slash = '' ) {
+if ( !function_exists( 'add_cache_constant' ) ) {
+    function add_cache_constant( $slash = '' ) {
         $config = file_get_contents (ABSPATH . "wp-config.php");
         if( strstr($config, "<?php define('WP_CACHE', true)") ) {
             return;
@@ -399,8 +399,8 @@ if ( !function_exists( 'wp_config_put' ) ) {
     }
 }
 
-if ( !function_exists( 'wp_config_delete' ) ) {
-    function wp_config_delete( $slash = '' ) {
+if ( !function_exists( 'remove_cache_constant' ) ) {
+    function remove_cache_constant( $slash = '' ) {
         $config = file_get_contents (ABSPATH . "wp-config.php");
         $config = preg_replace ("/( ?)(define)( ?)(\()( ?)(['\"])WP_CACHE(['\"])( ?)(,)( ?)(0|1|true|false)( ?)(\))( ?);/i", "", $config);
         file_put_contents (ABSPATH . $slash . "wp-config.php", $config);
