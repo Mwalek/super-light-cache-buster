@@ -169,7 +169,7 @@ class Super_Light_Cache_Buster {
                 }
                 break;
         }
-        if( $helper == $arguments['helper'] ){
+        if( $helper = $arguments['helper'] ){
             printf( '<span class="helper"> %s</span>', $helper );
         }
         /*if( $supplimental = $arguments['supplimental'] ){
