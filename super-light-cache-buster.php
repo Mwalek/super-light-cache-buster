@@ -68,8 +68,6 @@ class Super_Light_Cache_Buster {
         register_deactivation_hook( __FILE__, array( $this, 'slcb_deactivation') );
         // plugin uninstallation
         register_uninstall_hook( __FILE__, 'slcb_uninstaller' );
-        // Fire on the initialization of WordPress
-        //add_action( 'init', array( $this, 'setWpCache') );
     }
 	public function create_plugin_settings_page() {
     	// Add the menu item and page
@@ -130,7 +128,6 @@ class Super_Light_Cache_Buster {
             register_setting( 'slcb_fields', $field['uid'] );
     	}
     }
-
 	public function field_callback( $arguments ) {
         $value = get_option( $arguments['uid'] );
         if( ! $value ) {
@@ -188,15 +185,10 @@ class Super_Light_Cache_Buster {
     }
     public function uninstall_SLCB () {
         $uids = array();
-
         foreach($this->all_fields as $array) {
             $uids[] = $array['uid'];
-        }
-
-        # Potential alternative to foreach - $options = implode(", ", $uids);
-
+        } # Potential alternative to foreach - $options = implode(", ", $uids);
         $settingOptions = $uids;
- 
         foreach ( $settingOptions as $settingName ) {
             delete_option( $settingName );
         }
@@ -280,17 +272,14 @@ if ( 'option1' == $randomizer_control[0] && 'option2' == $adv_option_control[0] 
 
 // Randomize version numbers
 function slcb_randomize_ver( $src ) {
-
     $random_number = wp_rand( 1000, 520000000 );
     $src = esc_url( add_query_arg( 'ver', $random_number, $src ) );
     return $src;
-	
 }
 
 // Add nocache_headers if enable in wp-admin options
 
 function slcb_status_header() {
-    
     nocache_headers();
     header("Cache-Control: public, s-maxage=0");
     if ( !defined('WP_CACHE') ) {
@@ -299,7 +288,7 @@ function slcb_status_header() {
 }
 
 function hook_inHeader() {
-        if ( !defined('DONOTCACHEPAGE') )
+    if ( !defined('DONOTCACHEPAGE') )
         define('DONOTCACHEPAGE', true);
 }
 
@@ -307,7 +296,6 @@ function donotcachepage() {
 	if ( headers_sent() || ! defined( 'DONOTCACHEPAGE' ) ) {
 		return;
 	}
-
 	header( 'X-Cache-Enabled: False', true );
 	header("Cache-Control: max-age=0, must-revalidate");
 }
