@@ -21,6 +21,7 @@ class Super_Light_Cache_Buster {
             'section' => 'section_one',
             'type' => 'select',
             'helper' => 'When \'Off\' your cache will work normally.',
+            'supplimental' => '',
             'options' => array(
                 'option1' => 'On',
                 'option2' => 'Off',
@@ -33,6 +34,7 @@ class Super_Light_Cache_Buster {
             'section' => 'section_two',
             'type' => 'select',
             'helper' => 'Intensity only works if the Cache Buster Status is \'On\'.',
+            'supplimental' => '',
             'options' => array(
                 'option1' => 'Normal',
                 'option2' => 'Intense',
@@ -45,6 +47,7 @@ class Super_Light_Cache_Buster {
             'section' => 'section_two',
             'type' => 'select',
             'helper' => '\'false\' removes the WP_CACHE constant, \'true\' adds WP_CACHE back and sets it to \'true\'.',
+            'supplimental' => 'This setting will only work if the Cache Buster Status is \'On\'.',
             'options' => array(
                 'option1' => 'false',
                 'option2' => 'true',
@@ -172,9 +175,9 @@ class Super_Light_Cache_Buster {
         if( $helper = $arguments['helper'] ){
             printf( '<span class="helper"> %s</span>', $helper );
         }
-        /*if( $supplimental = $arguments['supplimental'] ){
+        if( $supplimental = $arguments['supplimental'] ){
             printf( '<p class="description">%s</p>', $supplimental );
-        }*/
+        }
     }
     public function get_SLCB_fields($offset1, $offset2 = 'default') {
         return( $this->all_fields[$offset1][$offset2] );
