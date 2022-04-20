@@ -26,6 +26,7 @@ class Super_Light_Cache_Buster {
                 'option1' => 'On',
                 'option2' => 'Off',
             ),
+            'disabled' => '',
             'default' => array('option1')
         ),
         array(
@@ -33,12 +34,13 @@ class Super_Light_Cache_Buster {
             'label' => 'Cache Buster Intensity',
             'section' => 'section_two',
             'type' => 'select',
-            'helper' => 'Intensity only works if the Cache Buster Status is \'On\'.',
-            'supplimental' => '',
+            'helper' => '',
+            'supplimental' => 'This setting will only work if the Cache Buster Status is \'On\'.',
             'options' => array(
                 'option1' => 'Normal',
                 'option2' => 'Intense',
             ),
+            'disabled' => '',
             'default' => array('option1')
         ),
         array(
@@ -46,12 +48,13 @@ class Super_Light_Cache_Buster {
             'label' => 'WP_CACHE',
             'section' => 'section_two',
             'type' => 'select',
-            'helper' => '\'false\' removes the WP_CACHE constant, \'true\' adds WP_CACHE back and sets it to \'true\'.',
-            'supplimental' => 'This setting will only work if the Cache Buster Status is \'On\'.',
+            'helper' => '',
+            'supplimental' => 'Coming soon: \'false\' removes the WP_CACHE constant, \'true\' adds WP_CACHE back and sets it to \'true\'. This setting will only work if the Cache Buster Status is \'On\'.',
             'options' => array(
                 'option1' => 'false',
                 'option2' => 'true',
             ),
+            'disabled' => 'disabled',
             'default' => array('option1')
         )
     );
@@ -153,7 +156,7 @@ class Super_Light_Cache_Buster {
                     if( $arguments['type'] === 'multiselect' ){
                         $attributes = ' multiple="multiple" ';
                     }
-                    printf( '<select name="%1$s[]" id="%1$s" %2$s>%3$s</select>', $arguments['uid'], $attributes, $options_markup );
+                    printf( '<select name="%1$s[]" id="%1$s" %2$s %3$s>%4$s</select>', $arguments['uid'], $attributes, $arguments['disabled'], $options_markup );
                 }
                 break;
             case 'radio':
@@ -173,7 +176,7 @@ class Super_Light_Cache_Buster {
             printf( '<span class="helper"> %s</span>', $helper );
         }
         if( $supplimental = $arguments['supplimental'] ){
-            printf( '<p class="description">%s</p>', $supplimental );
+            printf( '<p class="description" style="font-style: italic; max-width: 300px;">%s</p>', $supplimental );
         }
     }
     public function get_SLCB_fields($offset1, $offset2 = 'default') {
