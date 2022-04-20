@@ -266,8 +266,6 @@ if ( 'option1' == $randomizer_control[0] && 'option2' == $adv_option_control[0] 
 
     add_action( 'template_redirect', 'donotcachepage', 9999 );
 
-    add_action( 'template_redirect', 'slcb_redirect_to_referrer' );
-
 }
 
 // Randomize version numbers
@@ -298,37 +296,6 @@ function donotcachepage() {
 	}
 	header( 'X-Cache-Enabled: False', true );
 	header("Cache-Control: max-age=0, must-revalidate");
-}
-
-/**
- * Redirect any items without query string
- * 
- * @return void
-*/
-function slcb_redirect_to_referrer() {
-
-    $user_agent = $_SERVER['HTTP_USER_AGENT'];
-
-    # Don't change URL params for search engine bots
-
-    if ( isset($user_agent) && preg_match('/bot|crawl|slurp|spider|mediapartners/i', $user_agent) ) {
-        return;
-    }
-    
-    if ( ! isset( $_GET, $_GET['cache'] ) ) {
-        
-        $location = "https://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-         
-         wp_safe_redirect(
-             add_query_arg( array(
-                 'cache'        => 'bypass'
-             ), get_permalink() )
-         );
-         
-         exit();
-         
-     }
-     
 }
 
 function slcb_buster_button($wp_admin_bar){
