@@ -35,7 +35,7 @@ class Super_Light_Cache_Buster {
             'section' => 'section_two',
             'type' => 'select',
             'helper' => '',
-            'supplimental' => 'This setting will only work if the Cache Buster Status is \'On\'.',
+            'supplimental' => 'Add no-cache directives to the Cache-Control HTTP header field. This setting will only work if the Cache Buster Status is \'On\'.',
             'options' => array(
                 'option1' => 'Normal',
                 'option2' => 'Intense',
