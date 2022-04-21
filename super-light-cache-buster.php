@@ -27,7 +27,8 @@ class Super_Light_Cache_Buster {
                 'option2' => 'Off',
             ),
             'disabled' => '',
-            'default' => array('option1')
+            'default' => array('option1'),
+            'ancillary' => ''
         ),
         array(
             'uid' => 'slcb_intensity_level',
@@ -41,7 +42,8 @@ class Super_Light_Cache_Buster {
                 'option2' => 'Intense',
             ),
             'disabled' => '',
-            'default' => array('option1')
+            'default' => array('option1'),
+            'ancillary' => ''
         ),
         array(
             'uid' => 'slcb_wp_cache',
@@ -55,7 +57,8 @@ class Super_Light_Cache_Buster {
                 'option2' => 'true',
             ),
             'disabled' => 'disabled',
-            'default' => array('option1')
+            'default' => array('option1'),
+            'ancillary' => ''
         )
     );
     public $file_permissions_error = "Cache Buster failed to change the WP_CACHE setting. Make sure wp-config.php is <a href='https://wordpress.org/support/article/changing-file-permissions/'>writable</a>.";
@@ -156,7 +159,7 @@ class Super_Light_Cache_Buster {
                     if( $arguments['type'] === 'multiselect' ){
                         $attributes = ' multiple="multiple" ';
                     }
-                    printf( '<select name="%1$s[]" id="%1$s" %2$s %3$s>%4$s</select>', $arguments['uid'], $attributes, $arguments['disabled'], $options_markup );
+                    printf( '<select name="%1$s[]" id="%1$s" %2$s %3$s>%4$s</select>%5$s', $arguments['uid'], $attributes, $arguments['disabled'], $options_markup, $arguments['ancillary'] );
                 }
                 break;
             case 'radio':
