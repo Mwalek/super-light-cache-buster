@@ -20,8 +20,8 @@ class Super_Light_Cache_Buster {
             'label' => 'Cache Buster Status',
             'section' => 'section_one',
             'type' => 'select',
-            'helper' => 'When \'Off\' your cache will work normally.',
-            'supplimental' => '',
+            'helper' => '',
+            'supplimental' => '<strong>Pro tip: </strong>You may need to clear your cache before Cache Buster can prevent future caching.',
             'options' => array(
                 'option1' => 'On',
                 'option2' => 'Off',
