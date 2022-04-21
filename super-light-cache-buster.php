@@ -36,7 +36,7 @@ class Super_Light_Cache_Buster {
             'section' => 'section_two',
             'type' => 'select',
             'helper' => '',
-            'supplimental' => 'Add no-cache directives to the Cache-Control HTTP header field. This setting will only work if the Cache Buster Status is \'On\'.',
+            'supplimental' => 'Add/remove no-cache directives to the Cache-Control HTTP header field. This setting will only work if the Cache Buster Status is \'On\'.',
             'options' => array(
                 'option1' => 'Normal',
                 'option2' => 'Intense',
@@ -51,7 +51,7 @@ class Super_Light_Cache_Buster {
             'section' => 'section_two',
             'type' => 'select',
             'helper' => '',
-            'supplimental' => 'Coming soon: \'false\' removes the WP_CACHE constant, \'true\' adds WP_CACHE back and sets it to \'true\'. This setting will only work if the Cache Buster Status is \'On\'.',
+            'supplimental' => 'Coming Soon: \'false\' removes the WP_CACHE constant, \'true\' adds WP_CACHE back and sets it to \'true\'. This setting will only work if the Cache Buster Status is \'On\'.',
             'options' => array(
                 'option1' => 'false',
                 'option2' => 'true',
