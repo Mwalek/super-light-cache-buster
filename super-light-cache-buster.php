@@ -298,7 +298,7 @@ function donotcachepage() {
 		return;
 	}
 	header( 'X-Cache-Enabled: False', true );
-	header("Cache-Control: max-age=0, must-revalidate");
+	header("Cache-Control: no-cache, must-revalidate, max-age=0");
 }
 
 function slcb_buster_button($wp_admin_bar){
