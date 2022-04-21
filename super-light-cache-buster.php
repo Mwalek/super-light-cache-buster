@@ -36,7 +36,7 @@ class Super_Light_Cache_Buster {
             'section' => 'section_two',
             'type' => 'select',
             'helper' => '',
-            'supplimental' => 'Add/remove no-cache directives to the Cache-Control HTTP header field. This setting will only work if the Cache Buster Status is \'On\'.',
+            'supplimental' => 'Add/remove no-cache directives to/from the Cache-Control HTTP header field. This setting will only work if the Cache Buster Status is \'On\'.',
             'options' => array(
                 'option1' => 'Normal',
                 'option2' => 'Intense',
@@ -53,8 +53,8 @@ class Super_Light_Cache_Buster {
             'helper' => '',
             'supplimental' => 'Coming Soon: \'false\' removes the WP_CACHE constant, \'true\' adds WP_CACHE back and sets it to \'true\'. This setting will only work if the Cache Buster Status is \'On\'.',
             'options' => array(
-                'option1' => 'false',
-                'option2' => 'true',
+                'option1' => 'true',
+                'option2' => 'false/unset',
             ),
             'disabled' => 'disabled',
             'default' => array('option1'),
@@ -204,16 +204,16 @@ class Super_Light_Cache_Buster {
         return $retrieved[0];
     }
     public function setWpCache() {
-        if ( ('option1' == $this->retrieve_option('slcb_plugin_state', 0)) && ('option1' == $this->retrieve_option('slcb_wp_cache', 2)) ) {
+        if ( ('option1' == $this->retrieve_option('slcb_plugin_state', 0)) && ('option2' == $this->retrieve_option('slcb_wp_cache', 2)) ) {
             $this->slcb_activation();
         } else if ( 'option2' == $this->retrieve_option('slcb_plugin_state', 0) ) {
             $this->slcb_deactivation();
-        } else if ( 'option2' == $this->retrieve_option('slcb_wp_cache', 2) ) {
+        } else if ( 'option1' == $this->retrieve_option('slcb_wp_cache', 2) ) {
             $this->slcb_deactivation();
         }
     }
     public function slcb_activation() {
-        if ( 'option1' == $this->retrieve_option('slcb_wp_cache', 2) ) {        
+        if ( 'option2' == $this->retrieve_option('slcb_wp_cache', 2) ) {        
             if (file_exists (ABSPATH . "wp-config.php") && is_writable (ABSPATH . "wp-config.php")) {
                 remove_cache_constant();
             }
