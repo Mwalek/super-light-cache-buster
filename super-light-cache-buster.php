@@ -66,9 +66,9 @@ class Super_Light_Cache_Buster {
     	add_action( 'admin_init', array( $this, 'setup_sections' ) );
     	add_action( 'admin_init', array( $this, 'setup_fields' ) );
         // plugin activation
-        register_activation_hook( __FILE__, array( $this, 'slcb_activation') );
+        // Don't invoke this in v 1.1.0 // register_activation_hook( __FILE__, array( $this, 'slcb_activation') );
         // plugin deactivation
-        register_deactivation_hook( __FILE__, array( $this, 'slcb_deactivation') );
+        // Don't invoke this in v 1.1.0 // register_deactivation_hook( __FILE__, array( $this, 'slcb_deactivation') );
         // plugin uninstallation
         register_uninstall_hook( __FILE__, 'slcb_uninstaller' );
     }
@@ -86,7 +86,7 @@ class Super_Light_Cache_Buster {
             <diV class="main_content">
                 <h2>Super Light Cache Buster Settings</h2><?php 
                 if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] ){
-                    $this->setWpCache();
+                    // Don't invoke this in v 1.1.0 // $this->setWpCache();
                 } ?>
                 <form method="POST" action="options.php">
                     <?php
