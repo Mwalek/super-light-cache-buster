@@ -14,7 +14,7 @@ Stop browser caching by randomizing asset version numbers.
 == Description ==
 Can't see the changes supposedly made by your developer? Or maybe you're just tired of your site's annoying cache? Use this plugin to cache a break!
 
-With a compressed size of under 25KB, this simple plugin adds random version numbers to CSS & JS assets to prevent page and browser caching getting in the way of your happiness.
+With a compressed size of under 10KB, this simple plugin adds random version numbers to CSS & JS assets to prevent page and browser caching getting in the way of your happiness.
 
 You can completely disable the plugin from the settings page when you are not using it or keep it enabled if the site is under development 😀.
 
