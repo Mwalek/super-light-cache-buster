@@ -47,21 +47,21 @@ This will delete all pages/posts from the cache, and Cache Buster will prevent t
 Release Date - April 24, 2022
 
 **Added**
-* Introduce plugin settings to enable/disable cache prevention and control it's intensity.
-* Introduce a menu item to show plugin's status in the admin bar.
-* Introduce Cache-Control derictives.
+* Introduce plugin settings to enable/disable cache prevention and control its intensity.
+* Introduce a menu item to show Cache Buster's status in the admin bar.
+* Introduce `Cache-Control` directives.
 
 **Enhanced**
-* Delete database options when plugin is uninstalled.
+* Delete database options when Cache Buster is uninstalled.
 * Improve overall code efficiency.
-* 
+
 = 1.0.1 =
 
 Release Date - May 23, 2021
 
-= 1.0.0 =
-
 * Switch to semantic versioning.
+
+= 1.0.0 =
 
 Release Date - June 24, 2020
 
