@@ -1,6 +1,6 @@
 ﻿=== Super Light Cache Buster ===
 Contributors: mwalek
-Tags: asset version, cache, stop cache, prevent caching, cachebuster
+Tags: cache, cachebuster, prevent, clear, buster
 Requires at least: 4.0
 Tested up to: 5.9.3
 Requires PHP: 5.2
