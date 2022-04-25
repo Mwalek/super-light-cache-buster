@@ -29,7 +29,7 @@ You can completely disable the plugin from the settings page when you are not us
 1. Upload the entire `super-light-cache-buster` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 3. Clear all caches on your site and server (hosting).
-4. ~~Catch~~ Cache a break from caching :-).
+4. Cache a break from caching :-).
 
 == Frequently Asked Questions ==
 
@@ -47,11 +47,13 @@ This will delete all pages/posts from the cache, and Cache Buster will prevent t
 Release Date - April 24, 2022
 
 **Added**
+
 * Introduce plugin settings to enable/disable cache prevention and control its intensity.
 * Introduce a menu item to show Cache Buster's status in the admin bar.
 * Introduce `Cache-Control` directives.
 
 **Enhanced**
+
 * Delete database options when Cache Buster is uninstalled.
 * Improve overall code efficiency.
 
