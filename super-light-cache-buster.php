@@ -307,7 +307,7 @@ function donotcachepage() {
 function slcb_buster_button($wp_admin_bar){
     $slcb_fields = new Super_Light_Cache_Buster();
     $randomizer_control = get_option('slcb_plugin_state', $slcb_fields->get_SLCB_fields(0));
-    if(! is_admin()) {
+    if(! is_admin() && current_user_can('manage_options')) {
         $intitial_args = array(
             'id' => 'custom-button',
             'title' => 'Cache Buster',
