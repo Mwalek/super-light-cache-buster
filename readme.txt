@@ -2,11 +2,11 @@
 Contributors: mwalek
 Tags: cache, cachebuster, prevent, clear, buster
 Requires at least: 4.0
-Tested up to: 5.9.3
+Tested up to: 6.0
 Requires PHP: 5.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 
 
 Stop browser caching by randomizing asset version numbers.
@@ -42,9 +42,18 @@ This will delete all pages/posts from the cache, and Cache Buster will prevent t
 
 == Changelog ==
 
+= 1.1.1 =
+
+Release Date - May 06, 2022
+
+**Enhanced**
+
+* Don't randomize asset version numbers in the admin area.
+* Hide Cache Buster's status from non-admins.
+
 = 1.1.0 =
 
-Release Date - April 24, 2022
+Release Date - April 25, 2022
 
 **Added**
 
@@ -57,14 +66,14 @@ Release Date - April 24, 2022
 * Delete database options when Cache Buster is uninstalled.
 * Improve overall code efficiency.
 
-= 1.0.1 =
-
-Release Date - May 23, 2021
-
-* Switch to semantic versioning.
-
 = 1.0.0 =
 
 Release Date - June 24, 2020
 
 * Initial release
+
+== Upgrade Notice ==
+
+= 1.1.1 =
+
+Fixes the visibility of Cache Buster's status, preventing non-admins from seeing it.

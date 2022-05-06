@@ -1,12 +1,12 @@
 <?php
 /*
- * @since             1.1.0
+ * @since             1.0.0
  * @package           Super_Light_Cache_Buster
  *
  * @wordpress-plugin
  * Plugin Name:       Super Light Cache Buster
  * Description:       With a compressed size of under 10KB, this simple plugin adds random version numbers to CSS & JS assets to vanquish browser caching. Clear your Site and Server-side caches, and this plugin will do the rest.
- * Version:           1.1.0
+ * Version:           1.1.1
  * Author:            Mwale Kalenga
  * Author URI:        https://mwale.me
  * License:           GPL-3.0+
