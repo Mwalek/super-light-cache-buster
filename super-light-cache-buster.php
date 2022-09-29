@@ -6,7 +6,7 @@
  * @wordpress-plugin
  * Plugin Name:       Super Light Cache Buster
  * Description:       With a compressed size of under 10KB, this simple plugin adds random version numbers to CSS & JS assets to vanquish browser caching. Clear your Site and Server-side caches, and this plugin will do the rest.
- * Version:           1.1.1
+ * Version:           1.1.2
  * Author:            Mwale Kalenga
  * Author URI:        https://mwale.me
  * License:           GPL-3.0+
@@ -14,7 +14,7 @@
  */
 
 class Super_Light_Cache_Buster {
-    public $all_fields = array(
+    public static $all_fields = array(
         array(
             'uid' => 'slcb_plugin_state',
             'label' => 'Cache Buster Status',
@@ -72,8 +72,6 @@ class Super_Light_Cache_Buster {
         // Don't invoke slcb_activation in v 1.1.0
         // plugin deactivation
         // Don't invoke slcb_deactivation in v 1.1.0
-        // plugin uninstallation
-        register_uninstall_hook( __FILE__, 'slcb_uninstaller' );
     }
 	public function create_plugin_settings_page() {
     	// Add the menu item and page
@@ -85,21 +83,21 @@ class Super_Light_Cache_Buster {
 		add_submenu_page( 'options-general.php', $page_title, $menu_title, $capability, $slug, $callback );
     }
 	public function plugin_settings_page_content() {?>
-    	<div class="wrap">
-            <diV class="main_content">
-                <h2>Super Light Cache Buster Settings</h2><?php 
+<div class="wrap">
+    <div class="main_content">
+        <h2>Super Light Cache Buster Settings</h2><?php 
                 if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] ){
                     // Don't invoke setWpCache in v 1.1.0
                 } ?>
-                <form method="POST" action="options.php">
-                    <?php
+        <form method="POST" action="options.php">
+            <?php
                         settings_fields( 'slcb_fields' );
                         do_settings_sections( 'slcb_fields' );
                         submit_button();
                     ?>
-                </form>
-            <diV>
-    	</div> <?php
+        </form>
+        <div>
+        </div> <?php
     }
 	public function admin_notice() { ?>
         <div class="notice notice-success is-dismissible">
@@ -128,7 +126,7 @@ class Super_Light_Cache_Buster {
     	}
     }
 	public function setup_fields() {
-        $fields = $this->all_fields;
+        $fields = self::$all_fields;
     	foreach( $fields as $field ){
         	add_settings_field( $field['uid'], $field['label'], array( $this, 'field_callback' ), 'slcb_fields', $field['section'], $field );
             register_setting( 'slcb_fields', $field['uid'] );
@@ -183,15 +181,15 @@ class Super_Light_Cache_Buster {
         }
     }
     public function get_SLCB_fields($offset1, $offset2 = 'default') {
-        return( $this->all_fields[$offset1][$offset2] );
+        return( self::$all_fields[$offset1][$offset2] );
     }
     public function get_SLCB_uids() {
-        $uid = $this->all_fields[0]['uid'];
+        $uid = self::$all_fields[0]['uid'];
         print_r ($uid);
     }
-    public function uninstall_SLCB () {
+    public static function uninstall_SLCB () {
         $uids = array();
-        foreach($this->all_fields as $array) {
+        foreach(self::$all_fields as $array) {
             $uids[] = $array['uid'];
         } # Potential alternative to foreach - $options = implode(", ", $uids);
         $settingOptions = $uids;
@@ -242,9 +240,11 @@ class Super_Light_Cache_Buster {
             $this->admin_error($this->file_permissions_error);
         }
     }
-    public function slcb_uninstaller() {
-        $this->uninstall_SLCB();
-    }
+}
+
+if (class_exists ('Super_Light_Cache_Buster') ) {
+    // plugin uninstallation
+    register_uninstall_hook( __FILE__, 'Super_Light_Cache_Buster::uninstall_SLCB' );
 }
 
 $slcb_fields = new Super_Light_Cache_Buster();

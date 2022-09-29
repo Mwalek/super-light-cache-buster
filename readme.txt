@@ -6,7 +6,7 @@ Tested up to: 6.0
 Requires PHP: 5.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
-Stable tag: 1.1.0
+Stable tag: 1.1.2
 
 
 Stop browser caching by randomizing asset version numbers.
@@ -41,6 +41,18 @@ If you are still being served cached pages after activating the plugin, clear th
 This will delete all pages/posts from the cache, and Cache Buster will prevent them from being cached again while the plugin is enabled :-). 
 
 == Changelog ==
+
+= 1.1.2 =
+
+Release Date - September 29, 2022
+
+**Fixed**
+
+* Fix warning/error thrown when Cache Buster is uninstalled.
+
+**Enhanced**
+
+* Use a static method when register_uninstall_hook is invoked.
 
 = 1.1.1 =
 
