@@ -42,6 +42,18 @@ This will delete all pages/posts from the cache, and Cache Buster will prevent t
 
 == Changelog ==
 
+= 1.1.2 =
+
+Release Date - September 29, 2022
+
+**Fixed**
+
+* Fix warning/error thrown when Cache Buster is uninstalled.
+
+**Enhanced**
+
+* Use a static method when register_uninstall_hook is invoked.
+
 = 1.1.1 =
 
 Release Date - May 06, 2022
