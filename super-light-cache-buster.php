@@ -84,7 +84,7 @@ class Super_Light_Cache_Buster {
     }
 	public function plugin_settings_page_content() {?>
 <div class="wrap">
-    <diV class="main_content">
+    <div class="main_content">
         <h2>Super Light Cache Buster Settings</h2><?php 
                 if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] ){
                     // Don't invoke setWpCache in v 1.1.0
@@ -240,9 +240,6 @@ class Super_Light_Cache_Buster {
             $this->admin_error($this->file_permissions_error);
         }
     }
-    // static function slcb_uninstaller() {
-    //     $this->uninstall_SLCB();
-    // }
 }
 
 if (class_exists ('Super_Light_Cache_Buster') ) {
