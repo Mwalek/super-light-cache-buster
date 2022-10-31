@@ -26,4 +26,5 @@ node_modules/
 debug.txt
 
 # ignore dev tool configs
-# markdownlint.json
+.markdownlint.json
+settings.json
