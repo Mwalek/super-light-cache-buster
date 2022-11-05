@@ -218,10 +218,10 @@ class Super_Light_Cache_Buster {
 			case 'text':
 			case 'password':
 			case 'number':
-				printf( '<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" />', $arguments['uid'], $arguments['type'], $arguments['placeholder'], $value );
+				echo esc_html( sprintf( '<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" />', $arguments['uid'], $arguments['type'], $arguments['placeholder'], $value ) );
 				break;
 			case 'textarea':
-				printf( '<textarea name="%1$s" id="%1$s" placeholder="%2$s" rows="5" cols="50">%3$s</textarea>', $arguments['uid'], $arguments['placeholder'], $value );
+				echo esc_html( sprintf( '<textarea name="%1$s" id="%1$s" placeholder="%2$s" rows="5" cols="50">%3$s</textarea>', $arguments['uid'], $arguments['placeholder'], $value ) );
 				break;
 			case 'select':
 			case 'multiselect':
@@ -234,7 +234,7 @@ class Super_Light_Cache_Buster {
 					if ( 'multiselect' === $arguments['type'] ) {
 						$attributes = ' multiple="multiple" ';
 					}
-					printf( '<select name="%1$s[]" id="%1$s" %2$s %3$s>%4$s</select>%5$s', $arguments['uid'], $attributes, $arguments['disabled'], $options_markup, $arguments['ancillary'] );
+					echo esc_html( sprintf( '<select name="%1$s[]" id="%1$s" %2$s %3$s>%4$s</select>%5$s', $arguments['uid'], $attributes, $arguments['disabled'], $options_markup, $arguments['ancillary'] ) );
 				}
 				break;
 			case 'radio':
@@ -246,15 +246,15 @@ class Super_Light_Cache_Buster {
 						$iterator++;
 						$options_markup .= sprintf( '<label for="%1$s_%6$s"><input id="%1$s_%6$s" name="%1$s[]" type="%2$s" value="%3$s" %4$s /> %5$s</label><br/>', $arguments['uid'], $arguments['type'], $key, checked( $value[ array_search( $key, $value, true ) ], $key, false ), $label, $iterator );
 					}
-					printf( '<fieldset>%s</fieldset>', $options_markup );
+					echo esc_html( sprintf( '<fieldset>%s</fieldset>', $options_markup ) );
 				}
 				break;
 		}
 		if ( $helper === $arguments['helper'] ) {
-			printf( '<span class="helper"> %s</span>', $helper );
+			echo esc_html( sprintf( '<span class="helper"> %s</span>', $helper ) );
 		}
 		if ( $supplimental === $arguments['supplimental'] ) {
-			printf( '<p class="description" style="font-style: italic; max-width: 300px;">%s</p>', $supplimental );
+			echo esc_html( sprintf( '<p class="description" style="font-style: italic; max-width: 300px;">%s</p>', $supplimental ) );
 		}
 	}
 	/**
