@@ -221,7 +221,7 @@ class Super_Light_Cache_Buster {
 					foreach ( $arguments['options'] as $key => $label ) {
 						$options_markup .= sprintf( '<option value="%s" %s>%s</option>', $key, selected( $value[ array_search( $key, $value, true ) ], $key, false ), $label );
 					}
-					if ( $arguments['type'] === 'multiselect' ) {
+					if ( 'multiselect' === $arguments['type'] ) {
 						$attributes = ' multiple="multiple" ';
 					}
 					printf( '<select name="%1$s[]" id="%1$s" %2$s %3$s>%4$s</select>%5$s', $arguments['uid'], $attributes, $arguments['disabled'], $options_markup, $arguments['ancillary'] );
