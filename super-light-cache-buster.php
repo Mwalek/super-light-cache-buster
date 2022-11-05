@@ -390,7 +390,7 @@ function slcb_randomize_ver( $src ) {
  * @return void
  */
 function slcb_status_header() {
-	 nocache_headers();
+	nocache_headers();
 	header( 'Cache-Control: public, s-maxage=0' );
 	if ( ! defined( 'WP_CACHE' ) ) {
 		define( 'WP_CACHE', false );
