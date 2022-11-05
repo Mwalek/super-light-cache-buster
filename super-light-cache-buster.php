@@ -250,9 +250,9 @@ class Super_Light_Cache_Buster {
 	/**
 	 * Gets settings fields helper function.
 	 *
-	 * @param string $offset1 Offset position 1.
-	 * @param string $offset2 Optional. Offset position 2.
-	 * @return void
+	 * @param string $offset1 Position of field in $all_fields array.
+	 * @param string $offset2 Optional. Name of option to retrieve.
+	 * @return array A particular option of the specificed field.
 	 */
 	public function get_slcb_fields( $offset1, $offset2 = 'default' ) {
 		return( self::$all_fields[ $offset1 ][ $offset2 ] );
@@ -285,7 +285,7 @@ class Super_Light_Cache_Buster {
 	 *
 	 * @param string $uid Setting's uid.
 	 * @param int    $num Specifies position of option to retrieve.
-	 * @return void
+	 * @return string Name of option.
 	 */
 	public function retrieve_option( $uid, $num ) {
 		$retrieved = get_option( $uid, $this->get_slcb_fields( $num ) );
@@ -376,7 +376,7 @@ if ( 'option1' === $randomizer_control[0] && 'option2' === $adv_option_control[0
  * Randomizes version numbers.
  *
  * @param string $src The source URL of the enqueued style/script.
- * @return void
+ * @return string The randomized version of the URL.
  */
 function slcb_randomize_ver( $src ) {
 	$random_number = wp_rand( 1000, 520000000 );
@@ -459,7 +459,7 @@ add_action( 'admin_bar_menu', 'slcb_buster_button', 50 );
  * @param array $array The array in which to insert.
  * @param array $values The values to insert into the array.
  * @param int   $offset Specifies array offset position.
- * @return void
+ * @return array The modified array.
  */
 function array_insert( $array, $values, $offset ) {
 	return array_slice( $array, 0, $offset, true ) + $values + array_slice( $array, $offset + 1, null, true );
