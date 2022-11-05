@@ -5,7 +5,7 @@
   "phpsab.standard": "WordPress",
   "phpsab.executablePathCS": "/Users/mwalek/.composer/vendor/bin/phpcs",
   "phpsab.executablePathCBF": "/Users/mwalek/.composer/vendor/bin/phpcbf",
-  "phpsab.autoRulesetSearch": true,
+  "phpsab.autoRulesetSearch": false,
   "phpsab.snifferMode": "onSave",
   "phpsab.debug": true
 }
