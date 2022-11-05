@@ -254,7 +254,7 @@ class Super_Light_Cache_Buster {
 	 * @param string $offset2 Optional. Offset position 2.
 	 * @return void
 	 */
-	public function get_SLCB_fields( $offset1, $offset2 = 'default' ) {
+	public function get_slcb_fields( $offset1, $offset2 = 'default' ) {
 		return( self::$all_fields[ $offset1 ][ $offset2 ] );
 	}
 	/**
@@ -262,7 +262,7 @@ class Super_Light_Cache_Buster {
 	 *
 	 * @return void
 	 */
-	public function get_SLCB_uids() {
+	public function get_slcb_uids() {
 		$uid = self::$all_fields[0]['uid'];
 	}
 	/**
@@ -270,14 +270,14 @@ class Super_Light_Cache_Buster {
 	 *
 	 * @return void
 	 */
-	public static function uninstall_SLCB() {
+	public static function uninstall_slcb() {
 		$uids = array();
 		foreach ( self::$all_fields as $array ) {
 			$uids[] = $array['uid'];
 		}
-		$settingOptions = $uids;
-		foreach ( $settingOptions as $settingName ) {
-			delete_option( $settingName );
+		$setting_options = $uids;
+		foreach ( $setting_options as $setting_name ) {
+			delete_option( $setting_name );
 		}
 	}
 	/**
@@ -288,7 +288,7 @@ class Super_Light_Cache_Buster {
 	 * @return void
 	 */
 	public function retrieve_option( $uid, $num ) {
-		$retrieved = get_option( $uid, $this->get_SLCB_fields( $num ) );
+		$retrieved = get_option( $uid, $this->get_slcb_fields( $num ) );
 		return $retrieved[0];
 	}
 	/**
@@ -296,7 +296,7 @@ class Super_Light_Cache_Buster {
 	 *
 	 * @return void
 	 */
-	public function setWpCache() {
+	public function set_wp_cache() {
 		if ( ( 'option1' === $this->retrieve_option( 'slcb_plugin_state', 0 ) ) && ( 'option2' === $this->retrieve_option( 'slcb_wp_cache', 2 ) ) ) {
 			$this->slcb_activation();
 		} elseif ( 'option2' === $this->retrieve_option( 'slcb_plugin_state', 0 ) ) {
@@ -343,12 +343,12 @@ class Super_Light_Cache_Buster {
 
 if ( class_exists( 'Super_Light_Cache_Buster' ) ) {
 	// Plugin uninstallation.
-	register_uninstall_hook( __FILE__, 'Super_Light_Cache_Buster::uninstall_SLCB' );
+	register_uninstall_hook( __FILE__, 'Super_Light_Cache_Buster::uninstall_slcb' );
 }
 
 $slcb_fields = new Super_Light_Cache_Buster();
 
-$randomizer_control = get_option( 'slcb_plugin_state', $slcb_fields->get_SLCB_fields( 0 ) );
+$randomizer_control = get_option( 'slcb_plugin_state', $slcb_fields->get_slcb_fields( 0 ) );
 
 if ( ! is_admin() && 'option1' === $randomizer_control[0] ) {
 
@@ -360,7 +360,7 @@ if ( ! is_admin() && 'option1' === $randomizer_control[0] ) {
 
 }
 
-$adv_option_control = get_option( 'slcb_intensity_level', $slcb_fields->get_SLCB_fields( 1 ) );
+$adv_option_control = get_option( 'slcb_intensity_level', $slcb_fields->get_slcb_fields( 1 ) );
 
 if ( 'option1' === $randomizer_control[0] && 'option2' === $adv_option_control[0] ) {
 
@@ -426,7 +426,7 @@ function donotcachepage() {
  */
 function slcb_buster_button( $wp_admin_bar ) {
 	$slcb_fields        = new Super_Light_Cache_Buster();
-	$randomizer_control = get_option( 'slcb_plugin_state', $slcb_fields->get_SLCB_fields( 0 ) );
+	$randomizer_control = get_option( 'slcb_plugin_state', $slcb_fields->get_slcb_fields( 0 ) );
 	if ( ! is_admin() && current_user_can( 'manage_options' ) ) {
 		$intitial_args = array(
 			'id'    => 'custom-button',
