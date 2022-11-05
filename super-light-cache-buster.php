@@ -150,7 +150,17 @@ class Super_Light_Cache_Buster {
 	public function admin_error( $message = 'An error occured.' ) {
 		?>
 		<div class="notice notice-error">
-			<p><?php echo 'Error: ', $message; ?></p>
+			<p>
+			<?php
+			echo esc_html(
+				sprintf(
+				/* translators: %s: Error prefix */
+					__( 'Error: %s', 'super-light-cache-buster' ),
+					$message
+				)
+			);
+			?>
+			</p>
 		</div>
 		<?php
 	}
@@ -172,7 +182,7 @@ class Super_Light_Cache_Buster {
 	public function section_callback( $arguments ) {
 		switch ( $arguments['id'] ) {
 			case 'section_one':
-				echo "You can completely disable Cache Buster when you're not using it. Then it will be 100% idle.";
+				echo "You can completely disable Cache Buster when you're not using it . Then it will be 100 % idle . ";
 				echo '<hr>';
 				break;
 			case 'section_two':
@@ -219,7 +229,7 @@ class Super_Light_Cache_Buster {
 					$attributes     = '';
 					$options_markup = '';
 					foreach ( $arguments['options'] as $key => $label ) {
-						$options_markup .= sprintf( '<option value="%s" %s>%s</option>', $key, selected( $value[ array_search( $key, $value, true ) ], $key, false ), $label );
+						$options_markup .= sprintf( '<option value=" % s" %s>%s</option>', $key, selected( $value[ array_search( $key, $value, true ) ], $key, false ), $label );
 					}
 					if ( 'multiselect' === $arguments['type'] ) {
 						$attributes = ' multiple="multiple" ';
@@ -474,10 +484,10 @@ if ( ! function_exists( 'add_cache_constant' ) ) {
 	 */
 	function add_cache_constant( $slash = '' ) {
 		$config = file_get_contents( ABSPATH . 'wp-config.php' );
-		if ( strstr( $config, "<?php define('WP_CACHE', true)" ) ) {
+		if ( strstr( $config, " < ? php define( 'WP_CACHE', true )" ) ) {
 			return;
 		} else {
-			$config = preg_replace( "/^([\r\n\t ]*)(\<\?)(php)?/i", "<?php define('WP_CACHE', true);", $config );
+			$config = preg_replace( " / ^ ( array( \r\n\t ) * )( \ < \ ? )( php ) ? / i', ' < ? php define( 'WP_CACHE', true );", $config );
 		}
 		file_put_contents( ABSPATH . $slash . 'wp-config.php', $config );
 	}
