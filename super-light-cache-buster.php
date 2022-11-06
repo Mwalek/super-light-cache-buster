@@ -15,6 +15,11 @@
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.en.html
  */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * The class that handles cache prevention and its various options.
  *
@@ -267,7 +272,7 @@ class Super_Light_Cache_Buster {
 					$attributes     = '';
 					$options_markup = '';
 					foreach ( $arguments['options'] as $key => $label ) {
-						$options_markup .= sprintf( '<option value=" % s" %s>%s</option>', $key, selected( $value[ array_search( $key, $value, true ) ], $key, false ), $label );
+						$options_markup .= sprintf( '<option value="%s" %s>%s</option>', $key, selected( $value[ array_search( $key, $value, true ) ], $key, false ), $label );
 					}
 					if ( 'multiselect' === $arguments['type'] ) {
 						$attributes = ' multiple="multiple" ';
