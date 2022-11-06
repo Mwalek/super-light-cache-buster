@@ -210,7 +210,43 @@ class Super_Light_Cache_Buster {
 	 * @return void
 	 */
 	public function field_callback( $arguments ) {
-		$value = get_option( $arguments['uid'] );
+		$value        = get_option( $arguments['uid'] );
+		$allowed_html = array(
+			'input'    => array(
+				'name'        => array(),
+				'id'          => array(),
+				'type'        => array(),
+				'placeholder' => array(),
+				'value'       => array(),
+			),
+			'select'   => array(
+				'name'     => array(),
+				'id'       => array(),
+				'disabled' => array(),
+			),
+			'option'   => array(
+				'value'    => array(),
+				'selected' => array(),
+
+			),
+			'textarea' => array(
+				'name'        => array(),
+				'id'          => array(),
+				'placeholder' => array(),
+			),
+			'span'     => array(
+				'class' => array(),
+				'style' => array(),
+			),
+			'p'        => array(
+				'class' => array(),
+				'style' => array(),
+			),
+			'br'       => array(),
+			'em'       => array(),
+			'strong'   => array(),
+			'fieldset' => array(),
+		);
 		if ( ! $value ) {
 			$value = $arguments['default'];
 		}
@@ -218,10 +254,12 @@ class Super_Light_Cache_Buster {
 			case 'text':
 			case 'password':
 			case 'number':
-				echo esc_html( sprintf( '<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" />', $arguments['uid'], $arguments['type'], $arguments['placeholder'], $value ) );
+				$number_html = sprintf( '<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" />', $arguments['uid'], $arguments['type'], $arguments['placeholder'], $value );
+				echo wp_kses( $number_html, $allowed_html );
 				break;
 			case 'textarea':
-				echo esc_html( sprintf( '<textarea name="%1$s" id="%1$s" placeholder="%2$s" rows="5" cols="50">%3$s</textarea>', $arguments['uid'], $arguments['placeholder'], $value ) );
+				$textarea_html = sprintf( '<textarea name="%1$s" id="%1$s" placeholder="%2$s" rows="5" cols="50">%3$s</textarea>', $arguments['uid'], $arguments['placeholder'], $value );
+				echo wp_kses( $textarea_html, $allowed_html );
 				break;
 			case 'select':
 			case 'multiselect':
@@ -234,7 +272,8 @@ class Super_Light_Cache_Buster {
 					if ( 'multiselect' === $arguments['type'] ) {
 						$attributes = ' multiple="multiple" ';
 					}
-					echo esc_html( sprintf( '<select name="%1$s[]" id="%1$s" %2$s %3$s>%4$s</select>%5$s', $arguments['uid'], $attributes, $arguments['disabled'], $options_markup, $arguments['ancillary'] ) );
+					$multiselect_html = sprintf( '<select name="%1$s[]" id="%1$s" %2$s %3$s>%4$s</select>%5$s', $arguments['uid'], $attributes, $arguments['disabled'], $options_markup, $arguments['ancillary'] );
+					echo wp_kses( $multiselect_html, $allowed_html );
 				}
 				break;
 			case 'radio':
@@ -246,15 +285,18 @@ class Super_Light_Cache_Buster {
 						$iterator++;
 						$options_markup .= sprintf( '<label for="%1$s_%6$s"><input id="%1$s_%6$s" name="%1$s[]" type="%2$s" value="%3$s" %4$s /> %5$s</label><br/>', $arguments['uid'], $arguments['type'], $key, checked( $value[ array_search( $key, $value, true ) ], $key, false ), $label, $iterator );
 					}
-					echo esc_html( sprintf( '<fieldset>%s</fieldset>', $options_markup ) );
+					$checkbox_html = sprintf( '<fieldset>%s</fieldset>', $options_markup );
+					echo wp_kses( $checkbox_html, $allowed_html );
 				}
 				break;
 		}
-		if ( $helper === $arguments['helper'] ) {
-			echo esc_html( sprintf( '<span class="helper"> %s</span>', $helper ) );
+		if ( $helper = $arguments['helper'] ) {
+			$helper_html = sprintf( '<span class="helper"> %s</span>', $helper );
+			echo wp_kses( $helper_html, $allowed_html );
 		}
-		if ( $supplimental === $arguments['supplimental'] ) {
-			echo esc_html( sprintf( '<p class="description" style="font-style: italic; max-width: 300px;">%s</p>', $supplimental ) );
+		if ( $supplimental = $arguments['supplimental'] ) {
+			$supplimental_html = sprintf( '<p class="description" style="font-style: italic; max-width: 300px;">%s</p>', $supplimental );
+			echo wp_kses( $supplimental_html, $allowed_html );
 		}
 	}
 	/**
