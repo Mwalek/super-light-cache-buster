@@ -1,0 +1,54 @@
+# Copyright (C) 2022 Mwale Kalenga
+# This file is distributed under the GPL-3.0+.
+msgid ""
+msgstr ""
+"Project-Id-Version: Super Light Cache Buster 1.1.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/super-light-cache-"
+"buster\n"
+"POT-Creation-Date: 2022-11-06T17:46:32+00:00\n"
+"PO-Revision-Date: 2022-11-06 19:59+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2\n"
+"X-Domain: super-light-cache-buster\n"
+
+#. Plugin Name of the plugin
+msgid "Super Light Cache Buster"
+msgstr "Super Light Cache Buster"
+
+#. Description of the plugin
+msgid ""
+"With a compressed size of under 10KB, this simple plugin adds random version "
+"numbers to CSS & JS assets to vanquish browser caching. Clear your Site and "
+"Server-side caches, and this plugin will do the rest."
+msgstr ""
+"Mit einer komprimierten Größe von unter 10 KB fügt dieses einfache Plugin "
+"zufällige Versionsnummern zu CSS- und JS-Assets hinzu, um das Browser-"
+"Caching zu beseitigen. Löschen Sie Ihre Site- und Server-seitigen Caches, "
+"und dieses Plugin erledigt den Rest."
+
+#. Author of the plugin
+msgid "Mwale Kalenga"
+msgstr "Mwale Kalenga"
+
+#. Author URI of the plugin
+msgid "https://mwale.me"
+msgstr "https://mwale.me"
+
+#. translators: %s: Error prefix
+#: super-light-cache-buster.php:165
+msgid "Error: %s"
+msgstr "Fehler: %s"
+
+#: super-light-cache-buster.php:192
+msgid ""
+"You can completely disable Cache Buster when you're not using it. Then it "
+"will be 100% idle."
+msgstr ""
+"Sie können den Cache Buster vollständig deaktivieren, wenn Sie ihn nicht "
+"verwenden. Dann wird er 100% idle sein."

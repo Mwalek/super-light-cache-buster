@@ -189,7 +189,7 @@ class Super_Light_Cache_Buster {
 	public function section_callback( $arguments ) {
 		switch ( $arguments['id'] ) {
 			case 'section_one':
-				echo "You can completely disable Cache Buster when you're not using it . Then it will be 100 % idle . ";
+				_e( "You can completely disable Cache Buster when you're not using it. Then it will be 100% idle.", 'super-light-cache-buster' );
 				echo '<hr>';
 				break;
 			case 'section_two':
@@ -554,4 +554,16 @@ if ( ! function_exists( 'remove_cache_constant' ) ) {
 		$config = preg_replace( "/( ?)(define)( ?)(\()( ?)(['\"])WP_CACHE(['\"])( ?)(,)( ?)(0|1|true|false)( ?)(\))( ?);/i", '', $config );
 		file_put_contents( ABSPATH . $slash . 'wp-config.php', $config );
 	}
+}
+
+if ( ! function_exists( 'super_light_cache_buster_load_textdomain' ) ) {
+	/**
+	 * Declares the plugin text domain and languages directory.
+	 *
+	 * @return void
+	 */
+	function super_light_cache_buster_load_textdomain() {
+		load_plugin_textdomain( 'super-light-cache-buster', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+	}
+	add_action( 'plugins_loaded', 'super_light_cache_buster_load_textdomain' );
 }

@@ -1,0 +1,40 @@
+# Copyright (C) 2022 Mwale Kalenga
+# This file is distributed under the GPL-3.0+.
+msgid ""
+msgstr ""
+"Project-Id-Version: Super Light Cache Buster 1.1.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/super-light-cache-buster\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-11-06T17:46:32+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: super-light-cache-buster\n"
+
+#. Plugin Name of the plugin
+msgid "Super Light Cache Buster"
+msgstr ""
+
+#. Description of the plugin
+msgid "With a compressed size of under 10KB, this simple plugin adds random version numbers to CSS & JS assets to vanquish browser caching. Clear your Site and Server-side caches, and this plugin will do the rest."
+msgstr ""
+
+#. Author of the plugin
+msgid "Mwale Kalenga"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://mwale.me"
+msgstr ""
+
+#. translators: %s: Error prefix
+#: super-light-cache-buster.php:165
+msgid "Error: %s"
+msgstr ""
+
+#: super-light-cache-buster.php:192
+msgid "You can completely disable Cache Buster when you're not using it. Then it will be 100% idle."
+msgstr ""
