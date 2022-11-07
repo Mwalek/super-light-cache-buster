@@ -189,7 +189,7 @@ class Super_Light_Cache_Buster {
 	public function section_callback( $arguments ) {
 		switch ( $arguments['id'] ) {
 			case 'section_one':
-				_e( "You can completely disable Cache Buster when you're not using it. Then it will be 100% idle.", 'super-light-cache-buster' );
+				esc_html_e( "You can completely disable Cache Buster when you're not using it. Then it will be 100% idle.", 'super-light-cache-buster' );
 				echo '<hr>';
 				break;
 			case 'section_two':
