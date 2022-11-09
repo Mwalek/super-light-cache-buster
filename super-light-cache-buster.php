@@ -40,49 +40,43 @@ class Super_Light_Cache_Buster {
 	 */
 	public static $all_fields = array(
 		array(
-			'uid'          => 'slcb_plugin_state',
-			'label'        => 'Cache Buster Status',
-			'section'      => 'section_one',
-			'type'         => 'select',
-			'helper'       => '',
-			'supplimental' => '<strong>Pro tip: </strong>You may need to clear your cache before Cache Buster can prevent future caching.',
-			'options'      => array(
+			'uid'       => 'slcb_plugin_state',
+			'label'     => 'Cache Buster Status',
+			'section'   => 'section_one',
+			'type'      => 'select',
+			'options'   => array(
 				'option1' => 'On',
 				'option2' => 'Off',
 			),
-			'disabled'     => '',
-			'default'      => array( 'option1' ),
-			'ancillary'    => '',
+			'disabled'  => '',
+			'default'   => array( 'option1' ),
+			'ancillary' => '',
 		),
 		array(
-			'uid'          => 'slcb_intensity_level',
-			'label'        => 'Cache Buster Intensity',
-			'section'      => 'section_two',
-			'type'         => 'select',
-			'helper'       => '',
-			'supplimental' => 'Add/remove no-cache directives to/from the Cache-Control HTTP header field. This setting will only work if the Cache Buster Status is \'On\'.',
-			'options'      => array(
+			'uid'       => 'slcb_intensity_level',
+			'label'     => 'Cache Buster Intensity',
+			'section'   => 'section_two',
+			'type'      => 'select',
+			'options'   => array(
 				'option1' => 'Normal',
 				'option2' => 'Intense',
 			),
-			'disabled'     => '',
-			'default'      => array( 'option1' ),
-			'ancillary'    => '',
+			'disabled'  => '',
+			'default'   => array( 'option1' ),
+			'ancillary' => '',
 		),
 		array(
-			'uid'          => 'slcb_wp_cache',
-			'label'        => 'WP_CACHE',
-			'section'      => 'section_two',
-			'type'         => 'select',
-			'helper'       => '',
-			'supplimental' => 'Coming Soon: \'false\' removes the WP_CACHE constant, \'true\' adds WP_CACHE back and sets it to \'true\'. This setting will only work if the Cache Buster Status is \'On\'.',
-			'options'      => array(
+			'uid'       => 'slcb_wp_cache',
+			'label'     => 'WP_CACHE',
+			'section'   => 'section_two',
+			'type'      => 'select',
+			'options'   => array(
 				'option1' => 'true',
 				'option2' => 'false/unset',
 			),
-			'disabled'     => 'disabled',
-			'default'      => array( 'option1' ),
-			'ancillary'    => '',
+			'disabled'  => 'disabled',
+			'default'   => array( 'option1' ),
+			'ancillary' => '',
 		),
 	);
 	/**
@@ -297,14 +291,29 @@ class Super_Light_Cache_Buster {
 				}
 				break;
 		}
-		if ( $helper = $arguments['helper'] ) {
-			$helper_html = sprintf( '<span class="helper"> %s</span>', $helper );
-			echo wp_kses( $helper_html, $allowed_html );
+
+		/**
+		 * Add localized settings text.
+		 */
+		switch ( $arguments['uid'] ) {
+			case 'slcb_plugin_state':
+				$supplimental = __( '<strong>Pro tip: </strong>You may need to clear your cache before Cache Buster can prevent future caching.', 'super-light-cache-buster' );
+				$helper       = '';
+				break;
+			case 'slcb_intensity_level':
+				$supplimental = __( 'Add/remove no-cache directives to/from the Cache-Control HTTP header field. This setting will only work if the Cache Buster Status is \'On\'.', 'super-light-cache-buster' );
+				$helper       = '';
+				break;
+			case 'slcb_wp_cache':
+				$supplimental = __( 'Coming Soon: \'false\' removes the WP_CACHE constant, \'true\' adds WP_CACHE back and sets it to \'true\'. This setting will only work if the Cache Buster Status is \'On\'.', 'super-light-cache-buster' );
+				$helper       = '';
+				break;
+
 		}
-		if ( $supplimental = $arguments['supplimental'] ) {
-			$supplimental_html = sprintf( '<p class="description" style="font-style: italic; max-width: 300px;">%s</p>', $supplimental );
-			echo wp_kses( $supplimental_html, $allowed_html );
-		}
+		$supplimental_html = sprintf( '<p class="description" style="font-style: italic; max-width: 300px;">%s</p>', $supplimental );
+		echo wp_kses( $supplimental_html, $allowed_html );
+		$helper_html = sprintf( '<span class="helper"> %s</span>', $helper );
+		echo wp_kses( $helper_html, $allowed_html );
 	}
 	/**
 	 * Gets settings fields helper function.
