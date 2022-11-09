@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Super Light Cache Buster 1.1.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/super-light-cache-"
 "buster\n"
-"POT-Creation-Date: 2022-11-06T17:46:32+00:00\n"
-"PO-Revision-Date: 2022-11-06 19:59+0200\n"
+"POT-Creation-Date: 2022-11-09T18:24:16+00:00\n"
+"PO-Revision-Date: 2022-11-09 20:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -41,14 +41,41 @@ msgid "https://mwale.me"
 msgstr "https://mwale.me"
 
 #. translators: %s: Error prefix
-#: super-light-cache-buster.php:165
+#: super-light-cache-buster.php:159
 msgid "Error: %s"
 msgstr "Fehler: %s"
 
-#: super-light-cache-buster.php:192
+#: super-light-cache-buster.php:186
 msgid ""
 "You can completely disable Cache Buster when you're not using it. Then it "
 "will be 100% idle."
 msgstr ""
 "Sie können den Cache Buster vollständig deaktivieren, wenn Sie ihn nicht "
 "verwenden. Dann wird er 100% idle sein."
+
+#: super-light-cache-buster.php:300
+msgid ""
+"<strong>Pro tip: </strong>You may need to clear your cache before Cache "
+"Buster can prevent future caching."
+msgstr ""
+"<strong>Profi-Tipp: </strong>Möglicherweise müssen Sie Ihren Cache leeren, "
+"bevor Cache Buster künftige Zwischenspeicherungen verhindern kann."
+
+#: super-light-cache-buster.php:304
+msgid ""
+"Add/remove no-cache directives to/from the Cache-Control HTTP header field. "
+"This setting will only work if the Cache Buster Status is 'On'."
+msgstr ""
+"Hinzufügen/Entfernen von no-cache-Direktiven zum/vom HTTP-Header-Feld Cache-"
+"Control. Diese Einstellung funktioniert nur, wenn der Cache-Buster-Status "
+"\"Ein\" ist."
+
+#: super-light-cache-buster.php:308
+msgid ""
+"Coming Soon: 'false' removes the WP_CACHE constant, 'true' adds WP_CACHE "
+"back and sets it to 'true'. This setting will only work if the Cache Buster "
+"Status is 'On'."
+msgstr ""
+"Demnächst verfügbar: 'false' entfernt die Konstante WP_CACHE, 'true' fügt "
+"WP_CACHE wieder hinzu und setzt sie auf 'true'. Diese Einstellung "
+"funktioniert nur, wenn der Cache Buster Status 'On' ist."

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-11-06T17:46:32+00:00\n"
+"POT-Creation-Date: 2022-11-09T18:24:16+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: super-light-cache-buster\n"
@@ -31,10 +31,22 @@ msgid "https://mwale.me"
 msgstr ""
 
 #. translators: %s: Error prefix
-#: super-light-cache-buster.php:165
+#: super-light-cache-buster.php:159
 msgid "Error: %s"
 msgstr ""
 
-#: super-light-cache-buster.php:192
+#: super-light-cache-buster.php:186
 msgid "You can completely disable Cache Buster when you're not using it. Then it will be 100% idle."
+msgstr ""
+
+#: super-light-cache-buster.php:300
+msgid "<strong>Pro tip: </strong>You may need to clear your cache before Cache Buster can prevent future caching."
+msgstr ""
+
+#: super-light-cache-buster.php:304
+msgid "Add/remove no-cache directives to/from the Cache-Control HTTP header field. This setting will only work if the Cache Buster Status is 'On'."
+msgstr ""
+
+#: super-light-cache-buster.php:308
+msgid "Coming Soon: 'false' removes the WP_CACHE constant, 'true' adds WP_CACHE back and sets it to 'true'. This setting will only work if the Cache Buster Status is 'On'."
 msgstr ""
