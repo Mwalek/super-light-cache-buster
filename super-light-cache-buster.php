@@ -34,51 +34,51 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Super_Light_Cache_Buster {
 
 	/**
-	 * Contains all fields for the plugin settings form.
-	 *
-	 * @var array $all_fields
+	 * Returns all fields for the plugin settings form.
 	 */
-	public static $all_fields = array(
-		array(
-			'uid'       => 'slcb_plugin_state',
-			'label'     => 'Cache Buster Status',
-			'section'   => 'section_one',
-			'type'      => 'select',
-			'options'   => array(
-				'option1' => 'On',
-				'option2' => 'Off',
+	public static function all_fields() {
+		return array(
+			array(
+				'uid'       => 'slcb_plugin_state',
+				'label'     => __( 'Cache Buster Status', 'super-light-cache-buster' ),
+				'section'   => 'section_one',
+				'type'      => 'select',
+				'options'   => array(
+					'option1' => 'On',
+					'option2' => 'Off',
+				),
+				'disabled'  => '',
+				'default'   => array( 'option1' ),
+				'ancillary' => '',
 			),
-			'disabled'  => '',
-			'default'   => array( 'option1' ),
-			'ancillary' => '',
-		),
-		array(
-			'uid'       => 'slcb_intensity_level',
-			'label'     => 'Cache Buster Intensity',
-			'section'   => 'section_two',
-			'type'      => 'select',
-			'options'   => array(
-				'option1' => 'Normal',
-				'option2' => 'Intense',
+			array(
+				'uid'       => 'slcb_intensity_level',
+				'label'     => __( 'Cache Buster Intensity', 'super-light-cache-buster' ),
+				'section'   => 'section_two',
+				'type'      => 'select',
+				'options'   => array(
+					'option1' => 'Normal',
+					'option2' => 'Intense',
+				),
+				'disabled'  => '',
+				'default'   => array( 'option1' ),
+				'ancillary' => '',
 			),
-			'disabled'  => '',
-			'default'   => array( 'option1' ),
-			'ancillary' => '',
-		),
-		array(
-			'uid'       => 'slcb_wp_cache',
-			'label'     => 'WP_CACHE',
-			'section'   => 'section_two',
-			'type'      => 'select',
-			'options'   => array(
-				'option1' => 'true',
-				'option2' => 'false/unset',
+			array(
+				'uid'       => 'slcb_wp_cache',
+				'label'     => 'WP_CACHE',
+				'section'   => 'section_two',
+				'type'      => 'select',
+				'options'   => array(
+					'option1' => 'true',
+					'option2' => 'false/unset',
+				),
+				'disabled'  => 'disabled',
+				'default'   => array( 'option1' ),
+				'ancillary' => '',
 			),
-			'disabled'  => 'disabled',
-			'default'   => array( 'option1' ),
-			'ancillary' => '',
-		),
-	);
+		);
+	}
 	/**
 	 * Error message when wp-config.php can't be modified.
 	 *
@@ -198,7 +198,7 @@ class Super_Light_Cache_Buster {
 	 * @return void
 	 */
 	public function setup_fields() {
-		$fields = self::$all_fields;
+		$fields = $this->all_fields();
 		foreach ( $fields as $field ) {
 			add_settings_field( $field['uid'], $field['label'], array( $this, 'field_callback' ), 'slcb_fields', $field['section'], $field );
 			register_setting( 'slcb_fields', $field['uid'] );
@@ -323,7 +323,8 @@ class Super_Light_Cache_Buster {
 	 * @return array A particular option of the specificed field.
 	 */
 	public function get_slcb_fields( $offset1, $offset2 = 'default' ) {
-		return( self::$all_fields[ $offset1 ][ $offset2 ] );
+		$fields_array = $this->all_fields();
+		return( $fields_array[ $offset1 ][ $offset2 ] );
 	}
 	/**
 	 * Gets field uids.
@@ -331,7 +332,8 @@ class Super_Light_Cache_Buster {
 	 * @return void
 	 */
 	public function get_slcb_uids() {
-		$uid = self::$all_fields[0]['uid'];
+		$fields_array = $this->all_fields();
+		$uid          = $fields_arrays[0]['uid'];
 	}
 	/**
 	 * Deletes options when the plugin is uninstalled.
@@ -339,8 +341,9 @@ class Super_Light_Cache_Buster {
 	 * @return void
 	 */
 	public static function uninstall_slcb() {
-		$uids = array();
-		foreach ( self::$all_fields as $array ) {
+		$uids         = array();
+		$fields_array = $this->all_fields();
+		foreach ( $fields_array as $array ) {
 			$uids[] = $array['uid'];
 		}
 		$setting_options = $uids;

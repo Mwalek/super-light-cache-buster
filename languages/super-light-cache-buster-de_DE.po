@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Super Light Cache Buster 1.1.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/super-light-cache-"
 "buster\n"
-"POT-Creation-Date: 2022-11-09T18:24:16+00:00\n"
-"PO-Revision-Date: 2022-11-09 20:28+0200\n"
+"POT-Creation-Date: 2022-11-10T19:22:01+00:00\n"
+"PO-Revision-Date: 2022-11-10 21:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -40,12 +40,20 @@ msgstr "Mwale Kalenga"
 msgid "https://mwale.me"
 msgstr "https://mwale.me"
 
+#: super-light-cache-buster.php:45
+msgid "Cache Buster Status"
+msgstr "Cache Buster Status"
+
+#: super-light-cache-buster.php:58
+msgid "Cache Buster Intensity"
+msgstr "Cache Buster Intensität"
+
 #. translators: %s: Error prefix
-#: super-light-cache-buster.php:159
+#: super-light-cache-buster.php:161
 msgid "Error: %s"
 msgstr "Fehler: %s"
 
-#: super-light-cache-buster.php:186
+#: super-light-cache-buster.php:188
 msgid ""
 "You can completely disable Cache Buster when you're not using it. Then it "
 "will be 100% idle."
@@ -53,7 +61,7 @@ msgstr ""
 "Sie können den Cache Buster vollständig deaktivieren, wenn Sie ihn nicht "
 "verwenden. Dann wird er 100% idle sein."
 
-#: super-light-cache-buster.php:300
+#: super-light-cache-buster.php:302
 msgid ""
 "<strong>Pro tip: </strong>You may need to clear your cache before Cache "
 "Buster can prevent future caching."
@@ -61,7 +69,7 @@ msgstr ""
 "<strong>Profi-Tipp: </strong>Möglicherweise müssen Sie Ihren Cache leeren, "
 "bevor Cache Buster künftige Zwischenspeicherungen verhindern kann."
 
-#: super-light-cache-buster.php:304
+#: super-light-cache-buster.php:306
 msgid ""
 "Add/remove no-cache directives to/from the Cache-Control HTTP header field. "
 "This setting will only work if the Cache Buster Status is 'On'."
@@ -70,7 +78,7 @@ msgstr ""
 "Control. Diese Einstellung funktioniert nur, wenn der Cache-Buster-Status "
 "\"Ein\" ist."
 
-#: super-light-cache-buster.php:308
+#: super-light-cache-buster.php:310
 msgid ""
 "Coming Soon: 'false' removes the WP_CACHE constant, 'true' adds WP_CACHE "
 "back and sets it to 'true'. This setting will only work if the Cache Buster "
