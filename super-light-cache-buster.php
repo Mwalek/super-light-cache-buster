@@ -332,7 +332,7 @@ class Super_Light_Cache_Buster {
 	 * @return array A particular option of the specificed field.
 	 */
 	public function get_slcb_fields( $offset1, $offset2 = 'default' ) {
-		$fields_array = $this->all_fields();
+		$fields_array = self::all_fields();
 		return( $fields_array[ $offset1 ][ $offset2 ] );
 	}
 	/**
@@ -341,7 +341,7 @@ class Super_Light_Cache_Buster {
 	 * @return void
 	 */
 	public function get_slcb_uids() {
-		$fields_array = $this->all_fields();
+		$fields_array = self::all_fields();
 		$uid          = $fields_arrays[0]['uid'];
 	}
 	/**
@@ -351,7 +351,7 @@ class Super_Light_Cache_Buster {
 	 */
 	public static function uninstall_slcb() {
 		$uids         = array();
-		$fields_array = $this->all_fields();
+		$fields_array = self::all_fields();
 		foreach ( $fields_array as $array ) {
 			$uids[] = $array['uid'];
 		}
