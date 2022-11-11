@@ -44,8 +44,8 @@ class Super_Light_Cache_Buster {
 				'section'   => 'section_one',
 				'type'      => 'select',
 				'options'   => array(
-					'option1' => 'On',
-					'option2' => 'Off',
+					'option1' => __( 'On', 'super-light-cache-buster' ),
+					'option2' => __( 'Off', 'super-light-cache-buster' ),
 				),
 				'disabled'  => '',
 				'default'   => array( 'option1' ),
@@ -57,8 +57,8 @@ class Super_Light_Cache_Buster {
 				'section'   => 'section_two',
 				'type'      => 'select',
 				'options'   => array(
-					'option1' => 'Normal',
-					'option2' => 'Intense',
+					'option1' => __( 'Normal', 'super-light-cache-buster' ),
+					'option2' => __( 'Intense', 'super-light-cache-buster' ),
 				),
 				'disabled'  => '',
 				'default'   => array( 'option1' ),
@@ -66,12 +66,12 @@ class Super_Light_Cache_Buster {
 			),
 			array(
 				'uid'       => 'slcb_wp_cache',
-				'label'     => 'WP_CACHE',
+				'label'     => __( 'WP_CACHE', 'super-light-cache-buster' ),
 				'section'   => 'section_two',
 				'type'      => 'select',
 				'options'   => array(
-					'option1' => 'true',
-					'option2' => 'false/unset',
+					'option1' => __( 'true', 'super-light-cache-buster' ),
+					'option2' => __( 'false/unset', 'super-light-cache-buster' ),
 				),
 				'disabled'  => 'disabled',
 				'default'   => array( 'option1' ),
@@ -80,11 +80,54 @@ class Super_Light_Cache_Buster {
 		);
 	}
 	/**
-	 * Error message when wp-config.php can't be modified.
+	 * An array of allowed HTML elements and attributes.
 	 *
-	 * @var string $file_permissions_error
+	 * @var array
 	 */
-	public $file_permissions_error = "Cache Buster failed to change the WP_CACHE setting. Make sure wp-config.php is <a href='https://wordpress.org/support/article/changing-file-permissions/'>writable</a>.";
+	public $allowed_html = array(
+		'input'    => array(
+			'name'        => array(),
+			'id'          => array(),
+			'type'        => array(),
+			'placeholder' => array(),
+			'value'       => array(),
+		),
+		'select'   => array(
+			'name'     => array(),
+			'id'       => array(),
+			'disabled' => array(),
+		),
+		'option'   => array(
+			'value'    => array(),
+			'selected' => array(),
+
+		),
+		'textarea' => array(
+			'name'        => array(),
+			'id'          => array(),
+			'placeholder' => array(),
+		),
+		'span'     => array(
+			'class' => array(),
+			'style' => array(),
+		),
+		'p'        => array(
+			'class' => array(),
+			'style' => array(),
+		),
+		'br'       => array(),
+		'em'       => array(),
+		'strong'   => array(),
+		'fieldset' => array(),
+		'hr'       => array(),
+
+	);
+	/**
+	 * Houses error message shown when wp-config.php can't be modified.
+	 */
+	public function file_permissions_error() {
+		return __( "Cache Buster failed to change the WP_CACHE setting. Make sure wp-config.php is <a href='https://wordpress.org/support/article/changing-file-permissions/'>writable</a>.", 'super-light-cache-buster' );
+	}
 	/**
 	 * Initializes object's properties upon creation of the object.
 	 */
@@ -102,8 +145,8 @@ class Super_Light_Cache_Buster {
 	 */
 	public function create_plugin_settings_page() {
 		// Add the menu item and page.
-		$page_title = 'Super Light Cache Buster';
-		$menu_title = 'Cache Buster';
+		$page_title = __( 'Super Light Cache Buster', 'super-light-cache-buster' );
+		$menu_title = __( 'Cache Buster', 'super-light-cache-buster' );
 		$capability = 'manage_options';
 		$slug       = 'slcb_options';
 		$callback   = array( $this, 'plugin_settings_page_content' );
@@ -118,7 +161,7 @@ class Super_Light_Cache_Buster {
 		?>
 <div class="wrap">
 	<div class="main_content">
-		<h2>Super Light Cache Buster Settings</h2>
+		<h2><?php esc_html_e( 'Super Light Cache Buster Settings', 'super-light-cache-buster' ); ?></h2>
 		<form method="POST" action="options.php">
 			<?php
 						settings_fields( 'slcb_fields' );
@@ -138,7 +181,7 @@ class Super_Light_Cache_Buster {
 	public function admin_notice() {
 		?>
 		<div class="notice notice-success is-dismissible">
-			<p>Your settings have been updated!</p>
+			<p><?php esc_html_e( 'Your settings have been updated!', 'super-light-cache-buster' ); ?></p>
 		</div>
 		<?php
 	}
@@ -153,6 +196,8 @@ class Super_Light_Cache_Buster {
 		<div class="notice notice-error">
 			<p>
 			<?php
+			/* translators: Generic error message */
+			$message = __( 'An error occured', 'super-light-cache-buster' );
 			echo esc_html(
 				sprintf(
 				/* translators: %s: Error prefix */
@@ -171,8 +216,8 @@ class Super_Light_Cache_Buster {
 	 * @return void
 	 */
 	public function setup_sections() {
-		add_settings_section( 'section_one', 'Basic Settings', array( $this, 'section_callback' ), 'slcb_fields' );
-		add_settings_section( 'section_two', 'Advanced Settings', array( $this, 'section_callback' ), 'slcb_fields' );
+		add_settings_section( 'section_one', __( 'Basic Settings', 'super-light-cache-buster' ), array( $this, 'section_callback' ), 'slcb_fields' );
+		add_settings_section( 'section_two', __( 'Advanced Settings', 'super-light-cache-buster' ), array( $this, 'section_callback' ), 'slcb_fields' );
 	}
 	/**
 	 * Echos out content at the top of sections.
@@ -187,8 +232,8 @@ class Super_Light_Cache_Buster {
 				echo '<hr>';
 				break;
 			case 'section_two':
-				echo 'Settings in this section add more ways to prevent caching. The default settings are recommended for most sites.';
-				echo '<hr>';
+				esc_html_e( 'Settings in this section add more ways to prevent caching. The default settings are recommended for most sites.', 'super-light-cache-buster' );
+				echo wp_kses( '<hr>', $this->allowed_html );
 				break;
 		}
 	}
@@ -211,43 +256,7 @@ class Super_Light_Cache_Buster {
 	 * @return void
 	 */
 	public function field_callback( $arguments ) {
-		$value        = get_option( $arguments['uid'] );
-		$allowed_html = array(
-			'input'    => array(
-				'name'        => array(),
-				'id'          => array(),
-				'type'        => array(),
-				'placeholder' => array(),
-				'value'       => array(),
-			),
-			'select'   => array(
-				'name'     => array(),
-				'id'       => array(),
-				'disabled' => array(),
-			),
-			'option'   => array(
-				'value'    => array(),
-				'selected' => array(),
-
-			),
-			'textarea' => array(
-				'name'        => array(),
-				'id'          => array(),
-				'placeholder' => array(),
-			),
-			'span'     => array(
-				'class' => array(),
-				'style' => array(),
-			),
-			'p'        => array(
-				'class' => array(),
-				'style' => array(),
-			),
-			'br'       => array(),
-			'em'       => array(),
-			'strong'   => array(),
-			'fieldset' => array(),
-		);
+		$value = get_option( $arguments['uid'] );
 		if ( ! $value ) {
 			$value = $arguments['default'];
 		}
@@ -256,11 +265,11 @@ class Super_Light_Cache_Buster {
 			case 'password':
 			case 'number':
 				$number_html = sprintf( '<input name="%1$s" id="%1$s" type="%2$s" placeholder="%3$s" value="%4$s" />', $arguments['uid'], $arguments['type'], $arguments['placeholder'], $value );
-				echo wp_kses( $number_html, $allowed_html );
+				echo wp_kses( $number_html, $this->allowed_html );
 				break;
 			case 'textarea':
 				$textarea_html = sprintf( '<textarea name="%1$s" id="%1$s" placeholder="%2$s" rows="5" cols="50">%3$s</textarea>', $arguments['uid'], $arguments['placeholder'], $value );
-				echo wp_kses( $textarea_html, $allowed_html );
+				echo wp_kses( $textarea_html, $this->allowed_html );
 				break;
 			case 'select':
 			case 'multiselect':
@@ -274,7 +283,7 @@ class Super_Light_Cache_Buster {
 						$attributes = ' multiple="multiple" ';
 					}
 					$multiselect_html = sprintf( '<select name="%1$s[]" id="%1$s" %2$s %3$s>%4$s</select>%5$s', $arguments['uid'], $attributes, $arguments['disabled'], $options_markup, $arguments['ancillary'] );
-					echo wp_kses( $multiselect_html, $allowed_html );
+					echo wp_kses( $multiselect_html, $this->allowed_html );
 				}
 				break;
 			case 'radio':
@@ -287,7 +296,7 @@ class Super_Light_Cache_Buster {
 						$options_markup .= sprintf( '<label for="%1$s_%6$s"><input id="%1$s_%6$s" name="%1$s[]" type="%2$s" value="%3$s" %4$s /> %5$s</label><br/>', $arguments['uid'], $arguments['type'], $key, checked( $value[ array_search( $key, $value, true ) ], $key, false ), $label, $iterator );
 					}
 					$checkbox_html = sprintf( '<fieldset>%s</fieldset>', $options_markup );
-					echo wp_kses( $checkbox_html, $allowed_html );
+					echo wp_kses( $checkbox_html, $this->allowed_html );
 				}
 				break;
 		}
@@ -311,9 +320,9 @@ class Super_Light_Cache_Buster {
 
 		}
 		$supplimental_html = sprintf( '<p class="description" style="font-style: italic; max-width: 300px;">%s</p>', $supplimental );
-		echo wp_kses( $supplimental_html, $allowed_html );
+		echo wp_kses( $supplimental_html, $this->allowed_html );
 		$helper_html = sprintf( '<span class="helper"> %s</span>', $helper );
-		echo wp_kses( $helper_html, $allowed_html );
+		echo wp_kses( $helper_html, $this->allowed_html );
 	}
 	/**
 	 * Gets settings fields helper function.
@@ -388,11 +397,11 @@ class Super_Light_Cache_Buster {
 			} elseif ( file_exists( dirname( ABSPATH ) . '/wp-config.php' ) && is_writable( dirname( ABSPATH ) . '/wp-config.php' ) ) {
 				remove_cache_constant( '/' );
 			} elseif ( file_exists( ABSPATH . 'wp-config.php' ) && ! is_writable( ABSPATH . 'wp-config.php' ) ) {
-				$this->admin_error( $this->file_permissions_error );
+				$this->admin_error( $this->file_permissions_error() );
 			} elseif ( file_exists( dirname( ABSPATH ) . '/wp-config.php' ) && ! is_writable( dirname( ABSPATH ) . '/wp-config.php' ) ) {
-				$this->admin_error( $this->file_permissions_error );
+				$this->admin_error( $this->file_permissions_error() );
 			} else {
-				$this->admin_error( $this->file_permissions_error );
+				$this->admin_error( $this->file_permissions_error() );
 			}
 		}
 	}
@@ -407,7 +416,7 @@ class Super_Light_Cache_Buster {
 		} elseif ( file_exists( dirname( ABSPATH ) . '/wp-config.php' ) && is_writable( dirname( ABSPATH ) . '/wp-config.php' ) ) {
 			add_cache_constant( '/' );
 		} else {
-			$this->admin_error( $this->file_permissions_error );
+			$this->admin_error( $this->file_permissions_error() );
 		}
 	}
 }
