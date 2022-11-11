@@ -243,7 +243,7 @@ class Super_Light_Cache_Buster {
 	 * @return void
 	 */
 	public function setup_fields() {
-		$fields = $this->all_fields();
+		$fields = self::all_fields();
 		foreach ( $fields as $field ) {
 			add_settings_field( $field['uid'], $field['label'], array( $this, 'field_callback' ), 'slcb_fields', $field['section'], $field );
 			register_setting( 'slcb_fields', $field['uid'] );
@@ -327,7 +327,7 @@ class Super_Light_Cache_Buster {
 	/**
 	 * Gets settings fields helper function.
 	 *
-	 * @param string $offset1 Position of field in $all_fields array.
+	 * @param string $offset1 Position of field in array returned by all_fields function.
 	 * @param string $offset2 Optional. Name of option to retrieve.
 	 * @return array A particular option of the specificed field.
 	 */
