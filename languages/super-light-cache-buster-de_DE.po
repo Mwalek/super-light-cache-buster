@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: Super Light Cache Buster 1.1.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/super-light-cache-"
 "buster\n"
-"POT-Creation-Date: 2022-11-10T19:22:01+00:00\n"
-"PO-Revision-Date: 2022-11-10 21:27+0200\n"
+"POT-Creation-Date: 2022-11-11T20:18:47+00:00\n"
+"PO-Revision-Date: 2022-11-11 22:31+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -18,6 +18,7 @@ msgstr ""
 "X-Domain: super-light-cache-buster\n"
 
 #. Plugin Name of the plugin
+#: super-light-cache-buster.php:148
 msgid "Super Light Cache Buster"
 msgstr "Super Light Cache Buster"
 
@@ -40,20 +41,83 @@ msgstr "Mwale Kalenga"
 msgid "https://mwale.me"
 msgstr "https://mwale.me"
 
-#: super-light-cache-buster.php:45
+#: super-light-cache-buster.php:43
 msgid "Cache Buster Status"
 msgstr "Cache Buster Status"
 
-#: super-light-cache-buster.php:58
+#: super-light-cache-buster.php:47
+msgid "On"
+msgstr "Auf"
+
+#: super-light-cache-buster.php:48
+msgid "Off"
+msgstr "Aus"
+
+#: super-light-cache-buster.php:56
 msgid "Cache Buster Intensity"
 msgstr "Cache Buster Intensität"
 
+#: super-light-cache-buster.php:60
+msgid "Normal"
+msgstr "Normal"
+
+#: super-light-cache-buster.php:61
+msgid "Intense"
+msgstr "Intensive"
+
+#: super-light-cache-buster.php:69
+msgid "WP_CACHE"
+msgstr "WP_CACHE"
+
+#: super-light-cache-buster.php:73
+msgid "true"
+msgstr "wahr"
+
+#: super-light-cache-buster.php:74
+msgid "false/unset"
+msgstr "falsch/unbestimmt"
+
+#: super-light-cache-buster.php:129
+msgid ""
+"Cache Buster failed to change the WP_CACHE setting. Make sure wp-config.php "
+"is <a href='https://wordpress.org/support/article/changing-file-"
+"permissions/'>writable</a>."
+msgstr ""
+"Cache Buster konnte die Einstellung WP_CACHE nicht ändern. Stellen Sie "
+"sicher, dass die wp-config.php <a href='https://wordpress.org/support/"
+"article/changing-file-permissions/'>beschreibbar</a> ist."
+
+#: super-light-cache-buster.php:149
+msgid "Cache Buster"
+msgstr "Cache Buster"
+
+#: super-light-cache-buster.php:164
+msgid "Super Light Cache Buster Settings"
+msgstr "Super Light Cache Buster Einstellungen"
+
+#: super-light-cache-buster.php:184
+msgid "Your settings have been updated!"
+msgstr "Ihre Einstellungen wurden aktualisiert!"
+
+#. translators: Generic error message
+#: super-light-cache-buster.php:200
+msgid "An error occured"
+msgstr "Es ist ein Fehler aufgetreten"
+
 #. translators: %s: Error prefix
-#: super-light-cache-buster.php:161
+#: super-light-cache-buster.php:204
 msgid "Error: %s"
 msgstr "Fehler: %s"
 
-#: super-light-cache-buster.php:188
+#: super-light-cache-buster.php:219
+msgid "Basic Settings"
+msgstr "Grundeinstellungen"
+
+#: super-light-cache-buster.php:220
+msgid "Advanced Settings"
+msgstr "Erweiterte Einstellungen"
+
+#: super-light-cache-buster.php:231
 msgid ""
 "You can completely disable Cache Buster when you're not using it. Then it "
 "will be 100% idle."
@@ -61,7 +125,16 @@ msgstr ""
 "Sie können den Cache Buster vollständig deaktivieren, wenn Sie ihn nicht "
 "verwenden. Dann wird er 100% idle sein."
 
-#: super-light-cache-buster.php:302
+#: super-light-cache-buster.php:235
+msgid ""
+"Settings in this section add more ways to prevent caching. The default "
+"settings are recommended for most sites."
+msgstr ""
+"Die Einstellungen in diesem Abschnitt bieten weitere Möglichkeiten, die "
+"Zwischenspeicherung zu verhindern. Die Standardeinstellungen werden für die "
+"meisten Websites empfohlen."
+
+#: super-light-cache-buster.php:309
 msgid ""
 "<strong>Pro tip: </strong>You may need to clear your cache before Cache "
 "Buster can prevent future caching."
@@ -69,7 +142,7 @@ msgstr ""
 "<strong>Profi-Tipp: </strong>Möglicherweise müssen Sie Ihren Cache leeren, "
 "bevor Cache Buster künftige Zwischenspeicherungen verhindern kann."
 
-#: super-light-cache-buster.php:306
+#: super-light-cache-buster.php:313
 msgid ""
 "Add/remove no-cache directives to/from the Cache-Control HTTP header field. "
 "This setting will only work if the Cache Buster Status is 'On'."
@@ -78,12 +151,12 @@ msgstr ""
 "Control. Diese Einstellung funktioniert nur, wenn der Cache-Buster-Status "
 "\"Ein\" ist."
 
-#: super-light-cache-buster.php:310
+#: super-light-cache-buster.php:317
 msgid ""
 "Coming Soon: 'false' removes the WP_CACHE constant, 'true' adds WP_CACHE "
 "back and sets it to 'true'. This setting will only work if the Cache Buster "
 "Status is 'On'."
 msgstr ""
-"Demnächst verfügbar: 'false' entfernt die Konstante WP_CACHE, 'true' fügt "
-"WP_CACHE wieder hinzu und setzt sie auf 'true'. Diese Einstellung "
-"funktioniert nur, wenn der Cache Buster Status 'On' ist."
+"Demnächst verfügbar: ‘falsch’ entfernt die Konstante WP_CACHE, ‘wahr’ fügt "
+"WP_CACHE wieder hinzu und setzt sie auf ‘wahr’. Diese Einstellung "
+"funktioniert nur, wenn der Cache Buster Status ‘Auf’ ist."
