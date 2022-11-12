@@ -61,7 +61,7 @@ class Super_Light_Cache_Buster {
 					'option2' => __( 'Intense', 'super-light-cache-buster' ),
 				),
 				'disabled'  => '',
-				'default'   => array( 'option1' ),
+				'default'   => array( 'option2' ),
 				'ancillary' => '',
 			),
 			array(
