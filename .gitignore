@@ -32,5 +32,6 @@ settings.json
 # ignore irrelevant system files
 .DS_Store
 
-# ignore .mo translation files
-*.mo
+# ignore everything in /languages except .pot files
+languages/
+!languages/*.pot
