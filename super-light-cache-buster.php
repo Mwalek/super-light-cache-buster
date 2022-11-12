@@ -588,3 +588,28 @@ if ( ! function_exists( 'super_light_cache_buster_load_textdomain' ) ) {
 	}
 	add_action( 'plugins_loaded', 'super_light_cache_buster_load_textdomain' );
 }
+
+/**
+ * Urges users to clear their cache after updating settings.
+ *
+ * @return void
+ */
+function slcb_admin_notice() {
+
+	$screen = get_current_screen();
+
+	if ( 'settings_page_slcb_options' === $screen->id ) {
+		// phpcs:ignore
+		if ( isset( $_GET['settings-updated'] ) ) {
+			// phpcs:ignore
+			if ( 'true' === $_GET['settings-updated'] ) {
+				?>
+				<div class="notice notice-info notice-slcb is-dismissible">
+					<p><?php esc_html_e( 'Please clear your cache to make sure your new settings take effect.', 'super-light-cache-buster' ); ?></p>
+				</div>
+				<?php
+			}
+		}
+	}
+}
+add_action( 'admin_notices', 'slcb_admin_notice', -1 );
