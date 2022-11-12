@@ -1,0 +1,11 @@
+{
+  "phpsab.fixerEnable": true,
+  "phpsab.fixerArguments": [],
+  "phpsab.snifferEnable": true,
+  "phpsab.standard": "WordPress",
+  "phpsab.executablePathCS": "/Users/mwalek/.composer/vendor/bin/phpcs",
+  "phpsab.executablePathCBF": "/Users/mwalek/.composer/vendor/bin/phpcbf",
+  "phpsab.autoRulesetSearch": false,
+  "phpsab.snifferMode": "onSave",
+  "phpsab.debug": true
+}
