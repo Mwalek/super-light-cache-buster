@@ -61,7 +61,7 @@ Release Date - November 13, 2022
 **Fixed**
 
 - Patch XSS vulnerability.
-- Patch File-Handling Vulnerability.
+- Patch File-Handling vulnerability.
 
 **Enhanced**
 
