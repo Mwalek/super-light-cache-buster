@@ -15,7 +15,7 @@ Stop browser caching by randomizing asset version numbers.
 
 Can't see the changes supposedly made by your developer? Or maybe you're just tired of your site's annoying cache? Use this plugin to cache a break!
 
-With a compressed size of under 10KB, this simple plugin adds random version numbers to CSS & JS assets to prevent page and browser caching getting in the way of your happiness.
+With a compressed size of under 21KB, this simple plugin adds random version numbers to CSS & JS assets to prevent page and browser caching getting in the way of your happiness.
 
 You can completely disable the plugin from the settings page when you are not using it or keep it enabled if the site is under development 😀.
 
@@ -23,7 +23,7 @@ You can completely disable the plugin from the settings page when you are not us
 
 - I am open for your suggestions and feedback - Thank you for using or trying out one of my plugins!
 - Drop me a line [@mwale_and_sons](https://twitter.com/mwale_and_sons) on Twitter
-- Follow me on [my Instagram page](https://www.instagram.com/mwale_and_sons/)
+- Follow me on [my LinkedIn page](https://www.linkedin.com/in/mwale-kalenga)
 - Or visit me at [my website](https://mwale.me/).
 
 ## Installation
@@ -43,7 +43,30 @@ If you are still being served cached pages after activating the plugin, clear th
 
 This will delete all pages/posts from the cache, and Cache Buster will prevent them from being cached again while the plugin is enabled :-).
 
+### Does this plugin work on Multisite?
+
+No, Cache Buster hasn't been tested on Multisite Networks.
+
 ## Changelog
+
+### 1.2.0
+
+Release Date - November 13, 2022
+
+**Added**
+
+- Introduce Internationalization (Make Cache Buster translatable).
+- Introduce a notice to clear the cache when settings are saved.
+
+**Fixed**
+
+- Patch XSS vulnerability.
+- Patch File-Handling Vulnerability.
+
+**Enhanced**
+
+- Improve inline code documentation.
+- Improve WordPress Coding Standards conformance.
 
 ### 1.1.2
 
@@ -88,6 +111,10 @@ Release Date - June 24, 2020
 - Initial release
 
 ## Upgrade Notice
+
+### 1.1.1
+
+Fixes PHP vulnerabilities and adds a reminder to clear the cache after updating settings.
 
 ### 1.1.1
 
