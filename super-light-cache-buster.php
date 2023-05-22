@@ -430,7 +430,9 @@ $slcb_fields = new Super_Light_Cache_Buster();
 
 $randomizer_control = get_option( 'slcb_plugin_state', $slcb_fields->get_slcb_fields( 0 ) );
 
-if ( ! is_admin() && 'option1' === $randomizer_control[0] ) {
+$allow_in_backend = apply_filters( 'slcb_allow_in_backend', false );
+
+if ( ! is_admin() || $allow_in_backend && 'option1' === $randomizer_control[0] ) {
 
 	// Randomize asset version for styles.
 	add_filter( 'style_loader_src', 'slcb_randomize_ver', 9999 );
