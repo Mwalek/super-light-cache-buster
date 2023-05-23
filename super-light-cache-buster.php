@@ -159,17 +159,17 @@ class Super_Light_Cache_Buster {
 	 */
 	public function plugin_settings_page_content() {
 		?>
-<div class="wrap">
-	<div class="main_content">
-		<h2><?php esc_html_e( 'Super Light Cache Buster Settings', 'super-light-cache-buster' ); ?></h2>
-		<form method="POST" action="options.php">
-			<?php
-						settings_fields( 'slcb_fields' );
-						do_settings_sections( 'slcb_fields' );
-						submit_button();
-			?>
-		</form>
-		<div>
+		<div class="wrap">
+			<div class="main_content">
+				<h2><?php esc_html_e( 'Super Light Cache Buster Settings', 'super-light-cache-buster' ); ?></h2>
+				<form method="POST" action="options.php">
+					<?php
+								settings_fields( 'slcb_fields' );
+								do_settings_sections( 'slcb_fields' );
+								submit_button();
+					?>
+				</form>
+			</div>
 		</div>
 		<?php
 	}
