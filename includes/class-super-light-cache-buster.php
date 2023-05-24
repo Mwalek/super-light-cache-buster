@@ -128,6 +128,30 @@ class Super_Light_Cache_Buster {
 		// Add settings and fields.
 		add_action( 'admin_init', array( $this, 'setup_sections' ) );
 		add_action( 'admin_init', array( $this, 'setup_fields' ) );
+		// Randomize asset version for styles.
+		add_filter( 'style_loader_src', array( $this, 'slcb_randomize_ver' ), 9999 );
+
+		// Randomize asset version for scripts.
+		add_filter( 'script_loader_src', array( $this, 'slcb_randomize_ver' ), 9999 );
+		// Gets settings fields helper function.
+		$randomizer_control = get_option( 'slcb_plugin_state', $this->get_slcb_fields( 0 ) );
+		$adv_option_control = get_option( 'slcb_intensity_level', $this->get_slcb_fields( 1 ) );
+
+		if ( 'option1' === $randomizer_control[0] && 'option2' === $adv_option_control[0] ) {
+
+			add_action( 'send_headers', array( $this, 'slcb_status_header' ), 9999 );
+
+			add_action( 'wp_head', array( $this, 'hook_in_header' ) );
+
+			add_action( 'template_redirect', array( $this, 'donotcachepage' ), 9999 );
+
+		}
+		add_action( 'admin_bar_menu', array( $this, 'slcb_buster_button' ), 50 );
+
+		add_action( 'plugins_loaded', array( $this, 'super_light_cache_buster_load_textdomain' ) );
+
+		add_action( 'admin_notices', array( $this, 'slcb_admin_notice' ), -1 );
+
 	}
 	/**
 	 * Creates plugin settings page.
@@ -410,142 +434,115 @@ class Super_Light_Cache_Buster {
 			$this->admin_error( $this->file_permissions_error() );
 		}
 	}
-}
 
-if ( class_exists( 'Super_Light_Cache_Buster' ) ) {
-	// Plugin uninstallation.
-	register_uninstall_hook( __FILE__, 'Super_Light_Cache_Buster::uninstall_slcb' );
-}
 
-$slcb_fields = new Super_Light_Cache_Buster();
 
-$randomizer_control = get_option( 'slcb_plugin_state', $slcb_fields->get_slcb_fields( 0 ) );
-
-$allow_in_backend = apply_filters( 'slcb_allow_in_backend', false );
-
-if ( ! is_admin() || $allow_in_backend && 'option1' === $randomizer_control[0] ) {
-
-	// Randomize asset version for styles.
-	add_filter( 'style_loader_src', 'slcb_randomize_ver', 9999 );
-
-	// Randomize asset version for scripts.
-	add_filter( 'script_loader_src', 'slcb_randomize_ver', 9999 );
-
-}
-
-$adv_option_control = get_option( 'slcb_intensity_level', $slcb_fields->get_slcb_fields( 1 ) );
-
-if ( 'option1' === $randomizer_control[0] && 'option2' === $adv_option_control[0] ) {
-
-	add_action( 'send_headers', 'slcb_status_header', 9999 );
-
-	add_action( 'wp_head', 'hook_in_header' );
-
-	add_action( 'template_redirect', 'donotcachepage', 9999 );
-
-}
-
-/**
- * Randomizes version numbers.
- *
- * @param string $src The source URL of the enqueued style/script.
- * @return string The randomized version of the URL.
- */
-function slcb_randomize_ver( $src ) {
-	$random_number = wp_rand( 1000, 520000000 );
-	$src           = esc_url( add_query_arg( 'ver', $random_number, $src ) );
-	return $src;
-}
-
-/**
- * Adds nocache_headers if enable in wp-admin options.
- *
- * @return void
- */
-function slcb_status_header() {
-	nocache_headers();
-	header( 'Cache-Control: public, s-maxage=0' );
-	if ( ! defined( 'WP_CACHE' ) ) {
-		define( 'WP_CACHE', false );
-	}
-}
-/**
- * Adds DONOTCACHEPAGE page directive.
- *
- * @return void
- */
-function hook_in_header() {
-	if ( ! defined( 'DONOTCACHEPAGE' ) ) {
-		define( 'DONOTCACHEPAGE', true );
-	}
-}
-/**
- * Adds DONOTCACHEPAGE page directive.
- *
- * @return void
- */
-function donotcachepage() {
-	if ( headers_sent() || ! defined( 'DONOTCACHEPAGE' ) ) {
-		return;
-	}
-	header( 'X-Cache-Enabled: False', true );
-	header( 'Cache-Control: no-cache, must-revalidate, max-age=0' );
-}
-/**
- * Displays cache status information in the admin bar.
- *
- * @param object $wp_admin_bar The WP_Admin_Bar instance, passed by reference.
- * @return void
- */
-function slcb_buster_button( $wp_admin_bar ) {
-	$slcb_fields        = new Super_Light_Cache_Buster();
-	$randomizer_control = get_option( 'slcb_plugin_state', $slcb_fields->get_slcb_fields( 0 ) );
-	if ( ! is_admin() && current_user_can( 'manage_options' ) ) {
-		$intitial_args = array(
-			'id'    => 'custom-button',
-			'title' => 'Cache Buster',
-			'href'  => get_admin_url() . 'options-general.php?page=slcb_options',
-			'meta'  => array(
-				'class' => 'slcb-button',
-			),
-		);
-		if ( 'option1' === $randomizer_control[0] ) {
-			$title = array(
-				'title' => 'Cache Buster: On',
-			);
-		} else {
-			$title = array(
-				'title' => 'Cache Buster: Off',
-			);
+	/**
+	 * Randomizes version numbers.
+	 *
+	 * @param string $src The source URL of the enqueued style/script.
+	 * @return string The randomized version of the URL.
+	 */
+	public function slcb_randomize_ver( $src ) {
+		$allow_in_backend = apply_filters( 'slcb_allow_in_backend', false );
+		if ( ! is_admin() || $allow_in_backend && 'option1' === $randomizer_control[0] ) {
+			$random_number = wp_rand( 1000, 520000000 );
+			$src           = esc_url( add_query_arg( 'ver', $random_number, $src ) );
+			return $src;
 		}
-		$args = array_insert( $intitial_args, $title, 1 );
-		$wp_admin_bar->add_node( $args );
-	} else {
-		return;
 	}
-}
 
-add_action( 'admin_bar_menu', 'slcb_buster_button', 50 );
-/**
- * Array insertion helper function.
- *
- * @param array $array The array in which to insert.
- * @param array $values The values to insert into the array.
- * @param int   $offset Specifies array offset position.
- * @return array The modified array.
- */
-function array_insert( $array, $values, $offset ) {
-	return array_slice( $array, 0, $offset, true ) + $values + array_slice( $array, $offset + 1, null, true );
-}
 
-if ( ! function_exists( 'add_cache_constant' ) ) {
+
+	/**
+	 * Adds nocache_headers if enable in wp-admin options.
+	 *
+	 * @return void
+	 */
+	public function slcb_status_header() {
+		nocache_headers();
+		header( 'Cache-Control: public, s-maxage=0' );
+		if ( ! defined( 'WP_CACHE' ) ) {
+			define( 'WP_CACHE', false );
+		}
+	}
+	/**
+	 * Adds DONOTCACHEPAGE page directive.
+	 *
+	 * @return void
+	 */
+	public function hook_in_header() {
+		if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+			define( 'DONOTCACHEPAGE', true );
+		}
+	}
+	/**
+	 * Adds DONOTCACHEPAGE page directive.
+	 *
+	 * @return void
+	 */
+	public function donotcachepage() {
+		if ( headers_sent() || ! defined( 'DONOTCACHEPAGE' ) ) {
+			return;
+		}
+		header( 'X-Cache-Enabled: False', true );
+		header( 'Cache-Control: no-cache, must-revalidate, max-age=0' );
+	}
+
+	/**
+	 * Displays cache status information in the admin bar.
+	 *
+	 * @param object $wp_admin_bar The WP_Admin_Bar instance, passed by reference.
+	 * @return void
+	 */
+	public function slcb_buster_button( $wp_admin_bar ) {
+		$slcb_fields        = new Super_Light_Cache_Buster();
+		$randomizer_control = get_option( 'slcb_plugin_state', $slcb_fields->get_slcb_fields( 0 ) );
+		if ( ! is_admin() && current_user_can( 'manage_options' ) ) {
+			$intitial_args = array(
+				'id'    => 'custom-button',
+				'title' => 'Cache Buster',
+				'href'  => get_admin_url() . 'options-general.php?page=slcb_options',
+				'meta'  => array(
+					'class' => 'slcb-button',
+				),
+			);
+			if ( 'option1' === $randomizer_control[0] ) {
+				$title = array(
+					'title' => 'Cache Buster: On',
+				);
+			} else {
+				$title = array(
+					'title' => 'Cache Buster: Off',
+				);
+			}
+			$args = array_insert( $intitial_args, $title, 1 );
+			$wp_admin_bar->add_node( $args );
+		} else {
+			return;
+		}
+	}
+
+	/**
+	 * Array insertion helper function.
+	 *
+	 * @param array $array The array in which to insert.
+	 * @param array $values The values to insert into the array.
+	 * @param int   $offset Specifies array offset position.
+	 * @return array The modified array.
+	 */
+	public function array_insert( $array, $values, $offset ) {
+		return array_slice( $array, 0, $offset, true ) + $values + array_slice( $array, $offset + 1, null, true );
+	}
+
+
 	/**
 	 * Adds cache constant.
 	 *
 	 * @param string $slash Optional.
 	 * @return void
 	 */
-	function add_cache_constant( $slash = '' ) {
+	public function add_cache_constant( $slash = '' ) {
 		$config = file_get_contents( ABSPATH . 'wp-config.php' );
 		if ( strstr( $config, " < ? php define( 'WP_CACHE', true )" ) ) {
 			return;
@@ -554,55 +551,54 @@ if ( ! function_exists( 'add_cache_constant' ) ) {
 		}
 		file_put_contents( ABSPATH . $slash . 'wp-config.php', $config );
 	}
-}
 
-if ( ! function_exists( 'remove_cache_constant' ) ) {
 	/**
 	 * Removes cache constant.
 	 *
 	 * @param string $slash Optional.
 	 * @return void
 	 */
-	function remove_cache_constant( $slash = '' ) {
+	public function remove_cache_constant( $slash = '' ) {
 		$config = file_get_contents( ABSPATH . 'wp-config.php' );
 		$config = preg_replace( "/( ?)(define)( ?)(\()( ?)(['\"])WP_CACHE(['\"])( ?)(,)( ?)(0|1|true|false)( ?)(\))( ?);/i", '', $config );
 		file_put_contents( ABSPATH . $slash . 'wp-config.php', $config );
 	}
-}
 
-if ( ! function_exists( 'super_light_cache_buster_load_textdomain' ) ) {
 	/**
 	 * Declares the plugin text domain and languages directory.
 	 *
 	 * @return void
 	 */
-	function super_light_cache_buster_load_textdomain() {
+	public function super_light_cache_buster_load_textdomain() {
 		load_plugin_textdomain( 'super-light-cache-buster', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 	}
-	add_action( 'plugins_loaded', 'super_light_cache_buster_load_textdomain' );
-}
 
-/**
- * Urges users to clear their cache after updating settings.
- *
- * @return void
- */
-function slcb_admin_notice() {
+	/**
+	 * Urges users to clear their cache after updating settings.
+	 *
+	 * @return void
+	 */
+	public function slcb_admin_notice() {
 
-	$screen = get_current_screen();
+		$screen = get_current_screen();
 
-	if ( 'settings_page_slcb_options' === $screen->id ) {
-		// phpcs:ignore
-		if ( isset( $_GET['settings-updated'] ) ) {
+		if ( 'settings_page_slcb_options' === $screen->id ) {
 			// phpcs:ignore
-			if ( 'true' === $_GET['settings-updated'] ) {
-				?>
+			if ( isset( $_GET['settings-updated'] ) ) {
+				// phpcs:ignore
+				if ( 'true' === $_GET['settings-updated'] ) {
+					?>
 				<div class="notice notice-info notice-slcb is-dismissible">
 					<p><?php esc_html_e( 'Please clear your cache to make sure your new settings take effect.', 'super-light-cache-buster' ); ?></p>
 				</div>
-				<?php
+					<?php
+				}
 			}
 		}
 	}
 }
-add_action( 'admin_notices', 'slcb_admin_notice', -1 );
+
+if ( class_exists( 'Super_Light_Cache_Buster' ) ) {
+	// Plugin uninstallation.
+	register_uninstall_hook( __FILE__, 'Super_Light_Cache_Buster::uninstall_slcb' );
+}
