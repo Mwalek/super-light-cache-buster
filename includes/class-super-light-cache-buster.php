@@ -13,6 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once 'util/helpers.php';
+
 /**
  * The class that handles cache prevention and its various options.
  *
@@ -496,8 +498,7 @@ class Super_Light_Cache_Buster {
 	 * @return void
 	 */
 	public function slcb_buster_button( $wp_admin_bar ) {
-		$slcb_fields        = new Super_Light_Cache_Buster();
-		$randomizer_control = get_option( 'slcb_plugin_state', $slcb_fields->get_slcb_fields( 0 ) );
+		$randomizer_control = get_option( 'slcb_plugin_state', $this->get_slcb_fields( 0 ) );
 		if ( ! is_admin() && current_user_can( 'manage_options' ) ) {
 			$intitial_args = array(
 				'id'    => 'custom-button',
@@ -521,18 +522,6 @@ class Super_Light_Cache_Buster {
 		} else {
 			return;
 		}
-	}
-
-	/**
-	 * Array insertion helper function.
-	 *
-	 * @param array $array The array in which to insert.
-	 * @param array $values The values to insert into the array.
-	 * @param int   $offset Specifies array offset position.
-	 * @return array The modified array.
-	 */
-	public function array_insert( $array, $values, $offset ) {
-		return array_slice( $array, 0, $offset, true ) + $values + array_slice( $array, $offset + 1, null, true );
 	}
 
 
