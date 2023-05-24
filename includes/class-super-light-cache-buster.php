@@ -26,6 +26,9 @@ require_once 'util/helpers.php';
  */
 class Super_Light_Cache_Buster {
 
+	private $randomizer_control;
+	private $adv_option_control;
+
 	/**
 	 * Returns all fields for the plugin settings form.
 	 */
@@ -72,6 +75,7 @@ class Super_Light_Cache_Buster {
 			),
 		);
 	}
+
 	/**
 	 * An array of allowed HTML elements and attributes.
 	 *
@@ -115,16 +119,20 @@ class Super_Light_Cache_Buster {
 		'hr'       => array(),
 
 	);
+
 	/**
 	 * Houses error message shown when wp-config.php can't be modified.
 	 */
 	public function file_permissions_error() {
 		return __( "Cache Buster failed to change the WP_CACHE setting. Make sure wp-config.php is <a href='https://wordpress.org/support/article/changing-file-permissions/'>writable</a>.", 'super-light-cache-buster' );
 	}
+
 	/**
 	 * Initializes object's properties upon creation of the object.
 	 */
 	public function __construct() {
+		$this->randomizer_control = get_option( 'slcb_plugin_state', $this->get_slcb_fields( 0 ) );
+		$this->adv_option_control = get_option( 'slcb_intensity_level', $this->get_slcb_fields( 1 ) );
 		// Hook into the admin menu.
 		add_action( 'admin_menu', array( $this, 'create_plugin_settings_page' ) );
 		// Add settings and fields.
@@ -135,11 +143,8 @@ class Super_Light_Cache_Buster {
 
 		// Randomize asset version for scripts.
 		add_filter( 'script_loader_src', array( $this, 'slcb_randomize_ver' ), 9999 );
-		// Gets settings fields helper function.
-		$randomizer_control = get_option( 'slcb_plugin_state', $this->get_slcb_fields( 0 ) );
-		$adv_option_control = get_option( 'slcb_intensity_level', $this->get_slcb_fields( 1 ) );
 
-		if ( 'option1' === $randomizer_control[0] && 'option2' === $adv_option_control[0] ) {
+		if ( 'option1' === $this->randomizer_control[0] && 'option2' === $this->adv_option_control[0] ) {
 
 			add_action( 'send_headers', array( $this, 'slcb_status_header' ), 9999 );
 
@@ -447,11 +452,14 @@ class Super_Light_Cache_Buster {
 	 */
 	public function slcb_randomize_ver( $src ) {
 		$allow_in_backend = apply_filters( 'slcb_allow_in_backend', false );
-		if ( ! is_admin() || $allow_in_backend && 'option1' === $randomizer_control[0] ) {
+		// ray( $this->randomizer_control )->color( 'blue' );
+		if ( ( ! is_admin() || $allow_in_backend ) && 'option1' === $this->randomizer_control[0] ) {
+			ray( $this->randomizer_control[0] )->color( 'green' );
 			$random_number = wp_rand( 1000, 520000000 );
 			$src           = esc_url( add_query_arg( 'ver', $random_number, $src ) );
 			return $src;
 		}
+		return $src;
 	}
 
 
@@ -498,7 +506,8 @@ class Super_Light_Cache_Buster {
 	 * @return void
 	 */
 	public function slcb_buster_button( $wp_admin_bar ) {
-		$randomizer_control = get_option( 'slcb_plugin_state', $this->get_slcb_fields( 0 ) );
+		// ray( $this->randomizer_control )->color( 'red' );
+		// $this->randomizer_control = get_option( 'slcb_plugin_state', $this->get_slcb_fields( 0 ) );
 		if ( ! is_admin() && current_user_can( 'manage_options' ) ) {
 			$intitial_args = array(
 				'id'    => 'custom-button',
@@ -508,7 +517,7 @@ class Super_Light_Cache_Buster {
 					'class' => 'slcb-button',
 				),
 			);
-			if ( 'option1' === $randomizer_control[0] ) {
+			if ( 'option1' === $this->randomizer_control[0] ) {
 				$title = array(
 					'title' => 'Cache Buster: On',
 				);
