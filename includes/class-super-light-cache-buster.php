@@ -26,7 +26,18 @@ require_once 'util/helpers.php';
  */
 class Super_Light_Cache_Buster {
 
+	/**
+	 * Setting that determines if assets are served with a random query string.
+	 *
+	 * @var array $randomizer_control The randomizer control setting.
+	 */
 	private $randomizer_control;
+
+	/**
+	 * Setting that determines if advanced options should be in effect.
+	 *
+	 * @var array $adv_option_control The advanced options setting.
+	 */
 	private $adv_option_control;
 
 	/**
@@ -133,6 +144,7 @@ class Super_Light_Cache_Buster {
 	public function __construct() {
 		$this->randomizer_control = get_option( 'slcb_plugin_state', $this->get_slcb_fields( 0 ) );
 		$this->adv_option_control = get_option( 'slcb_intensity_level', $this->get_slcb_fields( 1 ) );
+		ray( $this->adv_option_control );
 		// Hook into the admin menu.
 		add_action( 'admin_menu', array( $this, 'create_plugin_settings_page' ) );
 		// Add settings and fields.
@@ -452,7 +464,6 @@ class Super_Light_Cache_Buster {
 	 */
 	public function slcb_randomize_ver( $src ) {
 		$allow_in_backend = apply_filters( 'slcb_allow_in_backend', false );
-		// ray( $this->randomizer_control )->color( 'blue' );
 		if ( ( ! is_admin() || $allow_in_backend ) && 'option1' === $this->randomizer_control[0] ) {
 			ray( $this->randomizer_control[0] )->color( 'green' );
 			$random_number = wp_rand( 1000, 520000000 );
@@ -506,8 +517,6 @@ class Super_Light_Cache_Buster {
 	 * @return void
 	 */
 	public function slcb_buster_button( $wp_admin_bar ) {
-		// ray( $this->randomizer_control )->color( 'red' );
-		// $this->randomizer_control = get_option( 'slcb_plugin_state', $this->get_slcb_fields( 0 ) );
 		if ( ! is_admin() && current_user_can( 'manage_options' ) ) {
 			$intitial_args = array(
 				'id'    => 'custom-button',
