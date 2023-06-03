@@ -176,7 +176,6 @@ class Super_Light_Cache_Buster {
 	public function redirect_to_resources() {
 
 		$uri = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL );
-		ray( $uri )->green();
 		function build_refresh_link( $uri ) {
 			global $wp;
 			$uri       = $uri;
@@ -184,15 +183,13 @@ class Super_Light_Cache_Buster {
 			$uri_parts = wp_parse_url( $uri );
 			$uri_query = array();
 			isset( $uri_parts['query'] ) && parse_str( $uri_parts['query'], $uri_query );
+			// Remove slcb from the query string if it exists.
 			if ( isset( $uri_query['slcb'] ) ) {
 				ray( $uri_query )->orange();
-				ray( 'slcb found in string' )->orange();
 				unset( $uri_query['slcb'] );
 			}
-			ray( http_build_query( $uri_query ) )->green();
-			ray( $uri_query )->purple();
+			ray( $uri_query )->orange();
 			$connector = false !== strpos( $uri, '?' ) && ( 0 < count( $uri_query ) ) ? '&' : '?';
-			ray( $uri )->purple();
 			if ( '' === $structure ) {
 				ray( 'Plain is used' );
 				if ( isset( $uri_query['page_id'] ) ) {
@@ -201,27 +198,16 @@ class Super_Light_Cache_Buster {
 				$url_suffix      = 0 < count( $uri_query ) ? '&' . http_build_query( $uri_query ) : http_build_query( $uri_query );
 				$url_with_params = add_query_arg( $wp->query_vars, home_url( $wp->request ) ) . $url_suffix;
 			} else {
-				// No query strings found.
-				if ( 1 > count( $uri_query ) ) {
-					$url_suffix = http_build_query( $uri_query );
-					// More than 1 query string found.
-				} elseif ( 1 < count( $uri_query ) ) {
-					$url_suffix = '&' . http_build_query( $uri_query );
-					// 1 query string found.
-				} else {
-					$url_suffix = '?' . http_build_query( $uri_query );
-				}
+
+				$url_suffix      = 1 > count( $uri_query ) ? http_build_query( $uri_query ) : '?' . http_build_query( $uri_query );
 				$url_with_params = home_url( $wp->request ) . $url_suffix;
-				ray( 'RESULT', $url_with_params )->red();
 
 			}
-			$new_uri     = $url_with_params . $connector . 'slcb=' . wp_rand( 1000, 520000000 );
-			$decoded_url = urldecode( $new_uri );
-			ray( $decoded_url )->green();
-			return $decoded_url;
+			$new_uri = $url_with_params . $connector . 'slcb=' . wp_rand( 1000, 520000000 );
+			return $new_uri;
 		}
 
-		if ( str_contains( $uri, 'slcb=randomizer' ) ) {
+		if ( str_contains( $uri, 'slcb=randomize' ) ) {
 			wp_safe_redirect( build_refresh_link( $uri ) );
 		}
 	}
@@ -586,46 +572,26 @@ class Super_Light_Cache_Buster {
 			$query                 = array();
 			isset( $parts['query'] ) && parse_str( $parts['query'], $query );
 
-			// if ( isset( $query['slcb'] ) ) {
-			// unset( $query['slcb'] );
-			// }
-			ray( http_build_query( $query ) )->red();
-			ray( $request_uri, $query )->orange();
-			if ( strpos( $request_uri, '?' ) ) {
-				ray( 'Question mark found' )->orange();
-			} else {
-				ray( 'Question mark not found' )->orange();
+			if ( isset( $query['slcb'] ) ) {
+				unset( $query['slcb'] );
 			}
 			$connector = ( false !== strpos( $request_uri, '?' ) ) || ( 0 < count( $query ) ) ? '&' : '?';
 			if ( '' === $structure ) {
-				ray( 'Plain is used' );
 				if ( isset( $query['page_id'] ) ) {
 					unset( $query['page_id'] );
 				}
 				$url_suffix      = 0 < count( $query ) ? '&' . http_build_query( $query ) : http_build_query( $query );
 				$url_with_params = add_query_arg( $wp->query_vars, home_url( $wp->request ) ) . $url_suffix;
 			} else {
-				// No query strings found.
-				if ( 1 > count( $query ) ) {
-					$url_suffix = http_build_query( $query );
-					// More than 1 query string found.
-				} elseif ( 1 <= count( $query ) ) {
-					$url_suffix = '?' . http_build_query( $query );
-					// 1 query string found.
-				} else {
-					$url_suffix = '&' . http_build_query( $query );
-				}
+				$url_suffix      = 1 > count( $query ) ? http_build_query( $query ) : '?' . http_build_query( $query );
 				$url_with_params = home_url( $wp->request ) . $url_suffix;
 
 			}
-			ray( print_r( $structure, true ) )->red();
-			// ray( $wp->query_vars )->red();
-			// $url_with_params  = add_query_arg( array($wp->query_vars, 'slcb' => wp_rand( 1000, 520000000 )), home_url( $wp->request ) );
 			$refresh_args = array(
 				'id'     => 'slcb-refresh',
 				'title'  => 'Refresh W/o Cache',
 				'parent' => 'slcb-status',
-				'href'   => $url_with_params . $connector . 'slcb=' . 'randomizer',
+				'href'   => $url_with_params . $connector . 'slcb=' . 'randomize',
 				'meta'   => array(
 					'class' => 'slcb-button',
 				),
