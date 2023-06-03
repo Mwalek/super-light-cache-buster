@@ -189,10 +189,8 @@ class Super_Light_Cache_Buster {
 		isset( $uri_parts['query'] ) && parse_str( $uri_parts['query'], $uri_query );
 		// Remove slcb from the query string if it exists.
 		if ( isset( $uri_query['slcb'] ) ) {
-			ray( $uri_query )->orange();
 			unset( $uri_query['slcb'] );
 		}
-		ray( $uri_query )->orange();
 		$connector = false !== strpos( $uri, '?' ) && ( 0 < count( $uri_query ) ) ? '&' : '?';
 		if ( '' === $structure ) {
 			if ( isset( $uri_query['page_id'] ) ) {
