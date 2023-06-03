@@ -174,6 +174,13 @@ class Super_Light_Cache_Buster {
 
 	}
 
+	/**
+	 * Builds the link used by the plugin to refresh the page.
+	 *
+	 * @param string  $uri The URI which was given in order to access the page.
+	 * @param boolean $button Value determines the purpose of the link to build.
+	 * @return string The link.
+	 */
 	private function build_refresh_link( $uri, $button = false ) {
 		global $wp;
 		$structure = get_option( 'permalink_structure' );
@@ -210,6 +217,11 @@ class Super_Light_Cache_Buster {
 		return $new_uri;
 	}
 
+	/**
+	 * Creates a redirect in order to bypass caching.
+	 *
+	 * @return void
+	 */
 	public function redirect_to_uncached_resource() {
 
 		$uri = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL );
@@ -576,7 +588,7 @@ class Super_Light_Cache_Buster {
 			$request_uri   = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL );
 			$refresh_args  = array(
 				'id'     => 'slcb-refresh',
-				'title'  => 'Refresh W/o Cache',
+				'title'  => __( 'Refresh W/o Cache', 'super-light-cache-buster' ),
 				'parent' => 'slcb-status',
 				'href'   => $this->build_refresh_link( $request_uri, true ),
 				'meta'   => array(
