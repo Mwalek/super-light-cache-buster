@@ -3,7 +3,7 @@
 Contributors: mwalek  
 Tags: cache, cachebuster, prevent, clear, buster  
 Requires at least: 4.6  
-Tested up to: 6.1  
+Tested up to: 6.2  
 Requires PHP: 5.2  
 License: GPLv3 or later  
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html  
@@ -15,9 +15,20 @@ Stop browser caching by randomizing asset version numbers.
 
 Can't see the changes supposedly made by your developer? Or maybe you're just tired of your site's annoying cache? Use this plugin to cache a break!
 
-With a compressed size of under 21KB, this simple plugin adds random version numbers to CSS & JS assets to prevent page and browser caching getting in the way of your happiness.
+With a compressed size of under 30KB, this simple plugin adds random version numbers to CSS & JS assets to prevent page and browser caching getting in the way of your happiness.
 
-You can completely disable the plugin from the settings page when you are not using it or keep it enabled if the site is under development 😀.
+You can completely disable the plugin from the settings page when you are not using it or keep it enabled if the site is under development. 😀
+
+## Available Hooks
+
+Cache Buster is becoming more developer friendly. Below you can find the plugin's first hook and details about it.
+
+`
+slcb_allow_in_backend
+`
+
+- Filters whether Cache Buster should run (randomize asset version numbers) in the back end.
+- Return `true` to enable Cache Buster. `false` is the default.
 
 ### Feedback
 
@@ -48,6 +59,15 @@ This will delete all pages/posts from the cache, and Cache Buster will prevent t
 No, Cache Buster hasn't been tested on Multisite Networks.
 
 ## Changelog
+
+### 1.3.0
+
+Release Date - June 3, 2023
+
+**Added**
+
+- Introduce a button to refresh the page without caching.
+- Apply a filter to determine whether Cache Buster runs in the wp-admin area.
 
 ### 1.2.0
 
