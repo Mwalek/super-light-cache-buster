@@ -152,7 +152,7 @@ class Super_Light_Cache_Buster {
 		// Randomize asset version for styles.
 		add_filter( 'style_loader_src', array( $this, 'slcb_randomize_ver' ), 9999 );
 
-		add_action( 'template_redirect', array( $this, 'redirect_to_resources' ) );
+		add_action( 'template_redirect', array( $this, 'redirect_to_uncached_resource' ) );
 
 		// Randomize asset version for scripts.
 		add_filter( 'script_loader_src', array( $this, 'slcb_randomize_ver' ), 9999 );
@@ -210,7 +210,7 @@ class Super_Light_Cache_Buster {
 		return $new_uri;
 	}
 
-	public function redirect_to_resources() {
+	public function redirect_to_uncached_resource() {
 
 		$uri = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL );
 
@@ -564,6 +564,7 @@ class Super_Light_Cache_Buster {
 	 */
 	public function slcb_buster_button( $wp_admin_bar ) {
 		if ( ! is_admin() && current_user_can( 'manage_options' ) ) {
+			global $wp;
 			$intitial_args = array(
 				'id'    => 'slcb-status',
 				'title' => 'Cache Buster',
@@ -572,9 +573,8 @@ class Super_Light_Cache_Buster {
 					'class' => 'slcb-button',
 				),
 			);
-			global $wp;
-			$request_uri  = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL );
-			$refresh_args = array(
+			$request_uri   = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL );
+			$refresh_args  = array(
 				'id'     => 'slcb-refresh',
 				'title'  => 'Refresh W/o Cache',
 				'parent' => 'slcb-status',
