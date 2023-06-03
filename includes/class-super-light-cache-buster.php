@@ -531,11 +531,12 @@ class Super_Light_Cache_Buster {
 			$parts                 = wp_parse_url( $request_uri );
 			$query                 = array();
 			isset( $parts['query'] ) && parse_str( $parts['query'], $query );
+			ray( $wp )->green();
 
 			if ( isset( $query['slcb'] ) ) {
 				unset( $query['slcb'] );
 			}
-			$connector = false !== strpos( $request_uri, '?' ) && 1 < count( $query ) ? '&' : '?';
+			$connector = false !== strpos( $request_uri, '?' ) && 1 <= count( $query ) ? '&' : '?';
 			if ( '' === $structure ) {
 				ray( 'Plain is used' );
 				$url_with_params       = add_query_arg( $wp->query_vars, home_url( $wp->request ) );
@@ -551,7 +552,7 @@ class Super_Light_Cache_Buster {
 				'id'     => 'slcb-refresh',
 				'title'  => 'Refresh W/o Cache',
 				'parent' => 'slcb-status',
-				'href'   => $request_uri_no_params . $connector . 'slcb=' . wp_rand( 1000, 520000000 ),
+				'href'   => $url_with_params . $connector . 'slcb=' . wp_rand( 1000, 520000000 ),
 				'meta'   => array(
 					'class' => 'slcb-button',
 				),
