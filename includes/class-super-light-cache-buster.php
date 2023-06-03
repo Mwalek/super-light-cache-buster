@@ -536,13 +536,18 @@ class Super_Light_Cache_Buster {
 			if ( isset( $query['slcb'] ) ) {
 				unset( $query['slcb'] );
 			}
+			ray( http_build_query( $query ) )->red();
 			$connector = false !== strpos( $request_uri, '?' ) && 1 <= count( $query ) ? '&' : '?';
 			if ( '' === $structure ) {
 				ray( 'Plain is used' );
-				$url_with_params       = add_query_arg( $wp->query_vars, home_url( $wp->request ) );
-				$request_uri_no_params = $url_with_params;
+				if ( isset( $query['page_id'] ) ) {
+					unset( $query['page_id'] );
+				}
+				$url_suffix      = 0 < count( $query ) ? '&' . http_build_query( $query ) : http_build_query( $query );
+				$url_with_params = add_query_arg( $wp->query_vars, home_url( $wp->request ) ) . $url_suffix;
 			} else {
-				$url_with_params = home_url( $wp->request );
+				$url_suffix      = 0 < count( $query ) ? '?' . http_build_query( $query ) : http_build_query( $query );
+				$url_with_params = home_url( $wp->request ) . $url_suffix;
 
 			}
 			ray( print_r( $structure, true ) )->red();
