@@ -144,7 +144,6 @@ class Super_Light_Cache_Buster {
 	public function __construct() {
 		$this->randomizer_control = get_option( 'slcb_plugin_state', $this->get_slcb_fields( 0 ) );
 		$this->adv_option_control = get_option( 'slcb_intensity_level', $this->get_slcb_fields( 1 ) );
-		ray( $this->adv_option_control );
 		// Hook into the admin menu.
 		add_action( 'admin_menu', array( $this, 'create_plugin_settings_page' ) );
 		// Add settings and fields.
@@ -465,7 +464,6 @@ class Super_Light_Cache_Buster {
 	public function slcb_randomize_ver( $src ) {
 		$allow_in_backend = apply_filters( 'slcb_allow_in_backend', false );
 		if ( ( ! is_admin() || $allow_in_backend ) && 'option1' === $this->randomizer_control[0] ) {
-			ray( $this->randomizer_control[0] )->color( 'green' );
 			$random_number = wp_rand( 1000, 520000000 );
 			$src           = esc_url( add_query_arg( 'ver', $random_number, $src ) );
 			return $src;
@@ -519,10 +517,42 @@ class Super_Light_Cache_Buster {
 	public function slcb_buster_button( $wp_admin_bar ) {
 		if ( ! is_admin() && current_user_can( 'manage_options' ) ) {
 			$intitial_args = array(
-				'id'    => 'custom-button',
+				'id'    => 'slcb-status',
 				'title' => 'Cache Buster',
 				'href'  => get_admin_url() . 'options-general.php?page=slcb_options',
 				'meta'  => array(
+					'class' => 'slcb-button',
+				),
+			);
+			global $wp;
+			$structure             = get_option( 'permalink_structure' );
+			$request_uri           = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL );
+			$request_uri_no_params = strtok( $request_uri, '?' );
+			$parts                 = wp_parse_url( $request_uri );
+			$query                 = array();
+			isset( $parts['query'] ) && parse_str( $parts['query'], $query );
+
+			if ( isset( $query['slcb'] ) ) {
+				unset( $query['slcb'] );
+			}
+			$connector = false !== strpos( $request_uri, '?' ) && 1 < count( $query ) ? '&' : '?';
+			if ( '' === $structure ) {
+				ray( 'Plain is used' );
+				$url_with_params       = add_query_arg( $wp->query_vars, home_url( $wp->request ) );
+				$request_uri_no_params = $url_with_params;
+			} else {
+				$url_with_params = home_url( $wp->request );
+
+			}
+			ray( print_r( $structure, true ) )->red();
+			// ray( $wp->query_vars )->red();
+			// $url_with_params  = add_query_arg( array($wp->query_vars, 'slcb' => wp_rand( 1000, 520000000 )), home_url( $wp->request ) );
+			$refresh_args = array(
+				'id'     => 'slcb-refresh',
+				'title'  => 'Refresh W/o Cache',
+				'parent' => 'slcb-status',
+				'href'   => $request_uri_no_params . $connector . 'slcb=' . wp_rand( 1000, 520000000 ),
+				'meta'   => array(
 					'class' => 'slcb-button',
 				),
 			);
@@ -537,6 +567,7 @@ class Super_Light_Cache_Buster {
 			}
 			$args = array_insert( $intitial_args, $title, 1 );
 			$wp_admin_bar->add_node( $args );
+			$wp_admin_bar->add_node( $refresh_args );
 		} else {
 			return;
 		}
