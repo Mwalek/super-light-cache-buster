@@ -188,9 +188,11 @@ class Super_Light_Cache_Buster {
 		ray( $uri_query )->orange();
 		$connector = false !== strpos( $uri, '?' ) && ( 0 < count( $uri_query ) ) ? '&' : '?';
 		if ( '' === $structure ) {
-			ray( 'Plain is used' );
 			if ( isset( $uri_query['page_id'] ) ) {
 				unset( $uri_query['page_id'] );
+			}
+			if ( isset( $uri_query['p'] ) ) {
+				unset( $uri_query['p'] );
 			}
 			$url_suffix      = 0 < count( $uri_query ) ? '&' . http_build_query( $uri_query ) : http_build_query( $uri_query );
 			$url_with_params = add_query_arg( $wp->query_vars, home_url( $wp->request ) ) . $url_suffix;
@@ -213,7 +215,8 @@ class Super_Light_Cache_Buster {
 		$uri = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL );
 
 		if ( str_contains( $uri, 'slcb=randomize' ) ) {
-			wp_safe_redirect( $this->build_refresh_link( $uri ) );
+			wp_safe_redirect( $this->build_refresh_link( $uri ), 307, 'Super_Light_Cache_Buster' );
+			exit;
 		}
 	}
 	/**
