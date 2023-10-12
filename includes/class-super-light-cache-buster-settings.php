@@ -67,19 +67,6 @@ class Super_Light_Cache_Buster_Settings {
 				'default'     => '',
 				'ancillary'   => '',
 			),
-			array(
-				'uid'       => 'slcb_wp_cache',
-				'label'     => __( 'WP_CACHE', 'super-light-cache-buster' ),
-				'section'   => 'section_two',
-				'type'      => 'select',
-				'options'   => array(
-					'option1' => __( 'true', 'super-light-cache-buster' ),
-					'option2' => __( 'false/unset', 'super-light-cache-buster' ),
-				),
-				'disabled'  => 'disabled',
-				'default'   => array( 'option1' ),
-				'ancillary' => '',
-			),
 		);
 	}
 

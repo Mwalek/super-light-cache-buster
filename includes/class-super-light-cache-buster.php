@@ -132,39 +132,14 @@ if ( ! class_exists( 'Super_Light_Store_Hours' ) ) {
 			$retrieved = get_option( $uid, $this->get_slcb_fields( $num ) );
 			return $retrieved[0];
 		}
-		/**
-		 * Sets cache prevention status.
-		 *
-		 * @return void
-		 */
-		public function set_wp_cache() {
-			if ( ( 'option1' === $this->retrieve_option( 'slcb_plugin_state', 0 ) ) && ( 'option2' === $this->retrieve_option( 'slcb_wp_cache', 2 ) ) ) {
-				$this->slcb_activation();
-			} elseif ( 'option2' === $this->retrieve_option( 'slcb_plugin_state', 0 ) ) {
-				$this->slcb_deactivation();
-			} elseif ( 'option1' === $this->retrieve_option( 'slcb_wp_cache', 2 ) ) {
-				$this->slcb_deactivation();
-			}
-		}
+
 		/**
 		 * Adds/removes wp-cache constant when the plugin is activated.
 		 *
 		 * @return void
 		 */
 		public function slcb_activation() {
-			if ( 'option2' === $this->retrieve_option( 'slcb_wp_cache', 2 ) ) {
-				if ( file_exists( ABSPATH . 'wp-config.php' ) && is_writable( ABSPATH . 'wp-config.php' ) ) {
-					remove_cache_constant();
-				} elseif ( file_exists( dirname( ABSPATH ) . '/wp-config.php' ) && is_writable( dirname( ABSPATH ) . '/wp-config.php' ) ) {
-					remove_cache_constant( '/' );
-				} elseif ( file_exists( ABSPATH . 'wp-config.php' ) && ! is_writable( ABSPATH . 'wp-config.php' ) ) {
-					$this->admin_error( $this->file_permissions_error() );
-				} elseif ( file_exists( dirname( ABSPATH ) . '/wp-config.php' ) && ! is_writable( dirname( ABSPATH ) . '/wp-config.php' ) ) {
-					$this->admin_error( $this->file_permissions_error() );
-				} else {
-					$this->admin_error( $this->file_permissions_error() );
-				}
-			}
+
 		}
 		/**
 		 * Adds/removes wp-cache constant when the plugin is activated.
