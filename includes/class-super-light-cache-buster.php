@@ -52,6 +52,7 @@ if ( ! class_exists( 'Super_Light_Store_Hours' ) ) {
 		public function __construct() {
 			$this->randomizer_control = get_option( 'slcb_plugin_state', $this->get_slcb_fields( 0 ) );
 			$this->adv_option_control = get_option( 'slcb_intensity_level', $this->get_slcb_fields( 1 ) );
+			$this->ver_name_control   = get_option( 'slcb_version_name', $this->get_slcb_fields( 2 ) );
 			$this->settings           = new Super_Light_Cache_Buster_Settings();
 			// Randomize asset version for styles.
 			add_filter( 'style_loader_src', array( $this, 'slcb_randomize_ver' ), 9999 );
@@ -102,8 +103,19 @@ if ( ! class_exists( 'Super_Light_Store_Hours' ) ) {
 		public function slcb_randomize_ver( $src ) {
 			$allow_in_backend = apply_filters( 'slcb_allow_in_backend', false );
 			if ( ( ! is_admin() || $allow_in_backend ) && 'option1' === $this->randomizer_control[0] ) {
-				$random_number = wp_rand( 1000, 520000000 );
-				$src           = esc_url( add_query_arg( 'ver', $random_number, $src ) );
+				$custom_ver_name = apply_filters( 'slcb_version_name', $this->ver_name_control );
+				$random_number   = wp_rand( 1000, 520000000 );
+				$version_name    = $random_number;
+				// If string and not empty proceed.
+				if ( is_string( $custom_ver_name ) && ! empty( $custom_ver_name ) ) {
+
+					$custom_url_check = home_url( '/?ver=' . $custom_ver_name );
+					// Only use custom version name if the URL is still valid.
+					if ( filter_var( $custom_url_check, FILTER_VALIDATE_URL ) ) {
+						$version_name = $custom_ver_name;
+					}
+				}
+				$src = esc_url( add_query_arg( 'ver', $version_name, $src ) );
 				return $src;
 			}
 			return $src;
