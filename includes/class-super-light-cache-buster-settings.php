@@ -316,7 +316,7 @@ class Super_Light_Cache_Buster_Settings {
 				$helper       = '';
 				break;
 			case 'slcb_version_name':
-				$supplimental = __( 'When set, this option will update your filenames only when you manually change the version name. E.g. You can change the version name from 1.0.4 to 2.0.0. To auto-update filenames, leave this field empty.', 'super-light-cache-buster' );
+				$supplimental = __( 'When activated, this option will update your filenames only if you change the version name yourself, for instance, from 1.0.4 to 2.0.0. To have filenames updated automatically, just leave this field empty.', 'super-light-cache-buster' );
 				$helper       = '';
 				break;
 			case 'slcb_wp_cache':
