@@ -349,34 +349,6 @@ class Super_Light_Cache_Buster_Settings {
 	}
 
 	/**
-	 * Adds cache constant.
-	 *
-	 * @param string $slash Optional.
-	 * @return void
-	 */
-	public function add_cache_constant( $slash = '' ) {
-		$config = file_get_contents( ABSPATH . 'wp-config.php' );
-		if ( strstr( $config, " < ? php define( 'WP_CACHE', true )" ) ) {
-			return;
-		} else {
-			$config = preg_replace( " / ^ ( array( \r\n\t ) * )( \ < \ ? )( php ) ? / i', ' < ? php define( 'WP_CACHE', true );", $config );
-		}
-		file_put_contents( ABSPATH . $slash . 'wp-config.php', $config );
-	}
-
-	/**
-	 * Removes cache constant.
-	 *
-	 * @param string $slash Optional.
-	 * @return void
-	 */
-	public function remove_cache_constant( $slash = '' ) {
-		$config = file_get_contents( ABSPATH . 'wp-config.php' );
-		$config = preg_replace( "/( ?)(define)( ?)(\()( ?)(['\"])WP_CACHE(['\"])( ?)(,)( ?)(0|1|true|false)( ?)(\))( ?);/i", '', $config );
-		file_put_contents( ABSPATH . $slash . 'wp-config.php', $config );
-	}
-
-	/**
 	 * Declares the plugin text domain and languages directory.
 	 *
 	 * @return void
