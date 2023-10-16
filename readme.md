@@ -36,7 +36,7 @@ slcb_allow_in_backend
 slcb_version_name
 `
 
-- Filters the version number for assets to allow using a custom version number (name).
+- Filters the version name for assets to allow using a custom version name (or number).
 - Return the version number e.g. you can use the value `2.0.1`.
 - When this filter is in use, version numbers will not be randomized. Instead, you will have to change the version name manually to rename assets.
 - This filter overrides the "Version Name" setting in the dashboard.
@@ -70,6 +70,19 @@ This will delete all pages/posts from the cache, and Cache Buster will prevent t
 No, Cache Buster hasn't been tested on Multisite Networks.
 
 ## Changelog
+
+### 1.4.0
+
+Release Date - October 17, 2023
+
+**Added**
+
+- Introduce the "Version Name" setting to allow using a custom version name instead of a random one.
+- Apply a filter to the Version Name setting to allow overriding it.
+
+**Enhanced**
+
+- Improve code architecture.
 
 ### 1.3.0
 
