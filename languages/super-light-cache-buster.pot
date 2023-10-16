@@ -9,13 +9,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-06-03T16:05:48+00:00\n"
+"POT-Creation-Date: 2023-10-16T19:14:01+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: super-light-cache-buster\n"
 
 #. Plugin Name of the plugin
-#: includes/class-super-light-cache-buster.php:239
+#: includes/class-super-light-cache-buster-settings.php:147
 msgid "Super Light Cache Buster"
 msgstr ""
 
@@ -31,100 +31,96 @@ msgstr ""
 msgid "https://mwale.me"
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:50
+#: includes/class-super-light-cache-buster-settings.php:36
 msgid "Cache Buster Status"
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:54
+#: includes/class-super-light-cache-buster-settings.php:40
 msgid "On"
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:55
+#: includes/class-super-light-cache-buster-settings.php:41
 msgid "Off"
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:63
+#: includes/class-super-light-cache-buster-settings.php:49
 msgid "Cache Buster Intensity"
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:67
+#: includes/class-super-light-cache-buster-settings.php:53
 msgid "Normal"
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:68
+#: includes/class-super-light-cache-buster-settings.php:54
 msgid "Intense"
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:76
-msgid "WP_CACHE"
+#: includes/class-super-light-cache-buster-settings.php:62
+msgid "Version Name"
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:80
-msgid "true"
-msgstr ""
-
-#: includes/class-super-light-cache-buster.php:81
-msgid "false/unset"
-msgstr ""
-
-#: includes/class-super-light-cache-buster.php:138
+#: includes/class-super-light-cache-buster-settings.php:121
 msgid "Cache Buster failed to change the WP_CACHE setting. Make sure wp-config.php is <a href='https://wordpress.org/support/article/changing-file-permissions/'>writable</a>."
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:240
+#: includes/class-super-light-cache-buster-settings.php:148
 msgid "Cache Buster"
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:255
+#: includes/class-super-light-cache-buster-settings.php:163
 msgid "Super Light Cache Buster Settings"
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:275
+#: includes/class-super-light-cache-buster-settings.php:183
 msgid "Your settings have been updated!"
 msgstr ""
 
 #. translators: Generic error message
-#: includes/class-super-light-cache-buster.php:291
+#: includes/class-super-light-cache-buster-settings.php:199
 msgid "An error occured"
 msgstr ""
 
 #. translators: %s: Error prefix
-#: includes/class-super-light-cache-buster.php:295
+#: includes/class-super-light-cache-buster-settings.php:203
 msgid "Error: %s"
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:310
+#: includes/class-super-light-cache-buster-settings.php:218
 msgid "Basic Settings"
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:311
+#: includes/class-super-light-cache-buster-settings.php:219
 msgid "Advanced Settings"
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:322
+#: includes/class-super-light-cache-buster-settings.php:230
 msgid "You can completely disable Cache Buster when you're not using it. Then it will be 100% idle."
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:326
+#: includes/class-super-light-cache-buster-settings.php:234
 msgid "Settings in this section add more ways to prevent caching. The default settings are recommended for most sites."
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:400
+#: includes/class-super-light-cache-buster-settings.php:311
 msgid "<strong>Pro tip: </strong>You may need to clear your cache before Cache Buster can prevent future caching."
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:404
+#: includes/class-super-light-cache-buster-settings.php:315
 msgid "Add/remove no-cache directives to/from the Cache-Control HTTP header field. This setting will only work if the Cache Buster Status is 'On'."
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:408
+#: includes/class-super-light-cache-buster-settings.php:319
+msgid "When activated, this option will update your filenames only if you change the version name yourself, for instance, from 1.0.4 to 2.0.0. To have filenames updated automatically, just leave this field empty."
+msgstr ""
+
+#: includes/class-super-light-cache-buster-settings.php:323
 msgid "Coming Soon: 'false' removes the WP_CACHE constant, 'true' adds WP_CACHE back and sets it to 'true'. This setting will only work if the Cache Buster Status is 'On'."
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:589
-msgid "Refresh W/o Cache"
+#: includes/class-super-light-cache-buster-settings.php:376
+msgid "Please clear your cache to make sure your new settings take effect."
 msgstr ""
 
-#: includes/class-super-light-cache-buster.php:667
-msgid "Please clear your cache to make sure your new settings take effect."
+#: includes/class-super-light-cache-buster.php:270
+msgid "Refresh W/o Cache"
 msgstr ""
