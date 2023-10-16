@@ -2,26 +2,28 @@
 
 Contributors: mwalek  
 Tags: cache, cachebuster, prevent, clear, buster  
-Requires at least: 4.6  
+Requires at least: 5.0  
 Tested up to: 6.3  
-Requires PHP: 5.2  
+Requires PHP: 5.3  
 License: GPLv3 or later  
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html  
 Stable tag: 1.3.0
 
-Stop browser caching by randomizing asset version numbers.
+Stop page & browser caching with random version numbers and Cache-Control directives.
 
 ## Description
 
 Can't see the changes supposedly made by your developer? Or maybe you're just tired of your site's annoying cache? Use this plugin to cache a break!
 
-With a compressed size of under 30KB, this simple plugin adds random version numbers to CSS & JS assets to prevent page and browser caching getting in the way of your happiness.
+With a compressed size of under 30KB, this simple plugin adds random version numbers to CSS & JS assets to prevent browser caching getting in the way of your happiness.
+
+Super Light Cache Buster also prevents page caching by using Cache-Control directives.
 
 You can completely disable the plugin from the settings page when you are not using it or keep it enabled if the site is under development. 😀
 
 ## Available Hooks
 
-Cache Buster is becoming more developer friendly. Below you can find the plugin's first hook and details about it.
+Cache Buster is becoming more developer friendly. Below you can find the plugin's first hooks and details about tbem.
 
 `
 slcb_allow_in_backend
@@ -29,6 +31,15 @@ slcb_allow_in_backend
 
 - Filters whether Cache Buster should run (randomize asset version numbers) in the back end.
 - Return `true` to enable Cache Buster. `false` is the default.
+
+`
+slcb_version_name
+`
+
+- Filters the version number for assets to allow using a custom version number (name).
+- Return the version number e.g. you can use the value `2.0.1`.
+- When this filter is in use, version numbers will not be randomized. Instead, you will have to change the version name manually to rename assets.
+- This filter overrides the "Version Name" setting in the dashboard.
 
 ### Feedback
 
