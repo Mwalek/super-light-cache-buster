@@ -40,6 +40,7 @@ slcb_version_name
 - Return the version number e.g. you can use the value `2.0.1`.
 - When this filter is in use, version numbers will not be randomized. Instead, you will have to change the version name manually to rename assets.
 - This filter overrides the "Version Name" setting in the dashboard.
+- The providedversion name must be a valid query parameter. As a safety, if the provided string breaks any URLs, it will not be used.
 
 ### Feedback
 
