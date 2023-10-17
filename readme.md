@@ -23,18 +23,16 @@ You can completely disable the plugin from the settings page when you are not us
 
 ## Available Hooks
 
-Cache Buster is becoming more developer friendly. Below you can find the plugin's first hooks and details about tbem.
+Cache Buster is becoming more developer friendly. Below you can find the plugin's first hooks and details about them.
 
-`
-slcb_allow_in_backend
-`
+    slcb_allow_in_backend
 
 - Filters whether Cache Buster should run (randomize asset version numbers) in the back end.
 - Return `true` to enable Cache Buster. `false` is the default.
 
-`
-slcb_version_name
-`
+<!-- end of the list -->
+
+    slcb_version_name
 
 - Filters the version name for assets to allow using a custom version name (or number).
 - Return the version name e.g. you can use the value `2.0.1`.
