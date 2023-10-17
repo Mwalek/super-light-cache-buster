@@ -84,6 +84,7 @@ Release Date - October 17, 2023
 **Enhanced**
 
 - Improve code architecture.
+- Add a link to SLCB settings next to the plugin description on the plugins screen.
 
 ### 1.3.0
 
