@@ -135,6 +135,8 @@ class Super_Light_Cache_Buster_Settings {
 
 		add_action( 'admin_notices', array( $this, 'slcb_admin_notice' ), -1 );
 
+		add_filter( 'plugin_action_links_super-light-cache-buster/super-light-cache-buster.php', array( $this, 'add_settings_page_link' ) );
+
 	}
 
 	/**
@@ -379,5 +381,18 @@ class Super_Light_Cache_Buster_Settings {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Adds a link to SLCB settings page from the installed plugins page.
+	 *
+	 * @param array $links Existing SLCB plugin management links.
+	 * @return array
+	 */
+	public function add_settings_page_link( array $links ) {
+		$url           = get_admin_url() . 'options-general.php?page=slcb_options';
+		$settings_link = '<a href="' . $url . '">' . __( 'Settings', 'super-light-cache-buster' ) . '</a>';
+		array_unshift( $links, $settings_link );
+		return $links;
 	}
 }
