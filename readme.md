@@ -3,7 +3,7 @@
 Contributors: mwalek  
 Tags: cache, cachebuster, prevent, clear, buster  
 Requires at least: 5.0  
-Tested up to: 6.3  
+Tested up to: 6.4  
 Requires PHP: 5.3  
 License: GPLv3 or later  
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html  
