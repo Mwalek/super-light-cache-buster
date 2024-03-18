@@ -47,6 +47,20 @@ if ( ! class_exists( 'Super_Light_Store_Hours' ) ) {
 		public $randomizer_control;
 
 		/**
+		 * Setting that determines the intensity level of cache busting.
+		 *
+		 * @var array $adv_option_control The advanced option control setting.
+		 */
+		public $adv_option_control;
+
+		/**
+		 * Setting that determines the version name for cache busting.
+		 *
+		 * @var array $ver_name_control The version name control setting.
+		 */
+		public $ver_name_control;
+
+		/**
 		 * Initializes object's properties upon creation of the object.
 		 */
 		public function __construct() {
