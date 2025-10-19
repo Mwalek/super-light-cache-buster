@@ -7,7 +7,7 @@ Tested up to: 6.8
 Requires PHP: 5.3  
 License: GPLv3 or later  
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html  
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 
 Stop page & browser caching with random version numbers and Cache-Control directives.
 
