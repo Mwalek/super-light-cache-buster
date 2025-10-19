@@ -3,7 +3,7 @@
 Contributors: mwalek  
 Tags: cache, cachebuster, prevent, clear, buster  
 Requires at least: 5.0  
-Tested up to: 6.5  
+Tested up to: 6.8  
 Requires PHP: 5.3  
 License: GPLv3 or later  
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html  
@@ -69,6 +69,14 @@ This will delete all pages/posts from the cache, and Cache Buster will prevent t
 No, Cache Buster hasn't been tested on Multisite Networks.
 
 ## Changelog
+
+### 1.4.2
+
+Release Date - October 19, 2025
+
+**Fixed**
+
+- Removed WordPress 6.7 text domain compatibility warning.
 
 ### 1.4.1
 
