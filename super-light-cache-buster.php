@@ -34,12 +34,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 require plugin_dir_path( __FILE__ ) . 'includes/class-super-light-cache-buster.php';
 
 /**
+ * Load plugin text domain for translations.
+ *
+ * @return void
+ */
+function super_light_cache_buster_load_plugin_textdomain() {
+	load_plugin_textdomain( 'super-light-cache-buster', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+}
+
+/**
  * Begins execution of the plugin.
  *
  * @return void
  */
 function run_super_light_cache_buster() {
+	// Load translations first.
+	super_light_cache_buster_load_plugin_textdomain();
+	// Then instantiate the plugin.
 	$plugin = new Super_Light_Cache_Buster();
 }
 
-run_super_light_cache_buster();
+add_action( 'init', 'run_super_light_cache_buster' );

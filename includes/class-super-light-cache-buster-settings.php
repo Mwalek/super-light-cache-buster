@@ -131,8 +131,6 @@ class Super_Light_Cache_Buster_Settings {
 		add_action( 'admin_init', array( $this, 'setup_sections' ) );
 		add_action( 'admin_init', array( $this, 'setup_fields' ) );
 
-		add_action( 'plugins_loaded', array( $this, 'super_light_cache_buster_load_textdomain' ) );
-
 		add_action( 'admin_notices', array( $this, 'slcb_admin_notice' ), -1 );
 
 		add_filter( 'plugin_action_links_super-light-cache-buster/super-light-cache-buster.php', array( $this, 'add_settings_page_link' ) );
@@ -160,19 +158,19 @@ class Super_Light_Cache_Buster_Settings {
 	 */
 	public function plugin_settings_page_content() {
 		?>
-		<div class="wrap">
-			<div class="main_content">
-				<h2><?php esc_html_e( 'Super Light Cache Buster Settings', 'super-light-cache-buster' ); ?></h2>
-				<form method="POST" action="options.php">
-					<?php
+<div class="wrap">
+    <div class="main_content">
+        <h2><?php esc_html_e( 'Super Light Cache Buster Settings', 'super-light-cache-buster' ); ?></h2>
+        <form method="POST" action="options.php">
+            <?php
 								settings_fields( 'slcb_fields' );
 								do_settings_sections( 'slcb_fields' );
 								submit_button();
 					?>
-				</form>
-			</div>
-		</div>
-		<?php
+        </form>
+    </div>
+</div>
+<?php
 	}
 	/**
 	 * Shows a success message when settings are saved.
@@ -181,10 +179,10 @@ class Super_Light_Cache_Buster_Settings {
 	 */
 	public function admin_notice() {
 		?>
-		<div class="notice notice-success is-dismissible">
-			<p><?php esc_html_e( 'Your settings have been updated!', 'super-light-cache-buster' ); ?></p>
-		</div>
-		<?php
+<div class="notice notice-success is-dismissible">
+    <p><?php esc_html_e( 'Your settings have been updated!', 'super-light-cache-buster' ); ?></p>
+</div>
+<?php
 	}
 	/**
 	 * Shows an error message when settings are not successfully saved.
@@ -194,9 +192,9 @@ class Super_Light_Cache_Buster_Settings {
 	 */
 	public function admin_error( $message = 'An error occured.' ) {
 		?>
-		<div class="notice notice-error">
-			<p>
-			<?php
+<div class="notice notice-error">
+    <p>
+        <?php
 			/* translators: Generic error message */
 			$message = __( 'An error occured', 'super-light-cache-buster' );
 			echo esc_html(
@@ -207,9 +205,9 @@ class Super_Light_Cache_Buster_Settings {
 				)
 			);
 			?>
-			</p>
-		</div>
-		<?php
+    </p>
+</div>
+<?php
 	}
 	/**
 	 * Sets up plugin settings sections.
@@ -351,15 +349,6 @@ class Super_Light_Cache_Buster_Settings {
 	}
 
 	/**
-	 * Declares the plugin text domain and languages directory.
-	 *
-	 * @return void
-	 */
-	public function super_light_cache_buster_load_textdomain() {
-		load_plugin_textdomain( 'super-light-cache-buster', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-	}
-
-	/**
 	 * Urges users to clear their cache after updating settings.
 	 *
 	 * @return void
@@ -374,10 +363,11 @@ class Super_Light_Cache_Buster_Settings {
 				// phpcs:ignore
 				if ( 'true' === $_GET['settings-updated'] ) {
 					?>
-				<div class="notice notice-info notice-slcb is-dismissible">
-					<p><?php esc_html_e( 'Please clear your cache to make sure your new settings take effect.', 'super-light-cache-buster' ); ?></p>
-				</div>
-					<?php
+<div class="notice notice-info notice-slcb is-dismissible">
+    <p><?php esc_html_e( 'Please clear your cache to make sure your new settings take effect.', 'super-light-cache-buster' ); ?>
+    </p>
+</div>
+<?php
 				}
 			}
 		}
